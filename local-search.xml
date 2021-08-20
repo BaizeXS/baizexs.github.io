@@ -4,6 +4,68 @@
   
   
   <entry>
+    <title>CTF入门基础——MISC之隐写入门知识</title>
+    <link href="/2021/08/20/CTF%E5%85%A5%E9%97%A8%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94MISC%E4%B9%8B%E9%9A%90%E5%86%99%E5%85%A5%E9%97%A8%E7%9F%A5%E8%AF%86/"/>
+    <url>/2021/08/20/CTF%E5%85%A5%E9%97%A8%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94MISC%E4%B9%8B%E9%9A%90%E5%86%99%E5%85%A5%E9%97%A8%E7%9F%A5%E8%AF%86/</url>
+    
+    <content type="html"><![CDATA[<h2 id="MISC-隐写"><a href="#MISC-隐写" class="headerlink" title="MISC-隐写"></a>MISC-隐写</h2><h3 id="01-图片隐写"><a href="#01-图片隐写" class="headerlink" title="01.图片隐写"></a>01.图片隐写</h3><h4 id="1-基本套路"><a href="#1-基本套路" class="headerlink" title="1.基本套路"></a>1.基本套路</h4><ol><li>将信息隐藏于图片属性</li><li>数据类型的隐藏</li><li>文件嵌套文件</li><li>文件内部的冗余信息</li><li>基于图片本身的数据隐藏</li></ol><h4 id="2-具体内容"><a href="#2-具体内容" class="headerlink" title="2.具体内容"></a>2.具体内容</h4><ol><li><p>将信息隐藏于图片属性：</p><ul><li>查看图片属性得到相关信息</li><li>有可能藏在EXIF信息里面，如GPS，拍摄相机等信息</li></ul></li><li><p>数据类型的隐藏：</p><ul><li><p>通常会打不开文件！</p></li><li><p>出现原因：</p><ul><li>缺少文件头</li><li>文件头与后缀不匹配</li></ul></li><li><p>工具：</p><ul><li>WinHex</li><li>010Editor</li></ul></li><li><p>常见文件头</p><p>|     文件类型     | 文件后缀 |     文件头     |<br>| :———————: | :———: | :——————: |<br>|       JPEG       |   .jpg   |    FFD8FFE1    |<br>|       PNG        |   .png   |    89504E47    |<br>|       GIF        |   .gif   |    47494638    |<br>|       TIFF       |   .tif   |    49492A00    |<br>|  Windows Bitmap  |   .bmp   |    424DC001    |<br>|   ZIP Achieve    |   .zip   |    50B0304     |<br>|   RAR Achieve    |   .rar   |    52617221    |<br>| Adobe Photoshop  |   .psd   |    38425053    |<br>| Rich Text Format |   .rtf   |   7B5C727466   |<br>|       XML        |   .xml   |   3C3F786D6C   |<br>|       HTML       |  .html   |   68746D6C3E   |<br>|  Adobe Arcobat   |   .pdf   | 255044462D312E |<br>|       Wave       |   .wav   |    57415645    |<br>|       pcap       |  .pcap   |    4D3C2B1A    |</p></li></ul></li><li><p>文件嵌套文件</p><ul><li><p>出现原因：</p><ul><li>文件头的嵌套</li><li>copy等命令的使用</li></ul></li><li><p>工具：</p><ul><li>WinHex（010Editor）</li><li>Binwalk（Foremost）</li></ul></li><li><p>有时会存在一个文件的全部信息<strong>夹在</strong>另一个文件中</p><p>| JPEG 1 |   信息   |<br>| :——: | :———: |<br>| JPEG 1 | 头部信息 |<br>| JPEG 2 | 全部信息 |<br>| JPEG 1 | 尾部信息 |</p></li></ul></li><li><p>文件内部的冗余信息</p><ul><li>出现原因：<ul><li>后续加入的不影响图片正常显示的信息</li></ul></li><li>工具：<ul><li>WinHex（010Editor）</li><li>strings</li></ul></li></ul></li><li><p>基于图片本身的数据隐藏</p><ul><li><p>出现原因：</p><ul><li>通过后期对于图片<strong>宽、高</strong>进行调整，实现隐藏部分图片内容，从而达到数据隐写的目的。一般来说，这种题目会有很明确的提示，譬如<strong>图片的宽和高明显不对等</strong>或<strong>指向某方向的箭头</strong>等</li></ul></li><li><p>LSB隐写：</p><ul><li><p>原理：</p><ul><li>图片的图像像数一般都是由RGB三原色（红绿蓝）组成， 每一种颜色占8位，取值为0x00—0xFF，就是256种，一共包含 了256的3次方种颜色，即16777216种颜色 但是人类的眼睛只 可以分辨大概1000万种不同的颜色，还有很多种细微的变化人 类的眼睛是觉察不到的，通过改变人眼观察不到的颜色数据来 进行数据隐写</li></ul></li><li><p>LSB隐写只会出现在png或bmp等无损的图片格式中</p></li><li><p>GIF文件处理：</p><ul><li><p>利用StegSolve对gif文件进行逐帧分析</p></li><li><p>一些类型：</p><ol><li><p>逐帧分析后将图片合并得到flag</p></li><li><p>逐帧分析后将图片合并得到二维码</p></li></ol></li></ul></li><li><p>StegSolve的使用：</p><ol><li><p>准备：</p><ul><li>StegSlove软件</li><li>Java开发环境</li></ul></li><li><p>使用说明</p><ul><li><p>程序主界面：</p><p><img src="https://gitee.com/baizexs/my_-picture_-host/raw/master/img/202108202128095.png" alt="iShot2021-08-07 13.50.31" style="zoom:50%;" /></p></li><li><p>File</p><ul><li>Open————————————&gt;打开文件</li><li>Save As———————————&gt;保存文件</li><li>Exit—————————————&gt;退出</li></ul></li><li><p>Analyse</p><ul><li><p>File Format——————————&gt;文件格式信息</p><p><img src="https://gitee.com/baizexs/my_-picture_-host/raw/master/img/202108202128490.png" alt="iShot2021-08-07 14.01.07" style="zoom:50%;" /></p></li><li><p>Data Extract  —————————&gt;数据提取</p><p><img src="https://gitee.com/baizexs/my_-picture_-host/raw/master/img/202108202129232.png" alt="iShot2021-08-07 14.06.13" style="zoom:50%;" /></p><ul><li>Bit Planes——&gt;ARGB颜色通道，数字越高，该通道颜色亮度越大</li><li>Extra By———&gt;分为行和列</li><li>Bit Order———&gt;位顺序序：MSB是一串数据的最高位，LSB是一串数据的最低位</li><li>Bit Plane Order——&gt;位平面顺序:整个图像分解为8个位平面，从LSB到MSB。随着从位平面0 到位平面7，位平面图像的特征逐渐变得复杂，细节不断增加。</li></ul></li><li><p>Stereogram Solver———————&gt;立体试图，控制左右偏移</p><p><img src="https://gitee.com/baizexs/my_-picture_-host/raw/master/img/202108202129060.png" alt="iShot2021-08-07 14.03.56" style="zoom:50%;" /></p></li><li><p>Frame Browser  ————————&gt;逐帧浏览器，用于查看GIF等</p><p><img src="https://gitee.com/baizexs/my_-picture_-host/raw/master/img/202108202129812.png" alt="iShot2021-08-07 14.04.27" style="zoom:50%;" /></p></li><li><p>Image Combiner————————&gt;图片拼接</p></li></ul></li></ul></li></ol></li></ul></li></ul></li></ol><h3 id="02-音频隐写"><a href="#02-音频隐写" class="headerlink" title="02.音频隐写"></a>02.音频隐写</h3><ol><li><p>摩斯密码</p><p>摩尔斯电码是一种时通时断的信号代码，通过不同的排列顺序来表达不同的英文字母、数字和标点符号。部分音频隐写通过快速播放的Morse电码来传递信息（也可能是正常速度的）</p><ul><li>解题方法：<ul><li>通过Audacity打开音频文件，放大波形图，来判断Morse电码</li><li>通过CTFcrack或其他工具进行解码</li></ul></li></ul></li><li><p>频谱图隐藏信息</p><p>频谱是频率谱密度的简称，是频率的分布曲线。复杂振荡分解为振幅不同和频率不同的谐振荡。这些谐振荡的幅值按频率排列的图形叫做频谱。在CTF中，我们可以单独只对一个声 道中，隐写进信息</p><ul><li><p>解题方法：</p><p>通过Audacity打开音频文件，选择音频所在音轨，”频谱”——&gt;”频谱图”即可</p></li></ul></li><li><p>MP3文件的隐写</p><p>MP3stego是著名的音频数据隐写工具，支持常见的压缩音频文件格式如mp3的数据嵌入，它采用的是一种特殊的量化方法并且将数据隐藏在MP3文件的奇偶校验块中</p><ul><li><p>解题方法：</p><p>使用MP3stego的decode模块即可</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs shell">用法：<br><br>加密：encode -E &lt;加密文本.txt&gt; -P &lt;密码&gt; &lt;MP3文件.mp3&gt;<br>解密：decode -X -P &lt;密码&gt; &lt;MP3文件.mp3&gt;<br></code></pre></td></tr></table></figure></li></ul></li></ol>]]></content>
+    
+    
+    <categories>
+      
+      <category>CTF</category>
+      
+      <category>杂项/MISC</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>CTF</tag>
+      
+      <tag>MISC</tag>
+      
+      <tag>隐写</tag>
+      
+      <tag>零基础</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>基于Gitee和PicGo的图床的搭建与使用</title>
+    <link href="/2021/08/12/%E5%9F%BA%E4%BA%8EGitee%E5%92%8CPicGo%E7%9A%84%E5%9B%BE%E5%BA%8A%E7%9A%84%E6%90%AD%E5%BB%BA%E4%B8%8E%E4%BD%BF%E7%94%A8/"/>
+    <url>/2021/08/12/%E5%9F%BA%E4%BA%8EGitee%E5%92%8CPicGo%E7%9A%84%E5%9B%BE%E5%BA%8A%E7%9A%84%E6%90%AD%E5%BB%BA%E4%B8%8E%E4%BD%BF%E7%94%A8/</url>
+    
+    <content type="html"><![CDATA[<h1 id="基于-Gitee-和-PicGo-的图床的搭建与使用"><a href="#基于-Gitee-和-PicGo-的图床的搭建与使用" class="headerlink" title="基于 Gitee 和 PicGo 的图床的搭建与使用"></a>基于 Gitee 和 PicGo 的图床的搭建与使用</h1><h2 id="0-前言"><a href="#0-前言" class="headerlink" title="0.前言"></a>0.前言</h2><p>因为博主最近在想搭建一个自己的博客，搭建的过程中发现上传太多图片的话，页面加载会比较慢，后来查了一下，发现可以用图床以及CDN等方案解决这个问题。由于博主是学生党，写博客也纯属是兴趣，就想着自己搭个免费的图床来用，于是就有了这次实践。</p><h2 id="1-下载并安装PicGo"><a href="#1-下载并安装PicGo" class="headerlink" title="1.下载并安装PicGo"></a>1.下载并安装PicGo</h2><ul><li><p>从<a href="https://github.com/Molunerfinn/PicGo">PicGo项目官网</a>下载你的操作系统对应的版本，下载完成后安装即可。</p></li><li><p>macOS可以使用Homebrew进行安装</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">brew install picgo --cask<br></code></pre></td></tr></table></figure><p><img src="https://gitee.com/baizexs/my_-picture_-host/raw/master/img/202108122115502.jpg" alt="iShot2021-08-12 20.20.36" style="zoom:50%;" /></p></li></ul><h2 id="2-建立Gitee仓库"><a href="#2-建立Gitee仓库" class="headerlink" title="2.建立Gitee仓库"></a>2.建立Gitee仓库</h2><ol><li><p>首先创建仓库用于储存图片：</p><p><img src="https://gitee.com/baizexs/my_-picture_-host/raw/master/img/202108122113696.png" alt="iShot2021-08-12 20.25.07" style="zoom:50%;" /></p></li><li><p>生成Gitee的私人令牌</p><p>设置-私人令牌-生成新令牌</p><p><img src="https://gitee.com/baizexs/my_-picture_-host/raw/master/img/202108122113912.png" alt="iShot2021-08-12 20.34.28" style="zoom:50%;" /></p><p>保存好你的令牌，一会配置PicGo的时候会用到。</p></li></ol><h2 id="3-配置PicGo"><a href="#3-配置PicGo" class="headerlink" title="3.配置PicGo"></a>3.配置PicGo</h2><ol><li><p>安装 Gitee 插件</p><p><img src="https://gitee.com/baizexs/my_-picture_-host/raw/master/img/202108122113307.png" alt="iShot2021-08-12 20.40.38" style="zoom:50%;" /></p><p>注意：该插件依赖于Node.js，所以你的电脑需要安装Node.js。</p></li><li><p>配置 Gitee 图床</p><p><img src="https://gitee.com/baizexs/my_-picture_-host/raw/master/img/202108122116551.png" alt="iShot2021-08-12 20.44.18" style="zoom:50%;" /></p><ul><li>owner处填你的用户名</li><li>repo处填你新建的仓库的仓库名</li><li>token填你的私人令牌</li></ul></li></ol><h2 id="4-配合Typora食用"><a href="#4-配合Typora食用" class="headerlink" title="4.配合Typora食用"></a>4.配合Typora食用</h2><p><img src="https://gitee.com/baizexs/my_-picture_-host/raw/master/img/202108122111465.png" alt="iShot2021-08-12 20.54.11" style="zoom:50%;" /></p><p>注意：Gitee有文件大小限制，图片不能超过1MB，否则会上传失败。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>零零碎碎</category>
+      
+      <category>博客/Blog</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>博客/Blog</tag>
+      
+      <tag>图床/Picture Host</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>基于Hexo+Github个人博客搭建</title>
     <link href="/2021/08/12/Hexo-GithubGitee%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/"/>
     <url>/2021/08/12/Hexo-GithubGitee%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/</url>
@@ -23,35 +85,6 @@
     <tags>
       
       <tag>博客/Blog</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>基于Gitee和PicGo的图床的搭建与使用</title>
-    <link href="/2021/08/12/%E5%9F%BA%E4%BA%8EGitee%E5%92%8CPicGo%E7%9A%84%E5%9B%BE%E5%BA%8A%E7%9A%84%E6%90%AD%E5%BB%BA%E4%B8%8E%E4%BD%BF%E7%94%A8/"/>
-    <url>/2021/08/12/%E5%9F%BA%E4%BA%8EGitee%E5%92%8CPicGo%E7%9A%84%E5%9B%BE%E5%BA%8A%E7%9A%84%E6%90%AD%E5%BB%BA%E4%B8%8E%E4%BD%BF%E7%94%A8/</url>
-    
-    <content type="html"><![CDATA[<h1 id="基于-Gitee-和-PicGo-的图床的搭建与使用"><a href="#基于-Gitee-和-PicGo-的图床的搭建与使用" class="headerlink" title="基于 Gitee 和 PicGo 的图床的搭建与使用"></a>基于 Gitee 和 PicGo 的图床的搭建与使用</h1><h3 id="0-前言"><a href="#0-前言" class="headerlink" title="0.前言"></a>0.前言</h3><p>因为博主最近在想搭建一个自己的博客，搭建的过程中发现上传太多图片的话，页面加载会比较慢，后来查了一下，发现可以用图床以及CDN等方案解决这个问题。由于博主是学生党，写博客也纯属是兴趣，就想着自己搭个免费的图床来用，于是就有了这次实践。</p><h3 id="1-下载并安装PicGo"><a href="#1-下载并安装PicGo" class="headerlink" title="1.下载并安装PicGo"></a>1.下载并安装PicGo</h3><ul><li><p>从<a href="https://github.com/Molunerfinn/PicGo">PicGo项目官网</a>下载你的操作系统对应的版本，下载完成后安装即可。</p></li><li><p>macOS可以使用Homebrew进行安装</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">brew install picgo --cask<br></code></pre></td></tr></table></figure><p><img src="https://gitee.com/baizexs/my_-picture_-host/raw/master/img/202108122115502.jpg" alt="iShot2021-08-12 20.20.36" style="zoom:50%;" /></p></li></ul><h3 id="2-建立Gitee仓库"><a href="#2-建立Gitee仓库" class="headerlink" title="2.建立Gitee仓库"></a>2.建立Gitee仓库</h3><ol><li><p>首先创建仓库用于储存图片：</p><p><img src="https://gitee.com/baizexs/my_-picture_-host/raw/master/img/202108122113696.png" alt="iShot2021-08-12 20.25.07" style="zoom:50%;" /></p></li><li><p>生成Gitee的私人令牌</p><p>设置-私人令牌-生成新令牌</p><p><img src="https://gitee.com/baizexs/my_-picture_-host/raw/master/img/202108122113912.png" alt="iShot2021-08-12 20.34.28" style="zoom:50%;" /></p><p>保存好你的令牌，一会配置PicGo的时候会用到。</p></li></ol><h3 id="3-配置PicGo"><a href="#3-配置PicGo" class="headerlink" title="3.配置PicGo"></a>3.配置PicGo</h3><ol><li><p>安装 Gitee 插件</p><p><img src="https://gitee.com/baizexs/my_-picture_-host/raw/master/img/202108122113307.png" alt="iShot2021-08-12 20.40.38" style="zoom:50%;" /></p><p>注意：该插件依赖于Node.js，所以你的电脑需要安装Node.js。</p></li><li><p>配置 Gitee 图床</p><p><img src="https://gitee.com/baizexs/my_-picture_-host/raw/master/img/202108122116551.png" alt="iShot2021-08-12 20.44.18" style="zoom:50%;" /></p><ul><li>owner处填你的用户名</li><li>repo处填你新建的仓库的仓库名</li><li>token填你的私人令牌</li></ul></li></ol><h3 id="4-配合Typora食用"><a href="#4-配合Typora食用" class="headerlink" title="4.配合Typora食用"></a>4.配合Typora食用</h3><p><img src="https://gitee.com/baizexs/my_-picture_-host/raw/master/img/202108122111465.png" alt="iShot2021-08-12 20.54.11" style="zoom:50%;" /></p><p>注意：Gitee有文件大小限制，图片不能超过1MB，否则会上传失败。</p>]]></content>
-    
-    
-    <categories>
-      
-      <category>零零碎碎</category>
-      
-      <category>博客/Blog</category>
-      
-    </categories>
-    
-    
-    <tags>
-      
-      <tag>博客/Blog</tag>
-      
-      <tag>图床/Picture Host</tag>
       
     </tags>
     
