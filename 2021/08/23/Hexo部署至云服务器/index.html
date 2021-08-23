@@ -1,0 +1,641 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="BaizeXS的个人博客">
+  <meta name="author" content="BaizeXS">
+  <meta name="keywords" content="">
+  
+  <title>Hexo部署至云服务器 - BaizeXS&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"baizexs.github.io","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>BaizeXS's Blog</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/Wallpaper9.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Hexo部署至云服务器">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-08-23 16:41" pubdate>
+        2021年8月23日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.1k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      25
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Hexo部署至云服务器</h1>
+            
+            <div class="markdown-body">
+              <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>由于将博客部署到Github Pages这种托管服务着实不太方便，目前我所尝试的三家都有一些让人不太爽的方面：</p>
+<ul>
+<li>Github Pages：一是速度比较慢，二是Github禁止百度的爬虫，用百度是搜不到自己博客的。</li>
+<li>CODING Pages：一向不太稳定，老是冗机。</li>
+<li>Gitee自定义域名又需要收费，一年99都快赶上学生服务器了。</li>
+</ul>
+<p>于是博主一狠心，借着自己学生的身份，购买了轻量应用服务器（学生优惠太香了，一折还可行），决定将自己的博客部署再到云服务器上。这样不仅可以提高博客的稳定性，同时还可以在操作的过程中慢慢了解学习服务器和Linux的操作。本人也是纯纯的小白，如有写的不对的地方希望大家能帮我指出来，现在这里谢谢大家啦！诶嘿！</p>
+<h2 id="一、环境"><a href="#一、环境" class="headerlink" title="一、环境"></a>一、环境</h2><h4 id="本地环境"><a href="#本地环境" class="headerlink" title="本地环境"></a>本地环境</h4><ul>
+<li>macOS(11.5.2)</li>
+<li>已装好 Git、Node.js 和 Hexo</li>
+<li>已在 Github Pages 部署了 Hexo 播客</li>
+</ul>
+<h4 id="服务器环境"><a href="#服务器环境" class="headerlink" title="服务器环境"></a>服务器环境</h4><ul>
+<li>腾讯云SAS（ 1核2G, 6M, Ubuntu 20.4LTS ）</li>
+</ul>
+<h2 id="二、本地机器配置"><a href="#二、本地机器配置" class="headerlink" title="二、本地机器配置"></a>二、本地机器配置</h2><p>如果已经将Hexo部署到 GitHub Pages / Gitee Pages / CODING Pages 上了，那么你的本地机器上已经完成了配置，这里不需要特别配置。</p>
+<p>若是未曾部署过Hexo，请先参考我的另一篇文章<a target="_blank" rel="noopener" href="http://192.144.238.112/2021/08/12/Hexo-GithubGitee个人博客搭建/">基于Hexo+Github个人博客搭建</a>完成Hexo的部署。文章内是将Hexo部署到Github进行托管，而我们这里是将Hexo部署到我们的服务器上。你可以先完全按照那篇文章进行部署，随后根据本篇博客将Hexo部署到服务器并作略微修改即可。（需要修改的地方会写在文末，只是一些细微的修改，请放心食用）</p>
+<h2 id="三、服务器配置"><a href="#三、服务器配置" class="headerlink" title="三、服务器配置"></a>三、服务器配置</h2><h4 id="0-连接到服务器"><a href="#0-连接到服务器" class="headerlink" title="0.连接到服务器"></a>0.连接到服务器</h4><p>首先要连接到服务器。</p>
+<ul>
+<li><p>Windows推荐使用XShell连接服务器。</p>
+</li>
+<li><p>Unix/Linux推荐使用终端直接用SSH连接。</p>
+</li>
+<li><p>macOS推荐用Termius连接服务器。</p>
+</li>
+</ul>
+<p>连接到服务器后就可以开始在终端进行配置了。</p>
+<h4 id="1-Git-配置"><a href="#1-Git-配置" class="headerlink" title="1. Git 配置"></a>1. Git 配置</h4><h5 id="1-1-在服务器上安装-Git"><a href="#1-1-在服务器上安装-Git" class="headerlink" title="1.1 在服务器上安装 Git"></a>1.1 在服务器上安装 Git</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">sudo add-apt-repository ppa:git-core/ppa<br>sudo apt update<br>sudo apt install git<br></code></pre></td></tr></table></figure>
+<h5 id="1-2-新建-git-用户并配置其权限"><a href="#1-2-新建-git-用户并配置其权限" class="headerlink" title="1.2 新建 git 用户并配置其权限"></a>1.2 新建 git 用户并配置其权限</h5><p>这里我们新建一个名为 git 的用户，专门用来和本地机器进行 git 操作。</p>
+<ol>
+<li>新建 git 用户并按照提示设置密码</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">sudo adduser git<br></code></pre></td></tr></table></figure>
+<ol>
+<li><p>修改 git 用户的权限</p>
+<p>修改<code>sudoers</code>文件的读写权限为可读写</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">sudo chmod 740 /etc/sudoers<br></code></pre></td></tr></table></figure>
+<p>修改 git 用户权限</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">sudo vim /etc/sudoers<br></code></pre></td></tr></table></figure>
+<p>找到如下内容：</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-comment"># User privilege specification</span><br><span class="hljs-attribute">root</span>    <span class="hljs-literal">ALL</span>=(<span class="hljs-literal">ALL</span>:<span class="hljs-literal">ALL</span>) <span class="hljs-literal">ALL</span><br></code></pre></td></tr></table></figure>
+<p>在它的下面添加如下内容并保存</p>
+<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ada">git    <span class="hljs-keyword">ALL</span>=(<span class="hljs-keyword">ALL</span>:<span class="hljs-keyword">ALL</span>) <span class="hljs-keyword">ALL</span><br></code></pre></td></tr></table></figure>
+<p>将<code>sudoers</code>文件权限恢复为可读</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">sudo chmod 400 /etc/sudoers<br></code></pre></td></tr></table></figure>
+</li>
+</ol>
+<h5 id="1-3-配置公钥至服务器"><a href="#1-3-配置公钥至服务器" class="headerlink" title="1.3 配置公钥至服务器"></a>1.3 配置公钥至服务器</h5><p>将公钥配置到服务器后，本地机器和服务器通过SSH连接和进行git操作时则不需要重复输入密码了，会方便很多。</p>
+<ol>
+<li><p>在本地机器上找到你的 SSH 公钥，即一个名为<code>id_rsa.pub</code>的文件</p>
+</li>
+<li><p>在服务器上配置公钥</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> 切换至 git 用户</span><br>su git<br><span class="hljs-meta">#</span><span class="bash"> 配置公钥</span><br>sudo mkdir ~/.ssh<br>vim ~/.ssh/authorized_keys<br></code></pre></td></tr></table></figure>
+<p>将本地<code>id_rsa.pub</code>的内容复制进去，强制保存修改即可。</p>
+<ul>
+<li><p>强制保存的方法</p>
+<p>按<code>ESC</code>键退到Vim的命令模式，输入<code>:wq!</code>再回车即可。</p>
+</li>
+</ul>
+</li>
+<li><p>修改<code>authorized_keys</code>的文件权限</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs shell">cd ~<br><span class="hljs-meta">#</span><span class="bash"> 将authorized_keys文件设置为可读可写</span><br>sudo chmod 600 .ssh/authorized_keys<br><span class="hljs-meta">#</span><span class="bash"> 将该文件夹设置为可读可写可执行</span><br>sudo chmod 700 .ssh <br></code></pre></td></tr></table></figure>
+</li>
+<li><p>测试SSH连接</p>
+<p>在本地终端输入以下内容：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">ssh -v git@服务器IP<br></code></pre></td></tr></table></figure>
+<p>若成功，你会看到<code>successful</code>的字样。</p>
+<ul>
+<li><p>踩坑一</p>
+<p>在本地测试时显示如下内容</p>
+<figure class="highlight gauss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs gauss"><span class="hljs-comment">@@</span><span class="hljs-comment">@@</span><span class="hljs-comment">@@</span><span class="hljs-comment">@@</span><span class="hljs-comment">@@</span><span class="hljs-comment">@@</span><span class="hljs-comment">@@</span><span class="hljs-comment">@@</span><span class="hljs-comment">@@</span><span class="hljs-comment">@@</span><span class="hljs-comment">@@</span><span class="hljs-comment">@@</span><span class="hljs-comment">@@</span><span class="hljs-comment">@@</span><span class="hljs-comment">@@</span><span class="hljs-comment">@@</span><span class="hljs-comment">@@</span><span class="hljs-comment">@@</span><span class="hljs-comment">@@</span><span class="hljs-comment">@@</span><span class="hljs-comment">@@</span><span class="hljs-comment">@@</span><span class="hljs-comment">@@</span><span class="hljs-comment">@@</span><span class="hljs-comment">@@</span><span class="hljs-comment">@@</span><span class="hljs-comment">@@</span><span class="hljs-comment">@@</span><span class="hljs-comment">@@</span><span class="hljs-comment">@</span><br><span class="hljs-comment">@</span>    WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!     <span class="hljs-comment">@</span><br><span class="hljs-comment">@</span><span class="hljs-comment">@@</span><span class="hljs-comment">@@</span><span class="hljs-comment">@@</span><span class="hljs-comment">@@</span><span class="hljs-comment">@@</span><span class="hljs-comment">@@</span><span class="hljs-comment">@@</span><span class="hljs-comment">@@</span><span class="hljs-comment">@@</span><span class="hljs-comment">@@</span><span class="hljs-comment">@@</span><span class="hljs-comment">@@</span><span class="hljs-comment">@@</span><span class="hljs-comment">@@</span><span class="hljs-comment">@@</span><span class="hljs-comment">@@</span><span class="hljs-comment">@@</span><span class="hljs-comment">@@</span><span class="hljs-comment">@@</span><span class="hljs-comment">@@</span><span class="hljs-comment">@@</span><span class="hljs-comment">@@</span><span class="hljs-comment">@@</span><span class="hljs-comment">@@</span><span class="hljs-comment">@@</span><span class="hljs-comment">@@</span><span class="hljs-comment">@@</span><span class="hljs-comment">@@</span><span class="hljs-comment">@@</span><br>IT IS POSSIBLE THAT SOMEONE IS DOING SOMETHING NASTY!<br>Someone could be eavesdropping on you right <span class="hljs-built_in">now</span> (man-in-the-middle attack)!<br>It is also possible that a host <span class="hljs-built_in">key</span> has just been changed.<br>The fingerprint <span class="hljs-keyword">for</span> the ECDSA key sent by the remote host is<br>SHA256:H/AmH+cRVcAUewk2z+iLmPig86J9/MQ51iYQVIlz7YM.<br>Please contact your system administrator.<br>Add correct host key in /Users/stevexu/.ssh/known_hosts to get rid of this message.<br>Offending ECDSA key in /Users/stevexu/.ssh/known_hosts:5<br>ECDSA host key <span class="hljs-keyword">for</span> 192.144.238.112 has changed and you have requested strict checking.<br>Host key verification failed.<br></code></pre></td></tr></table></figure>
+<p>解决方法</p>
+<ol>
+<li><p>在本地编辑 ~/.ssh/known_hosts 文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">vim ~/.ssh/known_hosts<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>将所需要所要连接的IP及其相关的内容删掉即可。例如我的服务器IP地址为：192.144.238.10，则把里面与 192.144.238.10 相关的内容删掉即可。</p>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+</ol>
+<h5 id="1-4-创建-git-空仓库"><a href="#1-4-创建-git-空仓库" class="headerlink" title="1.4 创建 git 空仓库"></a>1.4 创建 git 空仓库</h5><p>我们从本地机器git同步上来的内容将会放在新建的这个git仓库内。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> 切换至 git 目录</span><br>cd /home/git<br><span class="hljs-meta">#</span><span class="bash"> 创建一个名为 blog 的空仓库（ 也可以自行命名，但是后面的相关文件都需要自行修改 ）</span><br>git init --bare blog.git<br><span class="hljs-meta">#</span><span class="bash"> 修改该目录所有者为 git</span><br>chown git:git -R blog.git<br></code></pre></td></tr></table></figure>
+<h5 id="1-5-创建网站根目录"><a href="#1-5-创建网站根目录" class="headerlink" title="1.5 创建网站根目录"></a>1.5 创建网站根目录</h5><p>由于Hexo生成的是静态网页文件，我们需要让Nginx托管这些文件，于是我们需要创建网站根目录来让Nginx来托管这些静态网页文件。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> 切换为 root 用户</span><br>su root<br><span class="hljs-meta">#</span><span class="bash"> 这里我设置根目录为/home/hexo</span><br>mkdir /home/hexo<br><span class="hljs-meta">#</span><span class="bash"> 变更该目录所有者为 git</span><br>chown git:git -R /home/hexo<br></code></pre></td></tr></table></figure>
+<ul>
+<li>注意：该文件路径（ /home/hexo ）在配置Nginx时需要用到。</li>
+</ul>
+<h5 id="1-6-使用-git-hooks-同步网站根目录"><a href="#1-6-使用-git-hooks-同步网站根目录" class="headerlink" title="1.6 使用 git-hooks 同步网站根目录"></a>1.6 使用 git-hooks 同步网站根目录</h5><p>这里我们使用<code>post-receive</code>钩子。当 git 有收发的时候就会调用这个钩子，将接收到的内容（存储在blog.git仓库内）同步到我们的网站根目录（/home/hexo） </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">sudo vim blog.git/hooks/post-receive<br></code></pre></td></tr></table></figure>
+<p>添加如下内容</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-meta">#!/bin/sh</span><br>git --work-tree=/home/hexo --git-dir=/home/git/blog.git checkout -f<br></code></pre></td></tr></table></figure>
+<p>保存并赋予文件可执行权限即可</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">sudo chmod +x /home/git/blog.git/hooks/post-receive<br></code></pre></td></tr></table></figure>
+<h4 id="2-Node-js安装"><a href="#2-Node-js安装" class="headerlink" title="2. Node.js安装"></a>2. Node.js安装</h4><p>安装Node.js和npm</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">sudo apt install nodejs<br>sudo apt install npm<br></code></pre></td></tr></table></figure>
+<h4 id="3-Nginx配置"><a href="#3-Nginx配置" class="headerlink" title="3. Nginx配置"></a>3. Nginx配置</h4><h5 id="3-1-Nginx安装"><a href="#3-1-Nginx安装" class="headerlink" title="3.1 Nginx安装"></a>3.1 Nginx安装</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">sudo apt install nginx <br></code></pre></td></tr></table></figure>
+<p>安装后先启动看是否安装成功</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">nginx<br></code></pre></td></tr></table></figure>
+<p>在浏览器输入服务器的IP地址，验证是否安装成功，若成功则会出现如下界面</p>
+<p><img src="https://gitee.com/baizexs/my_-picture_-host/raw/master/img/Nginx.png" srcset="/img/loading.gif" lazyload alt="Nginx安装成功" style="zoom:50%;" /></p>
+<h5 id="3-2-配置Nginx"><a href="#3-2-配置Nginx" class="headerlink" title="3.2 配置Nginx"></a>3.2 配置Nginx</h5><ol>
+<li><p>查看Nginx配置文件的路径</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">nginx -s stop # 先停止nginx<br>sudo nginx -t<br></code></pre></td></tr></table></figure>
+<p>Nginx是通过<code>nginx.conf</code>文件进行配置的。这条命令是用来测试Nginx配置文件是否正确的，同时会告诉你配置文件的路径。我这里的路径为<code>/etx/nginx/nginx.conf</code>。</p>
+</li>
+<li><p>配置 Nginx</p>
+<p>编辑<code>nginx.conf</code>文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">nginx -s stop // 先停止nginx<br>sudo vim /etx/nginx/nginx.conf<br></code></pre></td></tr></table></figure>
+<ul>
+<li><code>user</code> 后修改为<code>root</code></li>
+</ul>
+<p><img src="https://gitee.com/baizexs/my_-picture_-host/raw/master/img/Nginx-1.png" srcset="/img/loading.gif" lazyload alt="配置Nginx" style="zoom:50%;" /></p>
+<ul>
+<li><p>在图示位置添加如下文段</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-section">sever</span> &#123;<br>	<span class="hljs-attribute">listen</span> <span class="hljs-number">80</span>; <span class="hljs-comment"># 80为代理服务默认端口（IPv4）</span><br>	<span class="hljs-attribute">listen</span> [::]:<span class="hljs-number">80</span>; <span class="hljs-comment"># 80为代理服务默认端口（IPv6）</span><br>	<span class="hljs-attribute">server_name</span> 你的域名/你的服务器的地址;<br>	<span class="hljs-attribute">location</span> /&#123;<br>		<span class="hljs-attribute">root</span>	/home/hexo;	<span class="hljs-comment"># 这就是我们的网站根目录</span><br>		<span class="hljs-attribute">index</span> index.html index.htm;<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><img src="https://gitee.com/baizexs/my_-picture_-host/raw/master/img/Nginx-2.png" srcset="/img/loading.gif" lazyload alt="配置Nginx" style="zoom:50%;" /></p>
+</li>
+</ol>
+<h5 id="3-3-开启Nginx服务"><a href="#3-3-开启Nginx服务" class="headerlink" title="3.3 开启Nginx服务"></a>3.3 开启Nginx服务</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">systemctl restart nginx.service<br></code></pre></td></tr></table></figure>
+<p>至此，服务器端就配置好了。</p>
+<h2 id="四、将本地内容推送到服务器"><a href="#四、将本地内容推送到服务器" class="headerlink" title="四、将本地内容推送到服务器"></a>四、将本地内容推送到服务器</h2><p>在本地Hexo生成的Blog文件夹下打开<code>_config.yml</code>配置文件。</p>
+<p><img src="https://gitee.com/baizexs/my_-picture_-host/raw/master/img/_config.yml.png" srcset="/img/loading.gif" lazyload alt="_config.yml" style="zoom:50%;" /></p>
+<p>找到<code>deploy</code>的<code>repo</code>处，这里则是我们需要修改的地方。</p>
+<p>若你打算部署到云服务器和Github，则按照如下配置替换<code>repo</code>处的内容即可。</p>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs dts"><span class="hljs-symbol">repo:</span> <br>	服务器提供商: git@服务器IP:网站根目录路径 <span class="hljs-meta"># 例如这里就是/home/hexo</span><br><span class="hljs-symbol">	github:</span> git@github.com:仓库路径<br></code></pre></td></tr></table></figure>
+<p>若你只打算部署到云服务器，则将<code>github</code>那一行删除即可。</p>
+<h2 id="五、总结"><a href="#五、总结" class="headerlink" title="五、总结"></a>五、总结</h2><p>有一说一，这次折腾确实花了不少时间，大概两三天有了，光服务器就重制了3，4次。好在最后终于摸清了是怎么个结构，也算是折腾成功了吧，有很大的收获，不旺我这两三天的辛苦。希望看我博客的小伙伴按照我的方法来一次就能成功，写的不周到的地方还希望大家批评指正，谢谢大噶！</p>
+<h2 id="六、参考文章"><a href="#六、参考文章" class="headerlink" title="六、参考文章"></a>六、参考文章</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_42138100/article/details/104739054?ops_request_misc=%7B%22request%5Fid%22%3A%22162961022116780262563839%22%2C%22scm%22%3A%2220140713.130102334.pc%5Fall.%22%7D&amp;request_id=162961022116780262563839&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~first_rank_ecpm_v1~rank_v29_ecpm-9-104739054.first_rank_v2_pc_rank_v29&amp;utm_term=hexo+服务器&amp;spm=1018.2226.3001.4187">Hexo+个人服务器 搭建自己的博客_南柯一梦°的博客-CSDN博客</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43874301/article/details/113572481">hexo部署云服务器的全过程_后端码匠-CSDN博客</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_35561857/article/details/81590953">带你跳过各种坑，一次性把 Hexo 博客部署到自己的服务器jeffery5461的博客-CSDN博客hexo部署到服务器</a></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E9%9B%B6%E9%9B%B6%E7%A2%8E%E7%A2%8E/">零零碎碎</a>
+                    
+                      <a class="hover-with-bg" href="/categories/%E9%9B%B6%E9%9B%B6%E7%A2%8E%E7%A2%8E/%E5%8D%9A%E5%AE%A2-Blog/">博客/Blog</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%8D%9A%E5%AE%A2-Blog/">博客/Blog</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/08/20/CTF%E5%85%A5%E9%97%A8%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94MISC%E4%B9%8B%E9%9A%90%E5%86%99%E5%85%A5%E9%97%A8%E7%9F%A5%E8%AF%86/">
+                        <span class="hidden-mobile">CTF入门基础——MISC之隐写入门知识</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"B7GAKwViPsTLMs44zRWV8P5e-gzGzoHsz","appKey":"k1a1m1gf9IgD5jfTFreItg2Q","placeholder":"说点什么","path":"window.location.pathname","avatar":"retro","meta":["nick","mail","link"],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false,"requiredFields":[]},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
