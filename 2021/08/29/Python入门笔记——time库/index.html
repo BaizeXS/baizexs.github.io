@@ -18,7 +18,7 @@
   <meta name="author" content="BaizeXS">
   <meta name="keywords" content="">
   
-  <title>CTF入门基础——MISC之隐写入门知识 - BaizeXS&#39;s Blog</title>
+  <title>Python入门笔记——time库 - BaizeXS&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
 
@@ -175,7 +175,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="CTF入门基础——MISC之隐写入门知识">
+            <span class="h2" id="subtitle" title="Python入门笔记——time库">
               
             </span>
 
@@ -185,8 +185,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-08-20 21:32" pubdate>
-        2021年8月20日 晚上
+      <time datetime="2021-08-29 23:23" pubdate>
+        2021年8月29日 晚上
       </time>
     </span>
   
@@ -197,7 +197,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.2k 字
+      522 字
     </span>
   
 
@@ -207,7 +207,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      13
+      6
        分钟
     </span>
   
@@ -245,186 +245,45 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">CTF入门基础——MISC之隐写入门知识</h1>
+            <h1 style="display: none">Python入门笔记——time库</h1>
             
             <div class="markdown-body">
-              <h2 id="MISC-隐写"><a href="#MISC-隐写" class="headerlink" title="MISC-隐写"></a>MISC-隐写</h2><h3 id="01-图片隐写"><a href="#01-图片隐写" class="headerlink" title="01.图片隐写"></a>01.图片隐写</h3><h4 id="1-基本套路"><a href="#1-基本套路" class="headerlink" title="1.基本套路"></a>1.基本套路</h4><ol>
-<li>将信息隐藏于图片属性</li>
-<li>数据类型的隐藏</li>
-<li>文件嵌套文件</li>
-<li>文件内部的冗余信息</li>
-<li>基于图片本身的数据隐藏</li>
-</ol>
-<h4 id="2-具体内容"><a href="#2-具体内容" class="headerlink" title="2.具体内容"></a>2.具体内容</h4><ol>
-<li><p>将信息隐藏于图片属性：</p>
+              <h1 id="Python入门笔记——-time-库的使用"><a href="#Python入门笔记——-time-库的使用" class="headerlink" title="Python入门笔记—— time 库的使用"></a>Python入门笔记—— time 库的使用</h1><ol>
+<li><p>time 库是Python中处理时间的标准库</p>
 <ul>
-<li>查看图片属性得到相关信息</li>
-<li>有可能藏在EXIF信息里面，如GPS，拍摄相机等信息</li>
+<li>计算机时间表达</li>
+<li>提供获取系统时间并格式化输出功能</li>
+<li>提供系统级精确计时功能，用于程序性能分析</li>
 </ul>
 </li>
-<li><p>数据类型的隐藏：</p>
+<li><p>time 库的使用</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> time<br>time.&lt;b&gt;()<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>time 库主要包括三类函数</p>
 <ul>
-<li><p>通常会打不开文件！</p>
+<li>时间获取：time(); ctime(); gmtime();</li>
+<li>时间格式化：stwftime(); strptime();</li>
+<li>程序计时：sleep(); perf_counter();</li>
+</ul>
 </li>
-<li><p>出现原因：</p>
+<li><p>时间获取</p>
+<p>| 函数     | 功能                                                         |<br>| ———— | —————————————————————————————— |<br>| time()   | 获取当前时间戳，即计算机内部的时间值，该时间值为浮点数。<br />&gt;&gt;&gt;time.time()<br />1630242266.687503 |<br>| ctime()  | 获取当前时间并以易读方式表示，返回字符串。<br />&gt;&gt;&gt;time.ctime()<br />‘Sun Aug 29 21:06:42 2021’ |<br>| gmtime() | 获取当前时间并表示为计算机可处理的时间格式。<br />&gt;&gt;&gt;time.gmtime()<br />&gt;&gt; time.struct_time(tm_year=2021, tm_mon=8, tm_mday=29, tm_hour=13, tm_min=8, tm_sec=55, tm_wday=6, tm_yday=241, tm_isdst=0)&gt;&gt;&gt; time.struct_time(tm_year=2021, tm_mon=8, tm_mday=29, tm_hour=13, tm_min=8, tm_sec=55, tm_wday=6, tm_yday=241, tm_isdst=0) |</p>
+</li>
+<li><p>时间格式化</p>
 <ul>
-<li>缺少文件头</li>
-<li>文件头与后缀不匹配</li>
+<li>格式化：类似于字符串格式化，需要有展示模板</li>
+<li>展示模板由特定的格式化控制符组成</li>
 </ul>
+<p>| 函数              | 功能                                                         |<br>| ————————- | —————————————————————————————— |<br>| strftime(tpl,ts)  | tpl是格式化模板字符串，用来定义输出效果<br/>ts是计算机内部时间类型变量<br />&gt;&gt;&gt;t = time.gmtime()<br />&gt;&gt;&gt;time.strftime(“%Y-%m-%d %H:%M:%S”,t)<br />‘2018-01-26 12:55:20’ |<br>| strptime(str,tpl) | str是字符串形式的时间值<br />tpl是格式化模版字符串，用来定义输入效果<br />&gt;&gt;&gt;timeStr = ‘2018-01-01 12:00:00’<br />&gt;&gt;&gt;time.strptime(timeStr, “%Y-%m-%d %H:%M:%S”) |</p>
 </li>
-<li><p>工具：</p>
+<li><p>程序计时</p>
+<p>程序计时应用广泛</p>
 <ul>
-<li>WinHex</li>
-<li>010Editor</li>
+<li>程序计时指起止动作所经历时间的过程</li>
+<li>测量时间：perf_counter()</li>
+<li>产生时间：sleep()</li>
 </ul>
-</li>
-<li><p>常见文件头</p>
-<p>|     文件类型     | 文件后缀 |     文件头     |<br>| :———————: | :———: | :——————: |<br>|       JPEG       |   .jpg   |    FFD8FFE1    |<br>|       PNG        |   .png   |    89504E47    |<br>|       GIF        |   .gif   |    47494638    |<br>|       TIFF       |   .tif   |    49492A00    |<br>|  Windows Bitmap  |   .bmp   |    424DC001    |<br>|   ZIP Achieve    |   .zip   |    50B0304     |<br>|   RAR Achieve    |   .rar   |    52617221    |<br>| Adobe Photoshop  |   .psd   |    38425053    |<br>| Rich Text Format |   .rtf   |   7B5C727466   |<br>|       XML        |   .xml   |   3C3F786D6C   |<br>|       HTML       |  .html   |   68746D6C3E   |<br>|  Adobe Arcobat   |   .pdf   | 255044462D312E |<br>|       Wave       |   .wav   |    57415645    |<br>|       pcap       |  .pcap   |    4D3C2B1A    |</p>
-</li>
-</ul>
-</li>
-<li><p>文件嵌套文件</p>
-<ul>
-<li><p>出现原因：</p>
-<ul>
-<li>文件头的嵌套</li>
-<li>copy等命令的使用</li>
-</ul>
-</li>
-<li><p>工具：</p>
-<ul>
-<li>WinHex（010Editor）</li>
-<li>Binwalk（Foremost）</li>
-</ul>
-</li>
-<li><p>有时会存在一个文件的全部信息<strong>夹在</strong>另一个文件中</p>
-<p>| JPEG 1 |   信息   |<br>| :——: | :———: |<br>| JPEG 1 | 头部信息 |<br>| JPEG 2 | 全部信息 |<br>| JPEG 1 | 尾部信息 |</p>
-</li>
-</ul>
-</li>
-<li><p>文件内部的冗余信息</p>
-<ul>
-<li>出现原因：<ul>
-<li>后续加入的不影响图片正常显示的信息</li>
-</ul>
-</li>
-<li>工具：<ul>
-<li>WinHex（010Editor）</li>
-<li>strings</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>基于图片本身的数据隐藏</p>
-<ul>
-<li><p>出现原因：</p>
-<ul>
-<li>通过后期对于图片<strong>宽、高</strong>进行调整，实现隐藏部分图片内容，从而达到数据隐写的目的。一般来说，这种题目会有很明确的提示，譬如<strong>图片的宽和高明显不对等</strong>或<strong>指向某方向的箭头</strong>等</li>
-</ul>
-</li>
-<li><p>LSB隐写：</p>
-<ul>
-<li><p>原理：</p>
-<ul>
-<li>图片的图像像数一般都是由RGB三原色（红绿蓝）组成， 每一种颜色占8位，取值为0x00—0xFF，就是256种，一共包含 了256的3次方种颜色，即16777216种颜色 但是人类的眼睛只 可以分辨大概1000万种不同的颜色，还有很多种细微的变化人 类的眼睛是觉察不到的，通过改变人眼观察不到的颜色数据来 进行数据隐写</li>
-</ul>
-</li>
-<li><p>LSB隐写只会出现在png或bmp等无损的图片格式中</p>
-</li>
-<li><p>GIF文件处理：</p>
-<ul>
-<li><p>利用StegSolve对gif文件进行逐帧分析</p>
-</li>
-<li><p>一些类型：</p>
-<ol>
-<li><p>逐帧分析后将图片合并得到flag</p>
-</li>
-<li><p>逐帧分析后将图片合并得到二维码</p>
-</li>
-</ol>
-</li>
-</ul>
-</li>
-<li><p>StegSolve的使用：</p>
-<ol>
-<li><p>准备：</p>
-<ul>
-<li>StegSlove软件</li>
-<li>Java开发环境</li>
-</ul>
-</li>
-<li><p>使用说明</p>
-<ul>
-<li><p>程序主界面：</p>
-<p><img src="https://gitee.com/baizexs/my_-picture_-host/raw/master/img/202108202128095.png" srcset="/img/loading.gif" lazyload alt="StegSolve" style="zoom:50%;" align="middle" /></p>
-</li>
-<li><p>File</p>
-<ul>
-<li>Open————————————&gt;打开文件</li>
-<li>Save As———————————&gt;保存文件</li>
-<li>Exit—————————————&gt;退出</li>
-</ul>
-</li>
-<li><p>Analyse</p>
-<ul>
-<li><p>File Format——————————&gt;文件格式信息</p>
-<p><img src="https://gitee.com/baizexs/my_-picture_-host/raw/master/img/202108202128490.png" srcset="/img/loading.gif" lazyload alt="File Format" style="zoom:50%;" align="middle" /></p>
-</li>
-<li><p>Data Extract  —————————&gt;数据提取</p>
-<p><img src="https://gitee.com/baizexs/my_-picture_-host/raw/master/img/202108202129232.png" srcset="/img/loading.gif" lazyload alt="Date Extract" style="zoom:50%;" align="middle" /></p>
-<ul>
-<li>Bit Planes——&gt;ARGB颜色通道，数字越高，该通道颜色亮度越大</li>
-<li>Extra By———&gt;分为行和列</li>
-<li>Bit Order———&gt;位顺序序：MSB是一串数据的最高位，LSB是一串数据的最低位</li>
-<li>Bit Plane Order——&gt;位平面顺序:整个图像分解为8个位平面，从LSB到MSB。随着从位平面0 到位平面7，位平面图像的特征逐渐变得复杂，细节不断增加。</li>
-</ul>
-</li>
-<li><p>Stereogram Solver———————&gt;立体试图，控制左右偏移</p>
-<p><img src="https://gitee.com/baizexs/my_-picture_-host/raw/master/img/202108202129060.png" srcset="/img/loading.gif" lazyload alt="Stereogram Solver" style="zoom:50%;" align="middle" /></p>
-</li>
-<li><p>Frame Browser  ————————&gt;逐帧浏览器，用于查看GIF等</p>
-<p><img src="https://gitee.com/baizexs/my_-picture_-host/raw/master/img/202108202129812.png" srcset="/img/loading.gif" lazyload alt="Frame Browser" style="zoom:50%;" align="middle" /></p>
-</li>
-<li><p>Image Combiner————————&gt;图片拼接</p>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ol>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ol>
-<h3 id="02-音频隐写"><a href="#02-音频隐写" class="headerlink" title="02.音频隐写"></a>02.音频隐写</h3><ol>
-<li><p>摩斯密码</p>
-<p>摩尔斯电码是一种时通时断的信号代码，通过不同的排列顺序来表达不同的英文字母、数字和标点符号。部分音频隐写通过快速播放的Morse电码来传递信息（也可能是正常速度的）</p>
-<ul>
-<li>解题方法：<ul>
-<li>通过Audacity打开音频文件，放大波形图，来判断Morse电码</li>
-<li>通过CTFcrack或其他工具进行解码</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>频谱图隐藏信息</p>
-<p>频谱是频率谱密度的简称，是频率的分布曲线。复杂振荡分解为振幅不同和频率不同的谐振荡。这些谐振荡的幅值按频率排列的图形叫做频谱。在CTF中，我们可以单独只对一个声 道中，隐写进信息</p>
-<ul>
-<li><p>解题方法：</p>
-<p>通过Audacity打开音频文件，选择音频所在音轨，”频谱”——&gt;”频谱图”即可</p>
-</li>
-</ul>
-</li>
-<li><p>MP3文件的隐写</p>
-<p>MP3stego是著名的音频数据隐写工具，支持常见的压缩音频文件格式如mp3的数据嵌入，它采用的是一种特殊的量化方法并且将数据隐藏在MP3文件的奇偶校验块中</p>
-<ul>
-<li><p>解题方法：</p>
-<p>使用MP3stego的decode模块即可</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs shell">用法：<br><br>加密：encode -E &lt;加密文本.txt&gt; -P &lt;密码&gt; &lt;MP3文件.mp3&gt;<br>解密：decode -X -P &lt;密码&gt; &lt;MP3文件.mp3&gt;<br></code></pre></td></tr></table></figure>
-</li>
-</ul>
+<p>| 函数           | 功能                                                         |<br>| ——————— | —————————————————————————————— |<br>| perf_counter() | 返回一个CPU级别的精确时间计数值，单位为秒。一般连续使用来获得时间差<br />注意，第一次perf_counter()是往后所有perf_counter()的基准时间！<br />&gt;&gt;&gt; start = perf_counter()<br />&gt;&gt;&gt; end = perf_counter()<br />end - start |<br>| sleep(s)       | 该函数使得程序休眠 s 秒。                                    |</p>
 </li>
 </ol>
 
@@ -436,9 +295,9 @@
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/CTF/">CTF</a>
+                      <a class="hover-with-bg" href="/categories/%E7%BC%96%E7%A8%8B-Coding/">编程/Coding</a>
                     
-                      <a class="hover-with-bg" href="/categories/CTF/%E6%9D%82%E9%A1%B9-MISC/">杂项/MISC</a>
+                      <a class="hover-with-bg" href="/categories/%E7%BC%96%E7%A8%8B-Coding/Python/">Python</a>
                     
                   </div>
                 
@@ -446,13 +305,9 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/CTF/">CTF</a>
+                      <a class="hover-with-bg" href="/tags/Python/">Python</a>
                     
-                      <a class="hover-with-bg" href="/tags/MISC/">MISC</a>
-                    
-                      <a class="hover-with-bg" href="/tags/%E9%9A%90%E5%86%99/">隐写</a>
-                    
-                      <a class="hover-with-bg" href="/tags/%E9%9B%B6%E5%9F%BA%E7%A1%80/">零基础</a>
+                      <a class="hover-with-bg" href="/tags/%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/">入门笔记</a>
                     
                   </div>
                 
@@ -469,18 +324,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/08/23/Hexo%E9%83%A8%E7%BD%B2%E8%87%B3%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Hexo部署至云服务器</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/08/12/Hexo-GithubGitee%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/">
-                        <span class="hidden-mobile">基于Hexo+Github个人博客搭建</span>
+                      <a href="/2021/08/23/Hexo%E9%83%A8%E7%BD%B2%E8%87%B3%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/">
+                        <span class="hidden-mobile">Hexo部署至云服务器</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
