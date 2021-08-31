@@ -267,15 +267,61 @@
 </ul>
 </li>
 <li><p>时间获取</p>
-<p>| 函数     | 功能                                                         |<br>| ———— | —————————————————————————————— |<br>| time()   | 获取当前时间戳，即计算机内部的时间值，该时间值为浮点数。<br />&gt;&gt;&gt;time.time()<br />1630242266.687503 |<br>| ctime()  | 获取当前时间并以易读方式表示，返回字符串。<br />&gt;&gt;&gt;time.ctime()<br />‘Sun Aug 29 21:06:42 2021’ |<br>| gmtime() | 获取当前时间并表示为计算机可处理的时间格式。<br />&gt;&gt;&gt;time.gmtime()<br />&gt;&gt; time.struct_time(tm_year=2021, tm_mon=8, tm_mday=29, tm_hour=13, tm_min=8, tm_sec=55, tm_wday=6, tm_yday=241, tm_isdst=0)&gt;&gt;&gt; time.struct_time(tm_year=2021, tm_mon=8, tm_mday=29, tm_hour=13, tm_min=8, tm_sec=55, tm_wday=6, tm_yday=241, tm_isdst=0) |</p>
 </li>
+</ol>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">函数</th>
+<th style="text-align:center">功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">time()</td>
+<td style="text-align:center">获取当前时间戳，即计算机内部的时间值，该时间值为浮点数。<br />&gt;&gt;&gt;time.time()<br />1630242266.687503</td>
+</tr>
+<tr>
+<td style="text-align:center">ctime()</td>
+<td style="text-align:center">获取当前时间并以易读方式表示，返回字符串。<br />&gt;&gt;&gt;time.ctime()<br />‘Sun Aug 29 21:06:42 2021’</td>
+</tr>
+<tr>
+<td style="text-align:center">gmtime()</td>
+<td style="text-align:center">获取当前时间并表示为计算机可处理的时间格式。<br />&gt;&gt;&gt;time.gmtime()<br />&gt;&gt; time.struct_time(tm_year=2021, tm_mon=8, tm_mday=29, tm_hour=13, tm_min=8, tm_sec=55, tm_wday=6, tm_yday=241, tm_isdst=0)&gt;&gt;&gt; time.struct_time(tm_year=2021, tm_mon=8, tm_mday=29, tm_hour=13, tm_min=8, tm_sec=55, tm_wday=6, tm_yday=241, tm_isdst=0)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ol>
 <li><p>时间格式化</p>
 <ul>
 <li>格式化：类似于字符串格式化，需要有展示模板</li>
 <li>展示模板由特定的格式化控制符组成</li>
 </ul>
-<p>| 函数              | 功能                                                         |<br>| ————————- | —————————————————————————————— |<br>| strftime(tpl,ts)  | tpl是格式化模板字符串，用来定义输出效果<br/>ts是计算机内部时间类型变量<br />&gt;&gt;&gt;t = time.gmtime()<br />&gt;&gt;&gt;time.strftime(“%Y-%m-%d %H:%M:%S”,t)<br />‘2018-01-26 12:55:20’ |<br>| strptime(str,tpl) | str是字符串形式的时间值<br />tpl是格式化模版字符串，用来定义输入效果<br />&gt;&gt;&gt;timeStr = ‘2018-01-01 12:00:00’<br />&gt;&gt;&gt;time.strptime(timeStr, “%Y-%m-%d %H:%M:%S”) |</p>
 </li>
+</ol>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">函数</th>
+<th style="text-align:center">功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">strftime(tpl,ts)</td>
+<td style="text-align:center">tpl是格式化模板字符串，用来定义输出效果<br/>ts是计算机内部时间类型变量<br />&gt;&gt;&gt;t = time.gmtime()<br />&gt;&gt;&gt;time.strftime(“%Y-%m-%d %H:%M:%S”,t)<br />‘2018-01-26 12:55:20’</td>
+</tr>
+<tr>
+<td style="text-align:center">strptime(str,tpl)</td>
+<td style="text-align:center">str是字符串形式的时间值<br />tpl是格式化模版字符串，用来定义输入效果<br />&gt;&gt;&gt;timeStr = ‘2018-01-01 12:00:00’<br />&gt;&gt;&gt;time.strptime(timeStr, “%Y-%m-%d %H:%M:%S”)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ol>
 <li><p>程序计时</p>
 <p>程序计时应用广泛</p>
 <ul>
@@ -283,9 +329,28 @@
 <li>测量时间：perf_counter()</li>
 <li>产生时间：sleep()</li>
 </ul>
-<p>| 函数           | 功能                                                         |<br>| ——————— | —————————————————————————————— |<br>| perf_counter() | 返回一个CPU级别的精确时间计数值，单位为秒。一般连续使用来获得时间差<br />注意，第一次perf_counter()是往后所有perf_counter()的基准时间！<br />&gt;&gt;&gt; start = perf_counter()<br />&gt;&gt;&gt; end = perf_counter()<br />end - start |<br>| sleep(s)       | 该函数使得程序休眠 s 秒。                                    |</p>
 </li>
 </ol>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>perf_counter()</td>
+<td>返回一个CPU级别的精确时间计数值，单位为秒。一般连续使用来获得时间差<br />注意，第一次perf_counter()是往后所有perf_counter()的基准时间！<br />&gt;&gt;&gt; start = perf_counter()<br />&gt;&gt;&gt; end = perf_counter()<br />end - start</td>
+</tr>
+<tr>
+<td>sleep(s)</td>
+<td>该函数使得程序休眠 s 秒。</td>
+</tr>
+</tbody>
+</table>
+</div>
 
             </div>
             <hr>
