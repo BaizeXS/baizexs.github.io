@@ -18,25 +18,9 @@
   <meta name="author" content="BaizeXS">
   <meta name="keywords" content="">
   
-  <title>Python入门笔记——time库 - BaizeXS&#39;s Blog</title>
+  <title>标签 - Java - BaizeXS&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
-
-
-  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
-  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
-
-  
-    
-    
-      
-      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-gist.min.css" />
-    
-  
-
-  
-    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
-  
 
 
 
@@ -64,7 +48,7 @@
 
 
 <body>
-  <header style="height: 70vh;">
+  <header style="height: 80vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
@@ -170,63 +154,22 @@
 </nav>
 
     <div class="banner" id="banner" parallax=true
-         style="background: url('/img/Wallpaper9.jpg') no-repeat center center;
+         style="background: url('/img/Wallpaper11.jpg') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="Python入门笔记——time库">
+            <span class="h2" id="subtitle" title="标签 - Java">
               
             </span>
 
             
-              <div class="mt-3">
-  
-  
-    <span class="post-meta">
-      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-08-29 23:23" pubdate>
-        2021年8月29日 晚上
-      </time>
-    </span>
-  
-</div>
-
-<div class="mt-1">
-  
-    
-    <span class="post-meta mr-2">
-      <i class="iconfont icon-chart"></i>
-      522 字
-    </span>
-  
-
-  
-    
-    <span class="post-meta mr-2">
-      <i class="iconfont icon-clock-fill"></i>
-      
-      
-      6
-       分钟
-    </span>
-  
-
-  
-  
-    
-      <!-- 不蒜子统计文章PV -->
-      <span id="busuanzi_container_page_pv" style="display: none">
-        <i class="iconfont icon-eye" aria-hidden="true"></i>
-        <span id="busuanzi_value_page_pv"></span> 次
-      </span>
-    
-  
-</div>
-
-            
           </div>
 
+          
+            <div class="scroll-down-bar">
+              <i class="iconfont icon-arrowdown"></i>
+            </div>
           
         </div>
       </div>
@@ -235,204 +178,40 @@
 
   <main>
     
+      <div class="container nopadding-x-md">
+        <div class="py-5" id="board"
+          >
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+<div class="list-group">
+  <p class="h4">共计 1 篇文章</p>
+  <hr>
+  
+  
+    
       
-
-<div class="container-fluid nopadding-x">
-  <div class="row nomargin-x">
-    <div class="d-none d-lg-block col-lg-2"></div>
-    <div class="col-lg-8 nopadding-x-md">
-      <div class="container nopadding-x-md" id="board-ctn">
-        <div class="py-5" id="board">
-          <article class="post-content mx-auto">
-            <!-- SEO header -->
-            <h1 style="display: none">Python入门笔记——time库</h1>
-            
-            <div class="markdown-body">
-              <h1 id="Python入门笔记——-time-库的使用"><a href="#Python入门笔记——-time-库的使用" class="headerlink" title="Python入门笔记—— time 库的使用"></a>Python入门笔记—— time 库的使用</h1><ol>
-<li><p>time 库是Python中处理时间的标准库</p>
-<ul>
-<li>计算机时间表达</li>
-<li>提供获取系统时间并格式化输出功能</li>
-<li>提供系统级精确计时功能，用于程序性能分析</li>
-</ul>
-</li>
-<li><p>time 库的使用</p>
-<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">import</span> time<br>time.&lt;b&gt;()<br></code></pre></div></td></tr></table></figure>
-</li>
-<li><p>time 库主要包括三类函数</p>
-<ul>
-<li>时间获取：time(); ctime(); gmtime();</li>
-<li>时间格式化：stwftime(); strptime();</li>
-<li>程序计时：sleep(); perf_counter();</li>
-</ul>
-</li>
-<li><p>时间获取</p>
-</li>
-</ol>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">函数</th>
-<th style="text-align:left">功能</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">time()</td>
-<td style="text-align:left">获取当前时间戳，即计算机内部的时间值，该时间值为浮点数。<br />&gt;&gt;&gt;time.time()<br />1630242266.687503</td>
-</tr>
-<tr>
-<td style="text-align:center">ctime()</td>
-<td style="text-align:left">获取当前时间并以易读方式表示，返回字符串。<br />&gt;&gt;&gt;time.ctime()<br />‘Sun Aug 29 21:06:42 2021’</td>
-</tr>
-<tr>
-<td style="text-align:center">gmtime()</td>
-<td style="text-align:left">获取当前时间并表示为计算机可处理的时间格式。<br />&gt;&gt;&gt;time.gmtime()<br />&gt;&gt; time.struct_time(tm_year=2021, tm_mon=8, tm_mday=29, tm_hour=13, tm_min=8, tm_sec=55, tm_wday=6, tm_yday=241, tm_isdst=0)&gt;&gt;&gt; time.struct_time(tm_year=2021, tm_mon=8, tm_mday=29, tm_hour=13, tm_min=8, tm_sec=55, tm_wday=6, tm_yday=241, tm_isdst=0)</td>
-</tr>
-</tbody>
-</table>
-</div>
-<ol>
-<li><p>时间格式化</p>
-<ul>
-<li>格式化：类似于字符串格式化，需要有展示模板</li>
-<li>展示模板由特定的格式化控制符组成</li>
-</ul>
-</li>
-</ol>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">函数</th>
-<th style="text-align:left">功能</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">strftime(tpl,ts)</td>
-<td style="text-align:left">tpl是格式化模板字符串，用来定义输出效果<br/>ts是计算机内部时间类型变量<br />&gt;&gt;&gt;t = time.gmtime()<br />&gt;&gt;&gt;time.strftime(“%Y-%m-%d %H:%M:%S”,t)<br />‘2018-01-26 12:55:20’</td>
-</tr>
-<tr>
-<td style="text-align:center">strptime(str,tpl)</td>
-<td style="text-align:left">str是字符串形式的时间值<br />tpl是格式化模版字符串，用来定义输入效果<br />&gt;&gt;&gt;timeStr = ‘2018-01-01 12:00:00’<br />&gt;&gt;&gt;time.strptime(timeStr, “%Y-%m-%d %H:%M:%S”)</td>
-</tr>
-</tbody>
-</table>
-</div>
-<ol>
-<li><p>程序计时</p>
-<p>程序计时应用广泛</p>
-<ul>
-<li>程序计时指起止动作所经历时间的过程</li>
-<li>测量时间：perf_counter()</li>
-<li>产生时间：sleep()</li>
-</ul>
-</li>
-</ol>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">函数</th>
-<th style="text-align:left">功能</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">perf_counter()</td>
-<td style="text-align:left">返回一个CPU级别的精确时间计数值，单位为秒。一般连续使用来获得时间差<br />注意，第一次perf_counter()是往后所有perf_counter()的基准时间！<br />&gt;&gt;&gt; start = perf_counter()<br />&gt;&gt;&gt; end = perf_counter()<br />end - start</td>
-</tr>
-<tr>
-<td style="text-align:center">sleep(s)</td>
-<td style="text-align:left">该函数使得程序休眠 s 秒。</td>
-</tr>
-</tbody>
-</table>
+      <p class="h5">2022</p>
+    
+    <a href="/2022/02/24/Java%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B01%E2%80%94%E2%80%94%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1/" class="list-group-item list-group-item-action">
+      <span class="archive-post-title">Java入门笔记1——类与对象</span>
+      <time style="float: right;">02-24</time>
+    </a>
+  
 </div>
 
-            </div>
-            <hr>
-            <div>
-              <div class="post-metas mb-3">
-                
-                  <div class="post-meta mr-3">
-                    <i class="iconfont icon-category"></i>
-                    
-                      <a class="hover-with-bg" href="/categories/%E7%BC%96%E7%A8%8B-Coding/">编程/Coding</a>
-                    
-                      <a class="hover-with-bg" href="/categories/%E7%BC%96%E7%A8%8B-Coding/Python/">Python</a>
-                    
-                  </div>
-                
-                
-                  <div class="post-meta">
-                    <i class="iconfont icon-tags"></i>
-                    
-                      <a class="hover-with-bg" href="/tags/%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/">入门笔记</a>
-                    
-                      <a class="hover-with-bg" href="/tags/Python/">Python</a>
-                    
-                  </div>
-                
+
+
+
+
               </div>
-              
-                <p class="note note-warning">
-                  
-                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
-                  
-                </p>
-              
-              
             </div>
-
-            
-              <!-- Comments -->
-              <article class="comments" id="comments" lazyload>
-                
-                  
-                
-                
-  <div id="valine"></div>
-  <script type="text/javascript">
-    Fluid.utils.loadComments('#valine', function() {
-      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', function() {
-        var options = Object.assign(
-          {"appId":"kPAygL5q2VkrVStJpaMqITqn-9Nh9j0Va","appKey":"m98SpwNzyNOjRi4xMzugiRJW","placeholder":"哒哒哒","path":"window.location.pathname","avatar":"retro","meta":["nick","mail"],"pageSize":10,"lang":"zh-CN","highlight":true,"recordIP":true,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false,"requiredFields":[]},
-          {
-            el: "#valine",
-            path: window.location.pathname
-          }
-        )
-        new Valine(options);
-      });
-    });
-  </script>
-  <noscript>Please enable JavaScript to view the comments</noscript>
-
-
-              </article>
-            
-          </article>
+          </div>
         </div>
       </div>
-    </div>
-    
-      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
-        <div id="toc">
-  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
-  <div class="toc-body" id="toc-body"></div>
-</div>
-
-      </div>
-    
-  </div>
-</div>
-
-<!-- Custom -->
-
-
     
 
     
@@ -546,15 +325,9 @@
 
 
 
-  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
 
 
 
-  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
-
-
-
-  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
 
 
 
