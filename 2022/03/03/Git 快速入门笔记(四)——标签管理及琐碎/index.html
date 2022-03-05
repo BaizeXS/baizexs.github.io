@@ -18,7 +18,7 @@
   <meta name="author" content="BaizeXS">
   <meta name="keywords" content="">
   
-  <title>Git 快速入门笔记(一)——基础知识 - BaizeXS&#39;s Blog</title>
+  <title>Git Git 快速入门笔记(四)——标签管理及琐碎 - BaizeXS&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
 
@@ -175,7 +175,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="Git 快速入门笔记(一)——基础知识">
+            <span class="h2" id="subtitle" title="Git Git 快速入门笔记(四)——标签管理及琐碎">
               
             </span>
 
@@ -185,8 +185,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2022-03-03 17:49" pubdate>
-        2022年3月3日 下午
+      <time datetime="2022-03-03 20:45" pubdate>
+        2022年3月3日 晚上
       </time>
     </span>
   
@@ -197,7 +197,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      715 字
+      303 字
     </span>
   
 
@@ -207,7 +207,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      8
+      3
        分钟
     </span>
   
@@ -245,67 +245,55 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Git 快速入门笔记(一)——基础知识</h1>
+            <h1 style="display: none">Git Git 快速入门笔记(四)——标签管理及琐碎</h1>
             
             <div class="markdown-body">
-              <h1 id="Git-快速入门笔记-一-——基础知识"><a href="#Git-快速入门笔记-一-——基础知识" class="headerlink" title="Git 快速入门笔记(一)——基础知识"></a>Git 快速入门笔记(一)——基础知识</h1><ol>
-<li><p><strong>Git是什么？</strong></p>
-<p>Git是目前世界上最先进的<strong>分布式版本控制系统</strong>。在Git管理的项目中，Git会记录每一次修改，以便操作人员进行文件/源码的版本控制与管理。可以参考一下<a target="_blank" rel="noopener" href="https://www.liaoxuefeng.com/wiki/896043488029600/896067008724000">廖雪峰大佬博客的例子</a>。</p>
-<p>注：本文也是一边看廖雪峰大佬的博客一边实践整理出的个人学习笔记。</p>
+              <h1 id="Git-快速入门笔记-四-——标签管理及琐碎"><a href="#Git-快速入门笔记-四-——标签管理及琐碎" class="headerlink" title="Git 快速入门笔记(四)——标签管理及琐碎"></a>Git 快速入门笔记(四)——标签管理及琐碎</h1><ol>
+<li><p>Q：为什么要使用标签？</p>
+<p>A：我们都知道，Git对版本仓库的管理，主要依赖于一个类似于指针的功能，记录了每一次的<code>commit</code>。但是<code>commit ID</code>太难记了，所以我们使用一些标签来指向特定的仓库中一些特别的<code>commit</code>。</p>
 </li>
-<li><p><strong>创建版本库</strong></p>
+<li><p>创建标签</p>
 <ul>
-<li><p>在合适的地方创建空文件夹，不妨命名为<code>learngit</code></p>
+<li><p>创建标签</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">git tag &lt;name&gt; &lt;commit id&gt;<br></code></pre></div></td></tr></table></figure>
 </li>
-<li><p>在该文件夹下打开终端/CMD，确保当前路径为<code>xxx/learngit</code>后，输入</p>
-<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">git init<br></code></pre></div></td></tr></table></figure>
-<p>对该文件夹进行初始化。命令执行完毕，Git已完成版本仓的新建。</p>
+<li><p>创建带有说明的标签</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">git tag -a &lt;name&gt; -m &lt;&quot;message&quot;&gt; &lt;commit id&gt;<br></code></pre></div></td></tr></table></figure>
+</li>
+<li><p>查看所有标签</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">git tag<br></code></pre></div></td></tr></table></figure>
+</li>
+<li><p>查看标签信息</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">git show &lt;tagname&gt;<br></code></pre></div></td></tr></table></figure>
 </li>
 </ul>
 </li>
-<li><p><strong>把文件添加到版本库</strong></p>
-<p>例如，我们需要向<code>learngit</code>库中添加<code>readme.txt</code>文件，只需要：</p>
+<li><p>操作标签</p>
 <ul>
-<li><p>在<code>learngit</code>文件夹下创建新文件<code>readme.txt</code></p>
+<li><p>删除标签</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">git tag -d &lt;name&gt;<br></code></pre></div></td></tr></table></figure>
 </li>
-<li><p>用<code>git add</code>命令将文件添加到本地仓库</p>
-<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">git add readme.txt<br></code></pre></div></td></tr></table></figure>
+<li><p>推送本地标签到远程</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">git push origin &lt;tagname&gt;<br></code></pre></div></td></tr></table></figure>
 </li>
-<li><p>用<code>git commit</code> 命令将文件提交到仓库</p>
-<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">git commit -m &quot;Wrote a readme.txt&quot;<br></code></pre></div></td></tr></table></figure>
-<p>注意：<code>-m &quot;...&quot;</code>中，双引号内的内容为本次提交的说明。</p>
+<li><p>推送全部本地标签到远程</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">git push origin --tags<br></code></pre></div></td></tr></table></figure>
+</li>
+<li><p>删除远程标签</p>
+<p>先删除本地标签，再执行如下命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">git push origin :refs/tags/&lt;tagname&gt;<br></code></pre></div></td></tr></table></figure>
 </li>
 </ul>
 </li>
-<li><p><strong>查看仓库当前状态</strong></p>
-<p>查看自上次提交后，有哪些文件被修改过：</p>
-<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">git status<br></code></pre></div></td></tr></table></figure>
-<p>查看自上次提交后，文件被修改的内容：</p>
-<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">git diff<br></code></pre></div></td></tr></table></figure>
+<li><p>GitHub</p>
+<ul>
+<li>GitHub上可以Fork任意开源仓库</li>
+<li>自己拥有Fork后的仓库的读写权限</li>
+<li>可以推送pull request给官方仓库来贡献代码</li>
+</ul>
 </li>
-<li><p><strong>查看仓库更新历史记录：</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">git log<br></code></pre></div></td></tr></table></figure>
-<p>如果嫌输出信息太多，看得眼花缭乱的，可以试试加上<code>--pretty=oneline</code>参数。</p>
-<p>在<code>log</code>中，<code>commit</code>之后跟着的便是每一次提交操作完成后的<code>commit ID</code>，即版本号。</p>
-</li>
-<li><p><strong>版本回退</strong></p>
-<p>Git中，用<code>HEAD</code>表示当前版本，上一个版本就是<code>HEAD^</code>，上上一个版本就是<code>HEAD^^</code>，当然往上100个版本写100个<code>^</code>比较容易数不过来，所以写成<code>HEAD~100</code>。</p>
-<p>退回至上一版本：</p>
-<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">git reset --hard HEAD^<br></code></pre></div></td></tr></table></figure>
-<p>退回至任一版本：</p>
-<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">git reset --hard commit_id<br></code></pre></div></td></tr></table></figure>
-<p>Git提供了一个命令<code>git reflog</code>用来记录你的每一次命令，即<strong>可以查看命令历史</strong>，以便决要回到未来的那个版本。</p>
-</li>
-<li><p><strong>撤销修改</strong></p>
-<p>仍然以<code>readme.txt</code>文件为例，若<code>readme.txt</code><strong>自修改后还没有放到暂缓区</strong>或者<code>readme.txt</code><strong>已经添加到暂存区后，又进行了修改</strong>，则可以使用<code>git checkout -- file</code>可以丢弃工作区的修改：</p>
-<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">git checkout -- readme.txt<br></code></pre></div></td></tr></table></figure>
-<p>若是<strong>修改后已经添加到暂存区并且还未提交</strong>，则可以使用<code>git reset HEAD &lt;file&gt;</code>将暂存区的修改撤销：</p>
-<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">git reset HEAD readme.txt<br></code></pre></div></td></tr></table></figure>
-<p>若是<strong>修改后已经添加到暂存区并且提交</strong>，则需要使用版本回退。</p>
-</li>
-<li><p><strong>删除文件</strong></p>
-<p>一般情况下，可以直接将文件夹中没用的文件删了，而后使用<code>git rm file</code>命令将其从版本库中删除：</p>
-<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">git rm test.txt<br>git commit -m &quot;Delete test.txt&quot;<br></code></pre></div></td></tr></table></figure>
+<li><p><code>.gitignore</code></p>
+<p>一些配置文件等不需要上传到远程仓库的文件可以通过添加<code>.gitignore</code>文件忽略他们。</p>
 </li>
 </ol>
 
@@ -346,9 +334,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/03/03/Git%20%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0(%E4%BA%8C)%E2%80%94%E2%80%94%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93/">
+                      <a href="/2022/03/05/Java%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B02%E2%80%94%E2%80%94%E5%AF%B9%E8%B1%A1%E4%BA%A4%E4%BA%92/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Git 快速入门笔记(二)——远程仓库</span>
+                        <span class="hidden-mobile">Java入门笔记2——对象交互</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -356,8 +344,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/02/24/Java%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B01%E2%80%94%E2%80%94%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1/">
-                        <span class="hidden-mobile">Java入门笔记1——类与对象</span>
+                      <a href="/2022/03/03/Git%20%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0(%E4%B8%89)%E2%80%94%E2%80%94%E5%88%86%E6%94%AF%E7%AE%A1%E7%90%86/">
+                        <span class="hidden-mobile">Git 快速入门笔记(三)——分支管理</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
