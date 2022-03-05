@@ -1,0 +1,610 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="BaizeXS的个人博客">
+  <meta name="author" content="BaizeXS">
+  <meta name="keywords" content="">
+  
+  <title>Java入门笔记3——容器对象 - BaizeXS&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"www.baizexs.top","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":true,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":"e0d9edce9af73da8896ba0d8880cc3aa","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>BaizeXS's Blog</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/Wallpaper3.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Java入门笔记3——容器对象">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-03-05 13:48" pubdate>
+        2022年3月5日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.3k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      17
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Java入门笔记3——容器对象</h1>
+            
+            <div class="markdown-body">
+              <h1 id="Java入门笔记3——对象容器"><a href="#Java入门笔记3——对象容器" class="headerlink" title="Java入门笔记3——对象容器"></a>Java入门笔记3——对象容器</h1><h2 id="3-1-顺序容器——ArrayList-lt-元素类型-gt"><a href="#3-1-顺序容器——ArrayList-lt-元素类型-gt" class="headerlink" title="3.1 顺序容器——ArrayList\&lt;元素类型&gt;"></a>3.1 顺序容器——ArrayList\&lt;元素类型&gt;</h2><h3 id="3-1-1-基本概念"><a href="#3-1-1-基本概念" class="headerlink" title="3.1.1 基本概念"></a>3.1.1 基本概念</h3><p>容器是现代程序设计非常基础而重要的手段。</p>
+<p>所谓容器，就是“<strong>放东西的东西</strong>”。数组可以看作是一种容器，但是数组的元素个数一旦确定就无法改变，这在实际使用中是很大的不足。一般意义上的<strong>容器</strong>，是指<strong>具有自动增长容量能力的存放数据的一种数据结构</strong>。Java具有丰富的容器，Java的容器具有丰富的功能和良好的性能。熟悉并能充分有效地利用好容器，是现代程序设计的基本能力。</p>
+<p>我们首先学习的是<strong>顺序容器</strong>，即<strong>放进容器中的对象是按照指定的顺序（放的顺序）排列起来的</strong>，<strong>而且允许具有相同值的多个对象存在</strong>。</p>
+<h3 id="3-1-2应用实例——记事本："><a href="#3-1-2应用实例——记事本：" class="headerlink" title="3.1.2应用实例——记事本："></a>3.1.2应用实例——记事本：</h3><p>首先明确我们的需求：</p>
+<ul>
+<li>不限制能存储的记录的数量</li>
+<li>能知道已经储存的记录的数量</li>
+<li>增——能存记录</li>
+<li>删——能删除一条记录</li>
+<li>查——能查看存进去的每一条记录</li>
+<li>列——能列出所有记录</li>
+</ul>
+<p>注意：设计程序的时候需要将<strong>人机交互</strong>和<strong>业务逻辑</strong>要分开，因此，我们需要设计一个类来完成这些功能，故而设计接口如下：</p>
+<ul>
+<li>add( String Note );</li>
+<li>getSize();</li>
+<li>geyNote( int index );</li>
+<li>removeNote( int index );</li>
+<li>list();</li>
+</ul>
+<p>Notebook类实例(1)：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> notebook;<br><br><span class="hljs-keyword">import</span> java.util.ArrayList;<br><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Notebook</span> </span>&#123;<br>    <span class="hljs-keyword">private</span> ArrayList&lt;String&gt; notes = <span class="hljs-keyword">new</span> ArrayList&lt;String&gt;();<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">add</span><span class="hljs-params">( String s )</span> </span>&#123;<br>        notes.add(s);<br>    &#125;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">add</span><span class="hljs-params">( String s, <span class="hljs-keyword">int</span> location )</span> </span>&#123;<br>        notes.add(location,s);<br>    &#125;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">getSize</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> notes.size();<br>    &#125;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getNote</span><span class="hljs-params">( <span class="hljs-keyword">int</span> index )</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> notes.get(index);<br>    &#125;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">removeNote</span><span class="hljs-params">( <span class="hljs-keyword">int</span> index )</span> </span>&#123;<br>        notes.remove(index);<br>    &#125;<br>    <span class="hljs-keyword">public</span> String[] list() &#123;<br>        String[] a = <span class="hljs-keyword">new</span> String[notes.size()];<br>        notes.toArray(a);<br><span class="hljs-comment">//        for ( int i = 0; i &lt; notes.size(); i++ ) &#123;</span><br><span class="hljs-comment">//            a[i] = notes.get(i);</span><br><span class="hljs-comment">//        &#125;</span><br>        <span class="hljs-keyword">return</span> a;<br>    &#125;<br>    <br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">( String[] args )</span> </span>&#123;<br>        Notebook nb = <span class="hljs-keyword">new</span> Notebook();<br>        nb.add(<span class="hljs-string">&quot;first&quot;</span>);<br>        nb.add(<span class="hljs-string">&quot;second&quot;</span>);<br>        System.out.println(nb.getSize());<br>    &#125;<br>&#125;<br><br></code></pre></div></td></tr></table></figure>
+<ul>
+<li><p><strong>容器类</strong>——用于存放对象的类</p>
+<p>举例：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">private</span> ArrayList&lt;String&gt; notes = <span class="hljs-keyword">new</span> ArrayList&lt;String&gt;();<br></code></pre></div></td></tr></table></figure>
+<p><strong>容器类</strong>有两个类型：</p>
+<ul>
+<li>容器的类型：如<strong>顺序容器类——ArrayList</strong>\&lt;></li>
+<li>元素的类型：如<strong>字符串元素类——String</strong></li>
+</ul>
+</li>
+<li><p><strong>ArrayList的操作</strong>：</p>
+<ul>
+<li>add(ElemType)——将ElemType加入ArrayList</li>
+<li>add(Location, ElemType)——将ElemType加入到ArrayList的Location位置上</li>
+<li>get(Index)——获得位置为Index的元素</li>
+<li>remove(Index)——移除位置为Index的元素</li>
+<li>toArray(a)——将ArrayList容器中的元素按顺序填入数组a中</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-2-对象数组"><a href="#3-2-对象数组" class="headerlink" title="3.2 对象数组"></a>3.2 对象数组</h2><h3 id="3-2-1-对象数组"><a href="#3-2-1-对象数组" class="headerlink" title="3.2.1 对象数组"></a>3.2.1 对象数组</h3><p>实例(1)中出现如下代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">String[] a = <span class="hljs-keyword">new</span> String[<span class="hljs-number">10</span>];<br></code></pre></div></td></tr></table></figure>
+<p>当<strong>数组的元素的类型是类</strong>的时候，数组的每一个元素其实只<strong>是对象的管理者</strong>而<strong>不是对象本身</strong>。因此，仅仅创建数组并没有创建其中的每一个对象！上述 <code>a</code> 数组中每个元素为一个 <code>String</code> 的管理者，并非对象本身。创建出该数组后，还需把每一个对象创建出来！</p>
+<h4 id="3-2-2-For-Each循环"><a href="#3-2-2-For-Each循环" class="headerlink" title="3.2.2 For-Each循环"></a>3.2.2 For-Each循环</h4><p>一般情况下 <code>For-Each</code> 循环举例：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">int</span>[] ia = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[<span class="hljs-number">10</span>];<br><span class="hljs-keyword">for</span> ( <span class="hljs-keyword">int</span> k : ia ) &#123;<br>    k++;	<span class="hljs-comment">// 这里 k 不会起作用，每次循环的 k 都是 ia 中元素的复制品 </span><br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p>对于对象数组：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">ArrayList&lt;String&gt; a = <span class="hljs-keyword">new</span> ArrayList&lt;String&gt;();<br>a.add(<span class="hljs-string">&quot;first&quot;</span>);<br>a.add(<span class="hljs-string">&quot;second&quot;</span>);<br><span class="hljs-keyword">for</span> ( String s : a ) &#123;<br>    System.out.println(s);	<span class="hljs-comment">// 对于容器类而言，for-each可以用，不过需要注意的是，有时循环的“复制品”可能为某一对象的管理者，此时可以管理该对象</span><br>&#125;<br></code></pre></div></td></tr></table></figure>
+<h2 id="3-3-集合容器——HashSet-lt-元素类型"><a href="#3-3-集合容器——HashSet-lt-元素类型" class="headerlink" title="3.3 集合容器——HashSet\&lt;元素类型>"></a>3.3 集合容器——HashSet\&lt;元素类型></h2><p>集合就是数学中的集合的概念：所有的元素都具有唯一的值，元素在其中没有顺序。即<strong>无序性</strong>和<strong>互异性</strong>。举例如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">HashSet&lt;String&gt; s = <span class="hljs-keyword">new</span> HashSet&lt;String&gt;();<br>s.add(<span class="hljs-string">&quot;first&quot;</span>);<br>s.add(<span class="hljs-string">&quot;second&quot;</span>);<br>s.add(<span class="hljs-string">&quot;first&quot;</span>);<br><span class="hljs-keyword">for</span> ( String k : s ) &#123;	<span class="hljs-comment">// 根据元素互异性，该程序只会打印一次 first</span><br>    System.out.println(k);<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p><strong>Tips:</strong></p>
+<p>Java中的任何类，只要有 <code>public String toString()</code> 函数，则可以通过 <code>System.out.println()</code> 进行打印。</p>
+<h2 id="3-4-散列表——HashMap"><a href="#3-4-散列表——HashMap" class="headerlink" title="3.4 散列表——HashMap\"></a>3.4 散列表——HashMap\<Key,Value\></h2><p>传统意义上的Hash表，是能以int做值，将数据存放起来的数据结构。Java的Hash表可以以任何实现了hash()函数的类的对象做值来存放对象。且散列表的键和值是一一对应的，一个key只对应一个value。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> coins;<br><br><span class="hljs-keyword">import</span> java.util.HashMap;<br><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Coin</span> </span>&#123;<br>    <span class="hljs-keyword">private</span> HashMap&lt;Interger, String&gt; coinnames = <span class="hljs-keyword">new</span> HashMap&lt;Interger, String&gt;();<br>    <span class="hljs-comment">// 注意，容器中的元素类型必须是对象，而基本类型不能作为容器的元素</span><br>    <br>    <span class="hljs-keyword">public</span> Coin &#123;<br>        coinnames.put(<span class="hljs-number">1</span>,<span class="hljs-string">&quot;penny&quot;</span>);<br>        coinnames.put(<span class="hljs-number">10</span>,<span class="hljs-string">&quot;dime&quot;</span>);<br>        coinnames.put(<span class="hljs-number">25</span>,<span class="hljs-string">&quot;quarter&quot;</span>);<br>        coinnames.put(<span class="hljs-number">50</span>,<span class="hljs-string">&quot;half-dollar&quot;</span>);<br>        <span class="hljs-keyword">for</span> ( Integer k : coinnames.keySet() ) &#123;<br>            String s = coinnames.get(k);<br>            System.out.println(s);<br>        &#125;<br>    &#125;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getName</span><span class="hljs-params">( <span class="hljs-keyword">int</span> amount )</span> </span>&#123;<br>        <span class="hljs-keyword">if</span> ( coinnames.containsKey(amount) )<br>        	<span class="hljs-keyword">return</span> coinnames.get(amount);<br>        <span class="hljs-keyword">else</span><br>            <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;NOT FOUND&quot;</span>;<br>    &#125;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>        Scanner in = <span class="hljs-keyword">new</span> Scanner(System.in);<br>        <span class="hljs-keyword">int</span> amount = in.nextInt();<br>        Coin coin = <span class="hljs-keyword">new</span> Coin();<br>        String name = coin.getName(amount);<br>        System.out.println(name);<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<ul>
+<li><strong>HashMap的操作：</strong>（以上述例子中的coinnames对象为例）<ul>
+<li>coinnames.put<key,value>：创建散列表的一项</li>
+<li>coinnames.get(key)：返回key所对应的value</li>
+</ul>
+</li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E7%BC%96%E7%A8%8B-Coding/">编程/Coding</a>
+                    
+                      <a class="hover-with-bg" href="/categories/%E7%BC%96%E7%A8%8B-Coding/Java/">Java</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/">入门笔记</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Java/">Java</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/03/05/Java%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B04%E2%80%94%E2%80%94%E7%BB%A7%E6%89%BF%E4%B8%8E%E5%A4%9A%E6%80%81/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Java入门笔记4——继承与多态</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/03/05/Java%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B02%E2%80%94%E2%80%94%E5%AF%B9%E8%B1%A1%E4%BA%A4%E4%BA%92/">
+                        <span class="hidden-mobile">Java入门笔记2——对象交互</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"kPAygL5q2VkrVStJpaMqITqn-9Nh9j0Va","appKey":"m98SpwNzyNOjRi4xMzugiRJW","placeholder":"哒哒哒","path":"window.location.pathname","avatar":"retro","meta":["nick","mail"],"pageSize":10,"lang":"zh-CN","highlight":true,"recordIP":true,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false,"requiredFields":[]},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+        京ICP备2021027091号-1
+      </a>
+    </span>
+    
+  </div>
+
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":true,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?e0d9edce9af73da8896ba0d8880cc3aa";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

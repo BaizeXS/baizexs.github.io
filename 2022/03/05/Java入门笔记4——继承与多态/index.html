@@ -1,0 +1,776 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="BaizeXS的个人博客">
+  <meta name="author" content="BaizeXS">
+  <meta name="keywords" content="">
+  
+  <title>Java入门笔记4——继承与多态 - BaizeXS&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"www.baizexs.top","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":true,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":"e0d9edce9af73da8896ba0d8880cc3aa","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>BaizeXS's Blog</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/Wallpaper3.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Java入门笔记4——继承与多态">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-03-05 14:07" pubdate>
+        2022年3月5日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      5.2k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      60
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Java入门笔记4——继承与多态</h1>
+            
+            <div class="markdown-body">
+              <h1 id="Java入门笔记4——继承与多态"><a href="#Java入门笔记4——继承与多态" class="headerlink" title="Java入门笔记4——继承与多态"></a>Java入门笔记4——继承与多态</h1><h2 id="4-1-继承"><a href="#4-1-继承" class="headerlink" title="4.1 继承"></a>4.1 继承</h2><h3 id="4-1-1-基本概念"><a href="#4-1-1-基本概念" class="headerlink" title="4.1.1 基本概念"></a>4.1.1 基本概念</h3><p>⚠️<strong>该部分概念主要取自浙大翁凯老师的MOOC——<em>面向对象程序设计——Java语言</em></strong></p>
+<p>面向对象程序设计语言有三大特性：<strong>封装、继承和多态性</strong>。继承是面向对象语言的重要特征之一，没有继承的语言只能被称作“使用对象的语言”。继承是非常简单而强大的设计思想，它提供了我们代码重用和程序组织的有力工具。</p>
+<p>类是规则，用来制造对象的规则。我们不断地定义类，用定义的类制造一些对象。类定义了对象的属性和行为，就像图纸决定了房子要盖成什么样子。一张图纸可以盖很多房子，它们都是相同的房子，但是坐落在不同的地方，会有不同的人住在里面。</p>
+<p>假如现在我们想盖一座新房子，<strong>和以前盖的房子很相似，但是稍微有点不同</strong>。任何一个建筑师都会拿以前盖的房子的图纸来，稍加修改，成为一张新图纸，然后盖这座新房子。所以一旦我们有了一张设计良好的图纸，我们就可以基于这张图纸设计出很多相似但不完全相同的房子的图纸来。</p>
+<p><strong>基于已有的设计创造新的设计，就是面向对象程序设计中的继承</strong>。在继承中，新的类不是凭空产生的，而是基于一个已经存在的类而定义出来的。<strong>通过继承</strong>，<strong>新的类自动获得了基础类中所有的成员，包括成员变量和方法，包括各种访问属性的成员，无论是public还是private</strong>。当然，在这之后，<strong>程序员还可以加入自己的新的成员，包括变量和方法</strong>。显然，通过继承来定义新的类，远比从头开始写一个新的类要简单快捷和方便。继承是支持代码重用的重要手段之一。</p>
+<p>如果我们用程序设计的语言来描述这个鸡和鸵鸟的关系问题，首先有一个类叫做“鸟”，它具有一些成员变量和方法，从而阐述了鸟所应该具有的特征和行为。然后一个“鸡”类可以从这个“鸟”类派生出来，它同样也具有“鸟”类所有的成员变量和方法，然后再加上自己特有的成员变量和方法。无论是从“鸟”那里继承来的变量和方法，还是它自己加上的，都是它的变量和方法。</p>
+<h3 id="4-1-2-媒体资料库设计"><a href="#4-1-2-媒体资料库设计" class="headerlink" title="4.1.2 媒体资料库设计"></a>4.1.2 媒体资料库设计</h3><p>我们来考虑设计一个媒体资料库，用来储存一些CD、DVD以及Game等信息。首先我们需要一个Database类，作为媒体资料库的主体。</p>
+<p>Database类：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> dome;<br><br><span class="hljs-keyword">import</span> java.util.ArrayList;<br><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Database</span> </span>&#123;<br>    <span class="hljs-keyword">private</span> ArrayList&lt;CD&gt; listCD = <span class="hljs-keyword">new</span> ArrayList&lt;CD&gt;();	<span class="hljs-comment">// 创建CD类的</span><br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">add</span><span class="hljs-params">(CD cd)</span> </span>&#123;<br>        listCD.add(cd);<br>    &#125;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">add</span><span class="hljs-params">(Item item)</span> </span>&#123;<br>        listItem.add(item);<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">list</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">for</span> (CD cd : listCD) &#123;<br>            cd.print();<br>        &#125;<br>    &#125;<br><br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>	<span class="hljs-comment">// 这里的代码先忽略，后面会用到</span><br>        Database db = <span class="hljs-keyword">new</span> Database();<br>        db.add(<span class="hljs-keyword">new</span> CD(<span class="hljs-string">&quot;abc&quot;</span>, <span class="hljs-string">&quot;abc&quot;</span>, <span class="hljs-number">4</span>, <span class="hljs-number">60</span>, <span class="hljs-string">&quot;...&quot;</span>));<br>        db.add(<span class="hljs-keyword">new</span> CD(<span class="hljs-string">&quot;def&quot;</span>, <span class="hljs-string">&quot;def&quot;</span>, <span class="hljs-number">4</span>, <span class="hljs-number">60</span>, <span class="hljs-string">&quot;...&quot;</span>));<br>        db.add(<span class="hljs-keyword">new</span> DVD(<span class="hljs-string">&quot;xxx&quot;</span>, <span class="hljs-string">&quot;aaa&quot;</span>, <span class="hljs-number">60</span>, <span class="hljs-string">&quot;...&quot;</span>));<br>        db.list();<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p>随后，我们可以首先设计一个CD类，CD类有以下特性：</p>
+<ul>
+<li>title</li>
+<li>artist</li>
+<li>number of tracks</li>
+<li>playing time</li>
+<li>got it</li>
+<li>comment</li>
+</ul>
+<p>设计CD类如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> dome;<br><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CD</span> </span>&#123;<br>    <span class="hljs-keyword">private</span> String title;<br>    <span class="hljs-keyword">private</span> String artist;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> numofTracks;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> playingTime;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">boolean</span> gotIt = <span class="hljs-keyword">false</span>;<br>    <span class="hljs-keyword">private</span> String comment;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">CD</span><span class="hljs-params">(String title, String artist, <span class="hljs-keyword">int</span> numofTracks, <span class="hljs-keyword">int</span> playingTime, String comment)</span> </span>&#123;	<span class="hljs-comment">// 用IDEA自动生成构造器</span><br>        <span class="hljs-keyword">this</span>.title = title;<br>        <span class="hljs-keyword">this</span>.artist = artist;<br>        <span class="hljs-keyword">this</span>.numofTracks = numofTracks;<br>        <span class="hljs-keyword">this</span>.playingTime = playingTime;<br>        <span class="hljs-keyword">this</span>.comment = comment;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>    &#125;<br>    <br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">print</span><span class="hljs-params">()</span> </span>&#123;<br>        System.out.println(<span class="hljs-string">&quot;CD:&quot;</span>+title + <span class="hljs-string">&quot;:&quot;</span> + artist);<br>    &#125;<br>&#125;<br><br></code></pre></div></td></tr></table></figure>
+<p>在设计一个DVD类：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> dome;<br><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DVD</span> </span>&#123;<br>    <span class="hljs-keyword">private</span> String title;<br>    <span class="hljs-keyword">private</span> String director;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> playingTime;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">boolean</span> gotIt = <span class="hljs-keyword">false</span>;<br>    <span class="hljs-keyword">private</span> String comment;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">DVD</span><span class="hljs-params">(String title, String director, <span class="hljs-keyword">int</span> playingTime, String comment)</span> </span>&#123;<br>        <span class="hljs-keyword">this</span>.title = title;<br>        <span class="hljs-keyword">this</span>.director = director;<br>        <span class="hljs-keyword">this</span>.playingTime = playingTime;<br>        <span class="hljs-keyword">this</span>.comment = comment;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">print</span><span class="hljs-params">()</span> </span>&#123;<br>        System.out.println(<span class="hljs-string">&quot;DVD:&quot;</span>+title + <span class="hljs-string">&quot;:&quot;</span> + director);<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p>我们发现DVD类与CD类有大量重复代码，我们将其重复的代码提取出来，另外设计一个类，叫做Item，DVD类和CD类可以看作是Item类的衍生，<strong>即Item作为父类，CD类和DVD类为Item的子类</strong>。</p>
+<p>我们把用来做<strong>基础派生其它类的那个类叫做父类、超类或者基类</strong>，而<strong>派生出来的新类叫做子类</strong>。Java用关键字 <strong>extends</strong> 表示这种<strong>继承/派生关系</strong>：</p>
+<figure class="highlight scala"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs scala"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ThisClass</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">SuperClass</span> </span>&#123;   <span class="hljs-comment">//… &#125;</span><br></code></pre></div></td></tr></table></figure>
+<p>设计Item类如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> dome;<br><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Item</span> </span>&#123;<br>    <span class="hljs-keyword">private</span> String title;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> playingTime;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">boolean</span> gotIt = <span class="hljs-keyword">false</span>;<br>    <span class="hljs-keyword">private</span> String comment;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Item</span> <span class="hljs-params">()</span> </span>&#123;<br><br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Item</span><span class="hljs-params">(String title, <span class="hljs-keyword">int</span> playingTime, <span class="hljs-keyword">boolean</span> gotIt, String comment)</span> </span>&#123;	<span class="hljs-comment">// Item类的构造器</span><br>        <span class="hljs-keyword">this</span>.title = title;<br>        <span class="hljs-keyword">this</span>.playingTime = playingTime;<br>        <span class="hljs-keyword">this</span>.gotIt = gotIt;<br>        <span class="hljs-keyword">this</span>.comment = comment;<br>    &#125;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">print</span><span class="hljs-params">()</span> </span>&#123;	<span class="hljs-comment">// Item类中的print()函数，只打印标题</span><br>        System.out.println(title);<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p>此时，我们只需要将CD类和DVD类做如下修改：</p>
+<ul>
+<li><p><code>public class CD</code> 修改为 <code>public class CD extends Item</code></p>
+</li>
+<li><p>构造器中的第一行添加如下代码，我们一会再来说它的作用：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">super</span>(title,playingTime,<span class="hljs-keyword">false</span>,comment);<br></code></pre></div></td></tr></table></figure>
+</li>
+</ul>
+<p>修改后的CD类代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> dome;<br><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CD</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Item</span> </span>&#123;<br>    <span class="hljs-comment">// 这里只保留 CD 自己独有的变量</span><br>    <span class="hljs-keyword">private</span> String artist;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> numofTracks;<br>	<span class="hljs-comment">// CD 类的构造器</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">CD</span><span class="hljs-params">(String title, String artist, <span class="hljs-keyword">int</span> numofTracks, <span class="hljs-keyword">int</span> playingTime, String comment)</span> </span>&#123;<br>        <span class="hljs-comment">// 通过 super() 函数，调用父类——Item类的构造函数，构造title等变量</span><br>        <span class="hljs-keyword">super</span>(title,playingTime,<span class="hljs-keyword">false</span>,comment);<br>        <span class="hljs-keyword">this</span>.artist = artist;<br>        <span class="hljs-keyword">this</span>.numofTracks = numofTracks;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">print</span><span class="hljs-params">()</span> </span>&#123;<br>        System.out.println(<span class="hljs-string">&quot;CD:&quot;</span>);<br>        <span class="hljs-keyword">super</span>.print();	<span class="hljs-comment">// 调用父类的同名函数需要使用——super.函数名</span><br>        System.out.println(artist);<br>    &#125;<br>&#125;<br><br></code></pre></div></td></tr></table></figure>
+<p>继承表达了一种is-a关系，就是说，<strong>子类的对象可以被看作是父类的对象</strong>。比如鸡是从鸟派生出来的，因此任何一只都可以被称作是一只鸟。<strong>但是反过来不行</strong>，有些鸟是鸡，但并不是所有的鸟都是鸡。如果你设计的继承关系，导致当你试图把一个子类的对象看作是父类的对象时显然很不合逻辑，比如你让鸡类从水果类得到继承，然后你试图说：这只本鸡是一种水果，所以这本鸡煲就像水果色拉。这显然不合逻辑，如果出现这样的问题，那就说明你的类的关系的设计是不正确的。</p>
+<p><strong>Java的继承只允许单继承，即一个类只能有一个父类。</strong></p>
+<h2 id="4-2-子类与父类的关系"><a href="#4-2-子类与父类的关系" class="headerlink" title="4.2 子类与父类的关系"></a>4.2 子类与父类的关系</h2><p>对理解继承来说，最重要的事情是，知道哪些东西被继承了，或者说，子类从父类那里得到了什么？答案是：<strong>所有的东西，所有的父类的成员，包括变量和方法，都成为了子类的成员，除了构造方法。构造方法是父类所独有的，因为它们的名字就是类的名字，所以父类的构造方法在子类中不存在。除此之外，子类继承得到了父类所有的成员。</strong></p>
+<p>但是<strong>得到不等于可以随便使用</strong>。每个成员有不同的访问属性，子类继承得到了父类所有的成员，但是不同的访问属性使得子类在使用这些成员时有所不同：有些父类的成员直接成为子类的对外的界面，有些则被深深地隐藏起来，即使子类自己也不能直接访问。下表列出了不同访问属性的父类成员在子类中的访问属性：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">父亲成员访问属性</th>
+<th style="text-align:center">在父类中的含义</th>
+<th style="text-align:center">在子类中的含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">public</td>
+<td style="text-align:center">对所有人开放</td>
+<td style="text-align:center">对所有人开放</td>
+</tr>
+<tr>
+<td style="text-align:center">protected</td>
+<td style="text-align:center">包内其他类，自己和自己的子类可以访问</td>
+<td style="text-align:center">只有包内其它类、自己和子类可以访问</td>
+</tr>
+<tr>
+<td style="text-align:center">缺省</td>
+<td style="text-align:center">包内其他类可以访问</td>
+<td style="text-align:center">如果子类与父类在同一个包内：只有包内其它类可以访问，否则：相当于private，不能访问</td>
+</tr>
+<tr>
+<td style="text-align:center">private</td>
+<td style="text-align:center">只有自己可以访问</td>
+<td style="text-align:center">不能访问</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>public的成员直接成为子类的public的成员，protected的成员也直接成为子类的protected的成员。Java的protected的意思是包内和子类可访问，所以它比缺省的访问属性要宽一些。而对于父类的缺省的未定义访问属性的成员来说，他们是在父类所在的包内可见，如果子类不属于父类的包，那么在子类里面，这些缺省属性的成员和private的成员是一样的：不可见。<strong>父类的private的成员在子类里仍然是存在的</strong>，只是子类中<strong>不能直接访问</strong>。而父类中private成员的访问有两种方式：</p>
+<ul>
+<li>将父类中的访问属性private改为protected，但是这种方式并不是推荐的，没有别的办法时，才使用这种方法</li>
+<li>用 <code>super()</code> 函数将<strong>子类从父类继承的成员变量</strong>通过<strong>父类的构造函数</strong>进行定义初始化等操作。</li>
+</ul>
+<p>例如修改后的CD类中，创建CD类对象调用CD类的构造函数时，会先调用<code>super(title,playingTime,false,comment)</code> 函数，进入到父类中，调用父类的构造函数从而进行以上4个从父类继承而来的成员变量的初始化。使用<code>super()</code>调用父类的构造器时候，若填入参数，如上述代买，则会自动调用需要这些参数的构造函数。未添加参数或者未使用<code>super()</code>则会自动调用父类中的无参数的构造函数，完成对从父类继承而来的变量的初始化等操作。</p>
+<p><strong>在构造一个子类的对象时，父类的构造方法也是会被调用的，而且父类的构造方法在子类的构造方法之前被调用</strong>。在程序运行过程中，子类对象的一部分空间存放的是父类对象。因为子类从父类得到继承，在子类对象初始化过程中可能会使用到父类的成员。所以父类的空间正是要先被初始化的，然后子类的空间才得到初始化。在这个过程中，如果父类的构造方法需要参数，如何传递参数就很重要了。</p>
+<p>其次，<strong>我们不可以在子类中重新定义继承得到的成员的访问属性。</strong></p>
+<p>如果我们试图重新定义一个在父类中已经存在的成员变量，那么我们是在定义一个与父类的成员变量完全无关的变量，尽管它们同名但是互不影响。也就是说，如果子类中有和父类中同名的成员变量，则该类创建对象时候，<strong>会创建两个同名的成员变量</strong>，在子类中我们可以访问这个定义在子类中的变量，在父类的方法中访问父类的那个。也就是说在子类中会自动隐藏父类的那个同名变量。</p>
+<p>此外，父类中的成员变量如果是private，我们则只能通过父类的操作对该对象的成员变量进行操作，子类自己是没有权限的，对于子类而言是看不到的。</p>
+<p>同理，在子类和父类中如果有同名函数时候，若要调用父类的同名函数，则需要使用<code>super.函数名()</code>来调用。</p>
+<h2 id="4-3-多态变量和向上造型"><a href="#4-3-多态变量和向上造型" class="headerlink" title="4.3 多态变量和向上造型"></a>4.3 多态变量和向上造型</h2><p>类定义了类型，DVD类所创建的对象的类型就是DVD。类可以有子类，所以由那些类定义的类型可以有子类型。在DoME的例子中,DVD类型就是Item类型的子类型。</p>
+<p><strong>子类型类似于类的层次,类型也构成了类型层次。子类所定义的类型是其超类的类型的子类型。</strong>当把<strong>一个对象赋值给一个变量</strong>时,<strong>对象的类型必须与变量的类型相匹配</strong>,如:</p>
+ <figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">Car myCar = <span class="hljs-keyword">new</span> Car(); <br></code></pre></div></td></tr></table></figure>
+<p>是一个有效的赋值。因为<strong>Car类型的对象</strong>被赋值给<strong>声明为保存Car类型对象的变量</strong>。但是由于引入了继承,这里的类型规则就得叙述得更完整些：<strong>一个变量可以保存（管理）其所声明的类型或该类型的任何子类型的对象。</strong>即对象变量可以保存其声明的类型的对象，或该类型的任何子类型的对象。</p>
+<p><strong>Java中保存对象类型的变量是多态变量</strong>。“多态”这个术语(字面意思是许多形态)是指一个变量可以保存不同类型(即其声明的类型或任何子类型)的对象。</p>
+<h3 id="4-3-1-多态变量"><a href="#4-3-1-多态变量" class="headerlink" title="4.3.1 多态变量"></a>4.3.1 多态变量</h3><p>在Database类中，起初我们有两个add函数分别对CD和DVD进行操作，我们增加父类Item类后，只需要一个针对Item的add函数，就可以完成对CD和DVD的操作。</p>
+<p>Item类的add函数中，需要传入的参数为Item类型，而我们在main函数中，可以将CD类和DVD类的对象作为参数传入该add函数。即我们传入的是<strong>Item类的一个子类的对象</strong>，经事实验证，这是可行的。</p>
+<p>通过继承技术完善后的Database类：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> dome;<br><br><span class="hljs-keyword">import</span> java.util.ArrayList;<br><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Database</span> </span>&#123;<br><span class="hljs-comment">//    private ArrayList&lt;CD&gt; listCD = new ArrayList&lt;CD&gt;();</span><br><span class="hljs-comment">//    private ArrayList&lt;DVD&gt; listDVD = new ArrayList&lt;DVD&gt;();</span><br>    <span class="hljs-keyword">private</span> ArrayList&lt;Item&gt; listItem = <span class="hljs-keyword">new</span> ArrayList&lt;Item&gt;();<br><br><span class="hljs-comment">//    public void add(CD cd) &#123;</span><br><span class="hljs-comment">//        listCD.add(cd);</span><br><span class="hljs-comment">//    &#125;</span><br><span class="hljs-comment">//    public void add(DVD dvd ) &#123;</span><br><span class="hljs-comment">//        listDVD.add(dvd);</span><br><span class="hljs-comment">//    &#125;</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">add</span><span class="hljs-params">(Item item)</span> </span>&#123;<br>        listItem.add(item);<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">list</span><span class="hljs-params">()</span> </span>&#123;<br><span class="hljs-comment">//        for (CD cd : listCD) &#123;</span><br><span class="hljs-comment">//            cd.print();</span><br><span class="hljs-comment">//        &#125;</span><br><span class="hljs-comment">//        for (DVD dvd : listDVD) &#123;</span><br><span class="hljs-comment">//            dvd.print();</span><br><span class="hljs-comment">//        &#125;</span><br>        <span class="hljs-keyword">for</span> (Item item : listItem ) &#123;<br>            item.print();<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>	<span class="hljs-comment">// write your code here</span><br>        Database db = <span class="hljs-keyword">new</span> Database();<br>        db.add(<span class="hljs-keyword">new</span> CD(<span class="hljs-string">&quot;abc&quot;</span>, <span class="hljs-string">&quot;abc&quot;</span>, <span class="hljs-number">4</span>, <span class="hljs-number">60</span>, <span class="hljs-string">&quot;...&quot;</span>));<br>        db.add(<span class="hljs-keyword">new</span> CD(<span class="hljs-string">&quot;def&quot;</span>, <span class="hljs-string">&quot;def&quot;</span>, <span class="hljs-number">4</span>, <span class="hljs-number">60</span>, <span class="hljs-string">&quot;...&quot;</span>));<br>        db.add(<span class="hljs-keyword">new</span> DVD(<span class="hljs-string">&quot;xxx&quot;</span>, <span class="hljs-string">&quot;aaa&quot;</span>, <span class="hljs-number">60</span>, <span class="hljs-string">&quot;...&quot;</span>));<br>        db.list();<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p>下面我们来对此进行解释，首先了解几个概念：</p>
+<ol>
+<li><p>子类和子类型</p>
+<ul>
+<li><p>类定义了类型</p>
+</li>
+<li><p>子类定义了子类型</p>
+</li>
+<li><p><strong>子类的对象</strong>可以<strong>被当作父类的对象</strong>来使用，有以下三种使用场景：</p>
+<ul>
+<li><p>赋值给父类的变量</p>
+<p><img src="../../../../Downloads/Temp/Typora/子类型与赋值.png" srcset="/img/loading.gif" lazyload alt="子类型与赋值" style="zoom:50%;" /></p>
+</li>
+<li><p>传递给需要父类对象的函数</p>
+<p><img src="../../../../Downloads/Temp/Typora/子类与参数传递.png" srcset="/img/loading.gif" lazyload alt="子类与参数传递" style="zoom:50%;" /></p>
+</li>
+<li><p>放进存放父类对象的容器中</p>
+<p><img src="../../../../Downloads/Temp/Typora/子类型与容器.png" srcset="/img/loading.gif" lazyload alt="子类型与容器" style="zoom:50%;" /></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>多态变量</p>
+<ul>
+<li><p>Java的<strong>对象变量</strong>是多态的，它们<strong>能保存不只一种类型的对象</strong></p>
+</li>
+<li><p>它们可以<strong>保存的是声明类型的对象</strong>，或者<strong>声明类型的子类的对象</strong>，如db容器中可以存放CD，DVD或者Item</p>
+</li>
+<li><p>当把<strong>子类的对象赋给父类的变量</strong>时，就发生了<strong>向上造型</strong>，例如：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">Item item = <span class="hljs-keyword">new</span> CD(...)<br></code></pre></div></td></tr></table></figure>
+</li>
+<li><p>静态类型与动态类型：</p>
+<ul>
+<li>静态类型——&gt;声明的时候所用的类型</li>
+<li>动态类型——&gt;变量实际管理的是什么类型的变量，他的动态类型就是什么，如Database例子中，db[0]和db[1]的动态类型是CD，而db[2]的类型是DVD</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="4-3-2-向上造型"><a href="#4-3-2-向上造型" class="headerlink" title="4.3.2 向上造型"></a>4.3.2 向上造型</h3><ol>
+<li><p>造型——cast：</p>
+<p><strong>把一个类型的对象赋给另外一个类型的变量的过程</strong></p>
+<ul>
+<li><p><strong>子类的对象可以赋值给父类的变量</strong></p>
+<ul>
+<li><p>注意！Java中不存在对象对对象的赋值，举例如下</p>
+<p><img src="../../../../Downloads/Temp/Study/Typora/iShot2022-01-29 23.36.55.png" srcset="/img/loading.gif" lazyload alt="iShot2022-01-29 23.36.55" style="zoom:50%;" /></p>
+<p>起初对象变量 s 管理的是 “Hello” 这个字符串对象，第二行则让对象变量 s 管理 “bye” 这个字符串对象，<strong>而不是</strong>直接用 “bye” 替换了 “hello”</p>
+<p>因此，<strong>赋值运算符就是让一个对象的管理者去管理另外一个对象</strong></p>
+</li>
+</ul>
+</li>
+<li><p><strong>父类的对象不能赋值给子类的变量</strong></p>
+<p>例一：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">Vechicle v;<br>Car c = <span class="hljs-keyword">new</span> Car();<br>v = c;	<span class="hljs-comment">// 可以</span><br>c = v;	<span class="hljs-comment">// 编译错误</span><br></code></pre></div></td></tr></table></figure>
+<p>例二：</p>
+<p><img src="../../../../Downloads/Temp/Typora/造型1.png" srcset="/img/loading.gif" lazyload alt="iShot2022-01-29 23.42.09" style="zoom:50%;" /></p>
+<p>该情况下，只有一种方法可以实现——造型：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">CD cc = (CD)item;<br></code></pre></div></td></tr></table></figure>
+<p>因为item实际管理的是一个CD类的对象，cc也是CD类的对象。</p>
+<p>例三：</p>
+<p>当对象变量 v 实际管理的对象是Car时候，可以进行造型：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">c = (Car)v;<br></code></pre></div></td></tr></table></figure>
+</li>
+<li><p>所谓造型，就是<strong>用括号围起来放在值的前面</strong>，如上述例子的<code>(Car)v</code>，<code>(CD)item</code>等。</p>
+</li>
+<li><p>⚠️：造型时，<strong>对象本身并没有发生任何变化</strong>，所以造型<strong>不是</strong>类型转换</p>
+<p>例一：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">int</span> i = (<span class="hljs-keyword">int</span>)<span class="hljs-number">10.2</span>;<br>CD cc = (CD)item;<br></code></pre></div></td></tr></table></figure>
+<p>第一行为类型转换，此时，10.2不再是10.2了，存在 i 中的就是10</p>
+<p>第二行为造型，造型只是把原有对象<strong>当作</strong>某一类型来看待</p>
+</li>
+<li><p>造型运行时有机制来检查这样的转化是否合理：<code>ClassCastException</code></p>
+</li>
+</ul>
+</li>
+<li><p>向上造型</p>
+<ul>
+<li>拿一个子类的对象，当作父类的对象来使用，用父类的对象变量管理子类的对象</li>
+<li>向上造型在Java中是默认的，不需要运算符</li>
+<li>向上造型总是安全的</li>
+</ul>
+</li>
+</ol>
+<h2 id="4-4-多态"><a href="#4-4-多态" class="headerlink" title="4.4 多态"></a>4.4 多态</h2><p>如果<strong>子类的方法覆盖了父类的方法</strong>，我们也说父类的那个方法在子类有了新的版本或者新的实现。<strong>覆盖的新版本具有与老版本相同的方法签名：相同的方法名称和参数表。</strong>因此，对于外界来说，子类并没有增加新的方法，仍然是在父类中定义过的那个方法。不同的是，这是一个新版本，所以<strong>通过子类的对象调用这个方法，执行的是子类自己的方法</strong>。</p>
+<p>覆盖关系并不说明父类中的方法已经不存在了，而是当通过一个子类的对象调用这个方法时，子类中的方法取代了父类的方法，父类的这个方法被“覆盖”起来而看不见了。而当通过父类的对象调用这个方法时，实际上执行的仍然是父类中的这个方法。</p>
+<p>⚠️：我们这里说的是对象而不是变量，因为一个类型为父类的变量有可能实际指向的是一个子类的对象。</p>
+<p><strong>函数调用的绑定</strong>：</p>
+<p><strong>当调用一个方法时，究竟应该调用哪个方法，这件事情叫做绑定</strong>。绑定表明了调用一个方法的时候，我们使用的是哪个方法。动态绑定在运行的时候根据变量当时实际所指的对象的类型动态决定调用的方法。</p>
+<ul>
+<li><p>绑定有两种：</p>
+<ul>
+<li>一种是早绑定，又称静态绑定，这种绑定在编译的时候就确定了</li>
+<li>另一种是晚绑定，即动态绑定</li>
+</ul>
+</li>
+<li><p>绑定的依据：</p>
+<ul>
+<li>静态绑定：更具变量的声明类型来决定</li>
+<li>动态绑定：更具变量的动态类型来决定</li>
+</ul>
+</li>
+<li><p>在成员函数中调用其他成员函数也是通过this这个对象变量来调用的</p>
+</li>
+<li>Java缺省使用动态绑定</li>
+</ul>
+<p><strong>覆盖override</strong>：</p>
+<ul>
+<li><p>子类和父类中存在<strong>名称和参数完全相同的函数</strong>，<strong>这一对函数构成覆盖关系</strong></p>
+<p>如CD中的print()覆盖了Item的print()</p>
+</li>
+<li><p>通过父类的变量调用存在覆盖关系的函数时，会调用变量当时所管理的对象所属的类的函数</p>
+</li>
+</ul>
+<p>所谓多态，就是当我们用一个对象变量去调用一个方法时，会根据对象实际的类型选择相应的方法。例如Database中的函数 <code>list()</code> 中，</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">list</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-keyword">for</span> (Item item : listItem ) &#123;<br>        item.print();<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p>循环每次选取的<code>print()</code>方法，会依据该轮循环 item 所管理的对象类型而使用相应的方法。即如果为CD类，则使用CD类的<code>print()</code>方法，如果为DVD类，则使用DVD类的<code>print()</code>方法。</p>
+<h3 id="4-5-类型系统"><a href="#4-5-类型系统" class="headerlink" title="4.5 类型系统"></a>4.5 类型系统</h3><h4 id="4-5-1-OBJECT类"><a href="#4-5-1-OBJECT类" class="headerlink" title="4.5.1 OBJECT类"></a>4.5.1 OBJECT类</h4><ol>
+<li><p>Java 实现了一个单根结构，即 Java 中的所有类都是一个OBJECT类的子类，OBJECT类就是类型中的根（Root）。即OBJECT类是所有类的父类。</p>
+<p><img src="../../../../Downloads/Temp/Typora/Objext.png" srcset="/img/loading.gif" lazyload alt="iShot2022-01-30 00.13.46" style="zoom:50%;" /></p>
+</li>
+<li><p>OBJECT类的函数：</p>
+<ul>
+<li><p>toString()：将一些内容转换为字符串</p>
+<p>例一：</p>
+<p>我们为了得到我们想要的字符串样式，我们可以在我们设计的类中重写toString()函数</p>
+<p><img src="../../../../Downloads/Temp/Typora/toString.png" srcset="/img/loading.gif" lazyload alt="iShot2022-01-30 00.17.33" style="zoom:50%;" /></p>
+</li>
+<li><p>equals()：OBJECT的equals就是<strong>判断两个变量（管理者）是否管理的是同一个对象</strong></p>
+<p><img src="../../../../Downloads/Temp/Typora/equal.png" srcset="/img/loading.gif" lazyload alt="iShot2022-01-30 00.22.06" style="zoom:50%;" /></p>
+</li>
+<li><p><code>@override</code>是告诉编译器下面的函数覆盖了父类中<strong>同名同参数表</strong>的函数</p>
+</li>
+</ul>
+</li>
+</ol>
+<h4 id="4-5-2-DoME的新媒体类型"><a href="#4-5-2-DoME的新媒体类型" class="headerlink" title="4.5.2 DoME的新媒体类型"></a>4.5.2 DoME的新媒体类型</h4><p>我们的媒体资料库通过继承的手段，可以很轻松的增加更多的类，如游戏等，通过继承的思维，可以使得我们的程序更具有<strong>可拓展性</strong>。</p>
+<p><img src="../../../../Downloads/Temp/Typora/jicheng.png" srcset="/img/loading.gif" lazyload alt="iShot2022-01-30 00.27.42" style="zoom:50%;" /></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E7%BC%96%E7%A8%8B-Coding/">编程/Coding</a>
+                    
+                      <a class="hover-with-bg" href="/categories/%E7%BC%96%E7%A8%8B-Coding/Java/">Java</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/">入门笔记</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Java/">Java</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/03/05/Java%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B03%E2%80%94%E2%80%94%E5%AE%B9%E5%99%A8%E5%AF%B9%E8%B1%A1/">
+                        <span class="hidden-mobile">Java入门笔记3——容器对象</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"kPAygL5q2VkrVStJpaMqITqn-9Nh9j0Va","appKey":"m98SpwNzyNOjRi4xMzugiRJW","placeholder":"哒哒哒","path":"window.location.pathname","avatar":"retro","meta":["nick","mail"],"pageSize":10,"lang":"zh-CN","highlight":true,"recordIP":true,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false,"requiredFields":[]},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+        京ICP备2021027091号-1
+      </a>
+    </span>
+    
+  </div>
+
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":true,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?e0d9edce9af73da8896ba0d8880cc3aa";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
