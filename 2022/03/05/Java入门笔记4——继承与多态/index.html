@@ -353,13 +353,13 @@
 <li><p><strong>子类的对象</strong>可以<strong>被当作父类的对象</strong>来使用，有以下三种使用场景：</p>
 <ul>
 <li><p>赋值给父类的变量</p>
-<p><img src="../../../../Downloads/Temp/Typora/子类型与赋值.png" srcset="/img/loading.gif" lazyload alt="子类型与赋值" style="zoom:50%;" /></p>
+<p><img src="https://gitee.com/baizexs/my_-picture_-host/raw/master/img/202203051952672.png" srcset="/img/loading.gif" lazyload alt="子类型与赋值" style="zoom:50%;" /></p>
 </li>
 <li><p>传递给需要父类对象的函数</p>
-<p><img src="../../../../Downloads/Temp/Typora/子类与参数传递.png" srcset="/img/loading.gif" lazyload alt="子类与参数传递" style="zoom:50%;" /></p>
+<p><img src="https://gitee.com/baizexs/my_-picture_-host/raw/master/img/202203051952631.png" srcset="/img/loading.gif" lazyload alt="子类与参数传递" style="zoom:50%;" /></p>
 </li>
 <li><p>放进存放父类对象的容器中</p>
-<p><img src="../../../../Downloads/Temp/Typora/子类型与容器.png" srcset="/img/loading.gif" lazyload alt="子类型与容器" style="zoom:50%;" /></p>
+<p><img src="https://gitee.com/baizexs/my_-picture_-host/raw/master/img/202203051952592.png" srcset="/img/loading.gif" lazyload alt="子类型与容器" style="zoom:50%;" /></p>
 </li>
 </ul>
 </li>
@@ -400,7 +400,7 @@
 <p>例一：</p>
 <figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">Vechicle v;<br>Car c = <span class="hljs-keyword">new</span> Car();<br>v = c;	<span class="hljs-comment">// 可以</span><br>c = v;	<span class="hljs-comment">// 编译错误</span><br></code></pre></div></td></tr></table></figure>
 <p>例二：</p>
-<p><img src="../../../../Downloads/Temp/Typora/造型1.png" srcset="/img/loading.gif" lazyload alt="iShot2022-01-29 23.42.09" style="zoom:50%;" /></p>
+<p><img src="https://gitee.com/baizexs/my_-picture_-host/raw/master/img/202203051952290.png" srcset="/img/loading.gif" lazyload alt="iShot2022-01-29 23.42.09" style="zoom:50%;" /></p>
 <p>该情况下，只有一种方法可以实现——造型：</p>
 <figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">CD cc = (CD)item;<br></code></pre></div></td></tr></table></figure>
 <p>因为item实际管理的是一个CD类的对象，cc也是CD类的对象。</p>
@@ -463,17 +463,17 @@
 <p>循环每次选取的<code>print()</code>方法，会依据该轮循环 item 所管理的对象类型而使用相应的方法。即如果为CD类，则使用CD类的<code>print()</code>方法，如果为DVD类，则使用DVD类的<code>print()</code>方法。</p>
 <h3 id="4-5-类型系统"><a href="#4-5-类型系统" class="headerlink" title="4.5 类型系统"></a>4.5 类型系统</h3><h4 id="4-5-1-OBJECT类"><a href="#4-5-1-OBJECT类" class="headerlink" title="4.5.1 OBJECT类"></a>4.5.1 OBJECT类</h4><ol>
 <li><p>Java 实现了一个单根结构，即 Java 中的所有类都是一个OBJECT类的子类，OBJECT类就是类型中的根（Root）。即OBJECT类是所有类的父类。</p>
-<p><img src="../../../../Downloads/Temp/Typora/Objext.png" srcset="/img/loading.gif" lazyload alt="iShot2022-01-30 00.13.46" style="zoom:50%;" /></p>
+<p><img src="https://gitee.com/baizexs/my_-picture_-host/raw/master/img/202203051952499.png" srcset="/img/loading.gif" lazyload alt="iShot2022-01-30 00.13.46" style="zoom:50%;" /></p>
 </li>
 <li><p>OBJECT类的函数：</p>
 <ul>
 <li><p>toString()：将一些内容转换为字符串</p>
 <p>例一：</p>
 <p>我们为了得到我们想要的字符串样式，我们可以在我们设计的类中重写toString()函数</p>
-<p><img src="../../../../Downloads/Temp/Typora/toString.png" srcset="/img/loading.gif" lazyload alt="iShot2022-01-30 00.17.33" style="zoom:50%;" /></p>
+<p><img src="https://gitee.com/baizexs/my_-picture_-host/raw/master/img/202203051952443.png" srcset="/img/loading.gif" lazyload alt="iShot2022-01-30 00.17.33" style="zoom:50%;" /></p>
 </li>
 <li><p>equals()：OBJECT的equals就是<strong>判断两个变量（管理者）是否管理的是同一个对象</strong></p>
-<p><img src="../../../../Downloads/Temp/Typora/equal.png" srcset="/img/loading.gif" lazyload alt="iShot2022-01-30 00.22.06" style="zoom:50%;" /></p>
+<p><img src="https://gitee.com/baizexs/my_-picture_-host/raw/master/img/202203051953956.png" srcset="/img/loading.gif" lazyload alt="iShot2022-01-30 00.22.06" style="zoom:50%;" /></p>
 </li>
 <li><p><code>@override</code>是告诉编译器下面的函数覆盖了父类中<strong>同名同参数表</strong>的函数</p>
 </li>
@@ -481,7 +481,7 @@
 </li>
 </ol>
 <h4 id="4-5-2-DoME的新媒体类型"><a href="#4-5-2-DoME的新媒体类型" class="headerlink" title="4.5.2 DoME的新媒体类型"></a>4.5.2 DoME的新媒体类型</h4><p>我们的媒体资料库通过继承的手段，可以很轻松的增加更多的类，如游戏等，通过继承的思维，可以使得我们的程序更具有<strong>可拓展性</strong>。</p>
-<p><img src="../../../../Downloads/Temp/Typora/jicheng.png" srcset="/img/loading.gif" lazyload alt="iShot2022-01-30 00.27.42" style="zoom:50%;" /></p>
+<p><img src="https://gitee.com/baizexs/my_-picture_-host/raw/master/img/202203051953171.png" srcset="/img/loading.gif" lazyload alt="iShot2022-01-30 00.27.42" style="zoom:50%;" /></p>
 
             </div>
             <hr>
