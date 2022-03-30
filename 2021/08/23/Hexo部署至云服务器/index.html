@@ -350,7 +350,7 @@
 <p>安装后先启动看是否安装成功</p>
 <figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">nginx<br></code></pre></div></td></tr></table></figure>
 <p>在浏览器输入服务器的IP地址，验证是否安装成功，若成功则会出现如下界面</p>
-<p><img src="https://gitee.com/baizexs/my_-picture_-host/raw/master/img/Nginx.png" srcset="/img/loading.gif" lazyload alt="Nginx安装成功" style="zoom:50%;" /></p>
+<p><img src="http://images.baizexs.top/202203301235501.png" srcset="/img/loading.gif" lazyload alt="Nginx" style="zoom:50%;" /></p>
 <h5 id="3-2-配置Nginx"><a href="#3-2-配置Nginx" class="headerlink" title="3.2 配置Nginx"></a>3.2 配置Nginx</h5><ol>
 <li><p>查看Nginx配置文件的路径</p>
 <figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">nginx -s stop # 先停止nginx<br>sudo nginx -t<br></code></pre></div></td></tr></table></figure>
@@ -362,19 +362,19 @@
 <ul>
 <li><code>user</code> 后修改为<code>root</code></li>
 </ul>
-<p><img src="https://gitee.com/baizexs/my_-picture_-host/raw/master/img/Nginx-1.png" srcset="/img/loading.gif" lazyload alt="配置Nginx" style="zoom:50%;" /></p>
+<p><img src="http://images.baizexs.top/Nginx-1.png" srcset="/img/loading.gif" lazyload alt="Nginx-1" style="zoom:50%;" /></p>
 <ul>
 <li><p>在图示位置添加如下文段</p>
 <figure class="highlight nginx"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs nginx"><span class="hljs-section">sever</span> &#123;<br>	<span class="hljs-attribute">listen</span> <span class="hljs-number">80</span>; <span class="hljs-comment"># 80为代理服务默认端口（IPv4）</span><br>	<span class="hljs-attribute">listen</span> [::]:<span class="hljs-number">80</span>; <span class="hljs-comment"># 80为代理服务默认端口（IPv6）</span><br>	<span class="hljs-attribute">server_name</span> 你的域名/你的服务器的地址;<br>	<span class="hljs-attribute">location</span> /&#123;<br>		<span class="hljs-attribute">root</span>	/home/hexo;	<span class="hljs-comment"># 这就是我们的网站根目录</span><br>		<span class="hljs-attribute">index</span> index.html index.htm;<br>	&#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
 </li>
 </ul>
-<p><img src="https://gitee.com/baizexs/my_-picture_-host/raw/master/img/Nginx-2.png" srcset="/img/loading.gif" lazyload alt="配置Nginx" style="zoom:50%;" /></p>
+<p><img src="http://images.baizexs.top/Nginx-2.png" srcset="/img/loading.gif" lazyload alt="Nginx-2" style="zoom:50%;" /></p>
 </li>
 </ol>
 <h5 id="3-3-开启Nginx服务"><a href="#3-3-开启Nginx服务" class="headerlink" title="3.3 开启Nginx服务"></a>3.3 开启Nginx服务</h5><figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">systemctl restart nginx.service<br></code></pre></div></td></tr></table></figure>
 <p>至此，服务器端就配置好了。</p>
 <h2 id="四、将本地内容推送到服务器"><a href="#四、将本地内容推送到服务器" class="headerlink" title="四、将本地内容推送到服务器"></a>四、将本地内容推送到服务器</h2><p>在本地Hexo生成的Blog文件夹下打开<code>_config.yml</code>配置文件。</p>
-<p><img src="https://gitee.com/baizexs/my_-picture_-host/raw/master/img/_config.yml.png" srcset="/img/loading.gif" lazyload alt="_config.yml" style="zoom:50%;" /></p>
+<p><img src="http://images.baizexs.top/202203301236847.png" srcset="/img/loading.gif" lazyload alt="_config.yml" style="zoom:50%;" /></p>
 <p>找到<code>deploy</code>的<code>repo</code>处，这里则是我们需要修改的地方。</p>
 <p>若你打算部署到云服务器和Github，则按照如下配置替换<code>repo</code>处的内容即可。</p>
 <figure class="highlight dts"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs dts"><span class="hljs-symbol">repo:</span> <br>	服务器提供商: git@服务器IP:网站根目录路径 <span class="hljs-meta"># 例如这里就是/home/hexo</span><br><span class="hljs-symbol">	github:</span> git@github.com:仓库路径<br></code></pre></div></td></tr></table></figure>
