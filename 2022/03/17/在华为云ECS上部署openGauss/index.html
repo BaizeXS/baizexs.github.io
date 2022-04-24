@@ -207,7 +207,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      34
+      35
        分钟
     </span>
   
@@ -429,17 +429,51 @@
 </ul>
 </li>
 </ol>
-<div class="hljs code-wrapper"><pre><code>  |                 |                                                              |
-   | --------------- | ------------------------------------------------------------ |
-   | clusterName     | openGauss名称。                                              |
-   | nodeNames       | openGauss中主机名称。                                        |
-   | backIp1s        | 主机在后端存储网络中的IP地址（内网IP）。所有openGauss主机使用后端存储网络通讯。 |
-   | gaussdbAppPath  | openGauss程序安装目录。此目录应满足如下要求：•磁盘空间&gt;1GB。•与数据库所需其它路径相互独立，没有包含关系。 |
-   | gaussdbLogPath  | openGauss运行日志和操作日志存储目录。此目录应满足如下要求：•磁盘空间建议根据主机上的数据库节点数规划。数据库节点预留1GB空间的基础上，再适当预留冗余空间。•与openGauss所需其它路径相互独立，没有包含关系。此路径可选。不指定的情况下，openGauss安装时会默认指定＂$GAUSSLOG/安装用户名＂作为日志目录。 |
-   | tmpdbPath       | 数据库临时文件存放目录。若不配置tmpdbPath，默认存放在/opt/huawei/wisequery/perfadm_db目录下。 |
-   | gaussdbToolPath | openGauss系统工具目录，主要用于存放互信工具等。此目录应满足如下要求：•磁盘空间&gt;100MB。•固定目录，与数据库所需其它目录相互独立，没有包含关系。此目录为可选配置项。不指定的情况下，openGauss安装时会默认指定＂/opt/huawei/wisequery＂作为数据库系统工具目录。 |
-   | corePath        | openGauss core文件的指定目录。                               |
-</code></pre></div><ol>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>clusterName</td>
+<td>openGauss名称。</td>
+</tr>
+<tr>
+<td>nodeNames</td>
+<td>openGauss中主机名称。</td>
+</tr>
+<tr>
+<td>backIp1s</td>
+<td>主机在后端存储网络中的IP地址（内网IP）。所有openGauss主机使用后端存储网络通讯。</td>
+</tr>
+<tr>
+<td>gaussdbAppPath</td>
+<td>openGauss程序安装目录。此目录应满足如下要求：•磁盘空间&gt;1GB。•与数据库所需其它路径相互独立，没有包含关系。</td>
+</tr>
+<tr>
+<td>gaussdbLogPath</td>
+<td>openGauss运行日志和操作日志存储目录。此目录应满足如下要求：•磁盘空间建议根据主机上的数据库节点数规划。数据库节点预留1GB空间的基础上，再适当预留冗余空间。•与openGauss所需其它路径相互独立，没有包含关系。此路径可选。不指定的情况下，openGauss安装时会默认指定＂$GAUSSLOG/安装用户名＂作为日志目录。</td>
+</tr>
+<tr>
+<td>tmpdbPath</td>
+<td>数据库临时文件存放目录。若不配置tmpdbPath，默认存放在/opt/huawei/wisequery/perfadm_db目录下。</td>
+</tr>
+<tr>
+<td>gaussdbToolPath</td>
+<td>openGauss系统工具目录，主要用于存放互信工具等。此目录应满足如下要求：•磁盘空间&gt;100MB。•固定目录，与数据库所需其它目录相互独立，没有包含关系。此目录为可选配置项。不指定的情况下，openGauss安装时会默认指定＂/opt/huawei/wisequery＂作为数据库系统工具目录。</td>
+</tr>
+<tr>
+<td>corePath</td>
+<td>openGauss core文件的指定目录。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ol>
 <li><p>预安装准备</p>
 <ul>
 <li><p>修改<code>performance.sh</code>文件</p>
@@ -511,14 +545,39 @@
 </ul>
 </li>
 </ol>
-<div class="hljs code-wrapper"><pre><code> | 参数                 | 用途                                             |
- | -------------------- | ------------------------------------------------ |
- | Encoding             | 设置字符集                                       |
- | max_process_memory   | 设置一个数据库节点可用的最大物理内存             |
- | shared_buffers       | 设置openGauss使用的共享内存大小                  |
- | bulk_write_ring_size | 大批量数据写入触发时，该操作使用的环形缓冲区大小 |
- | cstore_buffers       | 设置列存所使用的共享缓冲区的大小                 |
-</code></pre></div><ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Encoding</td>
+<td>设置字符集</td>
+</tr>
+<tr>
+<td>max_process_memory</td>
+<td>设置一个数据库节点可用的最大物理内存</td>
+</tr>
+<tr>
+<td>shared_buffers</td>
+<td>设置openGauss使用的共享内存大小</td>
+</tr>
+<tr>
+<td>bulk_write_ring_size</td>
+<td>大批量数据写入触发时，该操作使用的环形缓冲区大小</td>
+</tr>
+<tr>
+<td>cstore_buffers</td>
+<td>设置列存所使用的共享缓冲区的大小</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul>
 <li><p>在安装过程中需要需要设置数据库密码</p>
 <p><img src="https://baizexs-images-1257286808.cos.ap-nanjing.myqcloud.com/Gauss0027.jpg" srcset="/img/loading.gif" lazyload style="zoom: 50%;" /></p>
 </li>
