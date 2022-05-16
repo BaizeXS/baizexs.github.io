@@ -1,0 +1,1160 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="BaizeXS的个人博客">
+  <meta name="author" content="BaizeXS">
+  <meta name="keywords" content="">
+  
+  <title>【BIT数据库实验】实验一、建立数据库 - BaizeXS&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"www.baizexs.top","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":true,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":"e0d9edce9af73da8896ba0d8880cc3aa","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>BaizeXS's Blog</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/Wallpaper7.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="【BIT数据库实验】实验一、建立数据库">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-05-12 12:28" pubdate>
+        2022年5月12日 中午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      8k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      113
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">【BIT数据库实验】实验一、建立数据库</h1>
+            
+            <div class="markdown-body">
+              <h1 id="【BIT数据库实验】实验一、建立数据库"><a href="#【BIT数据库实验】实验一、建立数据库" class="headerlink" title="【BIT数据库实验】实验一、建立数据库"></a>【BIT数据库实验】实验一、建立数据库</h1><h2 id="一、购买ECS服务器，安装Gauss数据库"><a href="#一、购买ECS服务器，安装Gauss数据库" class="headerlink" title="一、购买ECS服务器，安装Gauss数据库"></a>一、购买ECS服务器，安装Gauss数据库</h2><h3 id="（一）、操作环境"><a href="#（一）、操作环境" class="headerlink" title="（一）、操作环境"></a>（一）、操作环境</h3><ul>
+<li>服务器端：openEuler 20.03 64bit with ARM</li>
+<li>本地客户端：macOS 12.2.1</li>
+</ul>
+<h3 id="（二）、购买云服务器"><a href="#（二）、购买云服务器" class="headerlink" title="（二）、购买云服务器"></a>（二）、购买云服务器</h3><ol>
+<li><p>登陆<a target="_blank" rel="noopener" href="https://www.huaweicloud.com/">华为云官网</a></p>
+</li>
+<li><p>在控制台找到<code>弹性云服务器ECS</code></p>
+<p><img src="https://baizexs-images-1257286808.cos.ap-nanjing.myqcloud.com/Gauss0001.jpg" srcset="/img/loading.gif" lazyload style="zoom:50%;" /></p>
+</li>
+<li><p>点击<code>购买弹性云服务器</code></p>
+<p><img src="https://baizexs-images-1257286808.cos.ap-nanjing.myqcloud.com/Gauss0002.jpg" srcset="/img/loading.gif" lazyload style="zoom:50%;" /></p>
+</li>
+<li><p>设置基础配置</p>
+<ul>
+<li>计费模式选择：<strong>按需计费</strong></li>
+<li>区域：<strong>华北-北京四</strong></li>
+<li>CPU架构：<strong>鲲鹏架构</strong></li>
+<li>CPU规格：<strong>2核CPU&amp;&amp;4G内存</strong></li>
+<li>镜像类型：<strong>公共镜像</strong></li>
+<li>镜像： <strong>openEuler 20.03 64bit with ARM</strong></li>
+<li>主机安全功能：<strong>取消勾选</strong></li>
+</ul>
+<p><img src="https://baizexs-images-1257286808.cos.ap-nanjing.myqcloud.com/Gauss0003.png" srcset="/img/loading.gif" lazyload style="zoom:50%;" /></p>
+<p><img src="https://baizexs-images-1257286808.cos.ap-nanjing.myqcloud.com/Gauss0004.png" srcset="/img/loading.gif" lazyload style="zoom:50%;" /></p>
+<p>配置完成后，单击下一步。</p>
+</li>
+<li><p>设置网络配置</p>
+<ul>
+<li>网路设置：选择<strong>默认</strong>即可。需要注意的是，你可以选择自动分配IP地址，也可以选择手动分配IP地址。</li>
+<li>公网宽带：<strong>按流量计费</strong></li>
+<li>带宽大小：<strong>5M</strong></li>
+<li>随实例释放：<strong>可选</strong></li>
+</ul>
+<p><img src="https://baizexs-images-1257286808.cos.ap-nanjing.myqcloud.com/Gauss0005.png" srcset="/img/loading.gif" lazyload style="zoom:50%;" /></p>
+<p><img src="https://baizexs-images-1257286808.cos.ap-nanjing.myqcloud.com/Gauss0006.png" srcset="/img/loading.gif" lazyload style="zoom:50%;" /></p>
+<p>配置完成后，单击下一步。</p>
+</li>
+<li><p>设置高级配置</p>
+<ul>
+<li>云服务器名称：根据自己的喜好设置即可，我这里设置为<code>openGauss</code>。</li>
+<li>root用户密码：根据自己的喜好设置即可。注意，这里的root用户密码会在使用SSH远程登录服务器时用到。</li>
+</ul>
+<p><img src="https://baizexs-images-1257286808.cos.ap-nanjing.myqcloud.com/Gauss0007.png" srcset="/img/loading.gif" lazyload style="zoom:50%;" /></p>
+<p>配置完成后，单击下一步。</p>
+</li>
+<li><p>确认购买</p>
+<ul>
+<li>勾选<code>我已阅读并同意</code>，然后选择立即购买即可。</li>
+</ul>
+<p><img src="https://baizexs-images-1257286808.cos.ap-nanjing.myqcloud.com/Gauss0009.png" srcset="/img/loading.gif" lazyload style="zoom:50%;" /></p>
+</li>
+<li><p>购买完成</p>
+<p>完成后略微等待一会，我们的服务器就创建好了。注意：IP地址栏第一行的IP是公网IP，第二行则为私有IP。公网IP在远程SSH登陆服务器时会用到，私有IP在后续安装openGauss过程中会用到。</p>
+<p><img src="https://baizexs-images-1257286808.cos.ap-nanjing.myqcloud.com/Gauss0010.png" srcset="/img/loading.gif" lazyload style="zoom:50%;" /></p>
+</li>
+</ol>
+<h3 id="（三）、配置安全组（可选）"><a href="#（三）、配置安全组（可选）" class="headerlink" title="（三）、配置安全组（可选）"></a>（三）、配置安全组（可选）</h3><p>创建好服务器之后，一般有两种方式可以登陆我们的服务器：</p>
+<ul>
+<li>通过云服务器厂商提供的<code>Cloud Shell</code>等服务，在网页端使用SSH服务登陆服务器。</li>
+<li>在本地机器上借助Terminal或者Xshell、Putty等软件，通过SSH协议连接至我们的云服务器。</li>
+</ul>
+<p>有时我们可以在本地电脑通过SSH直接连接到我们的服务器，有时却怎么登陆也登陆不上。为了使我们能在本地电脑通过SSH连接到服务器，我们需要在服务器端设置可以接入服务器的用户权限，也就是安全组设置。如果你的电脑无法正常连接到服务器，可以尝试下面的方法：</p>
+<ol>
+<li><p>查询自己的公网IP</p>
+<p>直接在百度中搜索IP，看到IP地址查询中的地址，则为我们本地机器的公网IP，将它复制下来。</p>
+<p><img src="https://baizexs-images-1257286808.cos.ap-nanjing.myqcloud.com/Gauss0011.png" srcset="/img/loading.gif" lazyload style="zoom:50%;" /></p>
+</li>
+<li><p>找到安全组</p>
+<p>在ESC云服务器侧边栏找到<code>安全组</code>，点击进入安全组页面。</p>
+<p><img src="https://baizexs-images-1257286808.cos.ap-nanjing.myqcloud.com/Gauss0012.jpg" srcset="/img/loading.gif" lazyload style="zoom:50%;" /></p>
+</li>
+<li><p>配置安全组</p>
+<ul>
+<li>点击<code>配置规则</code></li>
+</ul>
+<p><img src="https://baizexs-images-1257286808.cos.ap-nanjing.myqcloud.com/Gauss0013.jpg" srcset="/img/loading.gif" lazyload style="zoom:50%;" /></p>
+<ul>
+<li>随后选择<code>添加规则</code></li>
+</ul>
+<p><img src="https://baizexs-images-1257286808.cos.ap-nanjing.myqcloud.com/Gauss0014.jpg" srcset="/img/loading.gif" lazyload style="zoom:50%;" /></p>
+<ul>
+<li><code>优先级</code>设为<code>1</code>，在源地址中填入第1步中查到的本机IP，并在其后面加上<code>/32</code>。</li>
+</ul>
+<p><img src="https://baizexs-images-1257286808.cos.ap-nanjing.myqcloud.com/Gauss0015.png" srcset="/img/loading.gif" lazyload style="zoom:50%;" /></p>
+<p>随后点击确定即可。此时我们的安全组就配置好了，可以从本地连接到我们的云服务器了。</p>
+</li>
+</ol>
+<h3 id="（四）、使用Terminal连接至云服务器"><a href="#（四）、使用Terminal连接至云服务器" class="headerlink" title="（四）、使用Terminal连接至云服务器"></a>（四）、使用Terminal连接至云服务器</h3><p>在终端输入如下格式命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">ssh 用户名@公网IP -p 端口<br></code></pre></div></td></tr></table></figure>
+<p>我们这里使用<code>root</code>用户登陆，并且ssh服务默认端口为22，因此不需要添加<code>-p</code>参数，示例命令如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">ssh root@121.36.36.113<br></code></pre></div></td></tr></table></figure>
+<p>随后根据提示输入<code>root</code>用户密码即可登陆服务器。</p>
+<p><img src="https://baizexs-images-1257286808.cos.ap-nanjing.myqcloud.com/Gauss0016.jpg" srcset="/img/loading.gif" lazyload style="zoom:50%;" /></p>
+<h3 id="（五）、部署openGauss"><a href="#（五）、部署openGauss" class="headerlink" title="（五）、部署openGauss"></a>（五）、部署openGauss</h3><ol>
+<li><p>设置字符集参数</p>
+<p>将各数据库节点的字符集设置为相同的字符集，可以在<code>/etc/profile</code>文件中添加字符集。</p>
+<ul>
+<li><p>输入如下命令，编辑<code>/etc/profile</code>文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">vim /etc/profile<br></code></pre></div></td></tr></table></figure>
+<p><img src="https://baizexs-images-1257286808.cos.ap-nanjing.myqcloud.com/Gauss0017.jpg" srcset="/img/loading.gif" lazyload style="zoom:50%;" /></p>
+<p>按<code>i</code>进入编辑模式，在文件底部添加如下内容：</p>
+<figure class="highlight routeros"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs routeros"><span class="hljs-builtin-name">export</span> <span class="hljs-attribute">LANG</span>=en_US.UTF-8<br></code></pre></div></td></tr></table></figure>
+<p>添加后按<code>ESC</code>键退出编辑模式，并输入<code>:wq</code>保存修改并退出vim。</p>
+<p><img src="https://baizexs-images-1257286808.cos.ap-nanjing.myqcloud.com/Gauss0017.jpg" srcset="/img/loading.gif" lazyload style="zoom:50%;" /></p>
+</li>
+<li><p>输入如下命令初始化文件，使之立即生效</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">source /etc/profile<br></code></pre></div></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>修改Python版本并安装<code>libaio</code>包</p>
+<ul>
+<li><p>安装Python3</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">yum install -y python3<br></code></pre></div></td></tr></table></figure>
+</li>
+<li><p>进入<code>/usr/bin</code>目录</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">cd /usr/bin<br></code></pre></div></td></tr></table></figure>
+</li>
+<li><p>查找<code>python</code>文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">find python<br></code></pre></div></td></tr></table></figure>
+<p>正常情况下返回值为<code>python</code></p>
+</li>
+<li><p>备份<code>python</code>文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">mv python python.bak<br></code></pre></div></td></tr></table></figure>
+</li>
+<li><p>建立Python3软链接</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">ln -s python3 /usr/bin/python<br></code></pre></div></td></tr></table></figure>
+</li>
+<li><p>查看Python版本</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">python -V<br></code></pre></div></td></tr></table></figure>
+<p>返回值为<code>Python 3.x.x</code>即可。</p>
+</li>
+<li><p>安装<code>libaio</code>包</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">yum install -y libaio*<br></code></pre></div></td></tr></table></figure>
+</li>
+</ul>
+<p><img src="https://baizexs-images-1257286808.cos.ap-nanjing.myqcloud.com/Gauss0018.jpg" srcset="/img/loading.gif" lazyload style="zoom:50%;" /></p>
+</li>
+<li><p>下载数据库安装包</p>
+<ul>
+<li><p>在<code>root</code>用户下新建openGauss安装目录</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">mkdir -p /opt/software/openGauss<br></code></pre></div></td></tr></table></figure>
+</li>
+<li><p>更改文件夹权限</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">chmod 755 -R /opt/software<br></code></pre></div></td></tr></table></figure>
+</li>
+<li><p>进入安装目录</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">cd /opt/software/openGauss<br></code></pre></div></td></tr></table></figure>
+</li>
+<li><p>使用<code>wget</code>下载安装包</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">wget https://opengauss.obs.cn-south-1.myhuaweicloud.com/2.1.0/arm/openGauss-2.1.0-openEuler-64bit-all.tar.gz<br></code></pre></div></td></tr></table></figure>
+<p>注：根据服务器配置，这里选择的openGauss安装包为<code>openeuler_aarch64</code>版本，其他版本请自行更换安装包下载地址。下载地址可在<a target="_blank" rel="noopener" href="https://opengauss.org/zh/download.html">openGauss官网</a>找到。</p>
+</li>
+</ul>
+<p><img src="https://baizexs-images-1257286808.cos.ap-nanjing.myqcloud.com/Gauss0019.jpg" srcset="/img/loading.gif" lazyload style="zoom:50%;" /></p>
+</li>
+<li><p>配置XML文件</p>
+<p>安装openGauss前需要创建XML文件。XML文件包含部署openGauss的服务器信息、安装路径、IP地址以及端口号等。用于告知openGauss如何部署。用户需根据不同场合配置对应的XML文件。这里我们以实验为目的，使用单节点配置的方案。</p>
+<ul>
+<li><p>在<code>root</code>用户下进入<code>/opt/software/openGauss</code>文件夹</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">cd /opt/software/openGauss<br></code></pre></div></td></tr></table></figure>
+</li>
+<li><p>在华为云网络控制台处记下私有IP，编辑XML文件时会用到</p>
+<p><img src="https://baizexs-images-1257286808.cos.ap-nanjing.myqcloud.com/Gauss0020.png" srcset="/img/loading.gif" lazyload style="zoom:50%;" /></p>
+</li>
+<li><p>查看<code>hostname</code>，并将其记下，编辑XML文件时会用到</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">cat /etc/hostname<br></code></pre></div></td></tr></table></figure>
+</li>
+<li><p>创建XML配置文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">vim clusterconfig.xml<br></code></pre></div></td></tr></table></figure>
+<p>按<code>i</code>进入编辑模式，并将如下内容复制进去</p>
+<figure class="highlight xml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs xml"><span class="hljs-meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span> <br><span class="hljs-tag">&lt;<span class="hljs-name">ROOT</span>&gt;</span> <br>    <span class="hljs-tag">&lt;<span class="hljs-name">CLUSTER</span>&gt;</span> <br>        <span class="hljs-tag">&lt;<span class="hljs-name">PARAM</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;clusterName&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;dbCluster&quot;</span> /&gt;</span> <br>        <span class="hljs-tag">&lt;<span class="hljs-name">PARAM</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;nodeNames&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;ecs-c9bf&quot;</span> /&gt;</span> <br>        <span class="hljs-tag">&lt;<span class="hljs-name">PARAM</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;backIp1s&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;192.168.0.58&quot;</span>/&gt;</span> <br>        <span class="hljs-tag">&lt;<span class="hljs-name">PARAM</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;gaussdbAppPath&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;/opt/gaussdb/app&quot;</span> /&gt;</span> <br>        <span class="hljs-tag">&lt;<span class="hljs-name">PARAM</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;gaussdbLogPath&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;/var/log/gaussdb&quot;</span> /&gt;</span> <br>        <span class="hljs-tag">&lt;<span class="hljs-name">PARAM</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;gaussdbToolPath&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;/opt/huawei/wisequery&quot;</span> /&gt;</span> <br>        <span class="hljs-tag">&lt;<span class="hljs-name">PARAM</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;corePath&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;/opt/opengauss/corefile&quot;</span>/&gt;</span> <br>        <span class="hljs-tag">&lt;<span class="hljs-name">PARAM</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;clusterType&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;single-inst&quot;</span>/&gt;</span> <br>    <span class="hljs-tag">&lt;/<span class="hljs-name">CLUSTER</span>&gt;</span> <br>   <br>    <span class="hljs-tag">&lt;<span class="hljs-name">DEVICELIST</span>&gt;</span> <br>        <br>        <span class="hljs-tag">&lt;<span class="hljs-name">DEVICE</span> <span class="hljs-attr">sn</span>=<span class="hljs-string">&quot;1000001&quot;</span>&gt;</span> <br>            <span class="hljs-tag">&lt;<span class="hljs-name">PARAM</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;name&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;ecs-c9bf&quot;</span>/&gt;</span> <br>            <span class="hljs-tag">&lt;<span class="hljs-name">PARAM</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;azName&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;AZ1&quot;</span>/&gt;</span> <br>            <span class="hljs-tag">&lt;<span class="hljs-name">PARAM</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;azPriority&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;1&quot;</span>/&gt;</span> <br>            <span class="hljs-tag">&lt;<span class="hljs-name">PARAM</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;backIp1&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;192.168.0.58&quot;</span>/&gt;</span> <br>            <span class="hljs-tag">&lt;<span class="hljs-name">PARAM</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;sshIp1&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;192.168.0.58&quot;</span>/&gt;</span> <br>             <br>	    <span class="hljs-comment">&lt;!--dbnode--&gt;</span> <br>	    <span class="hljs-tag">&lt;<span class="hljs-name">PARAM</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;dataNum&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;1&quot;</span>/&gt;</span> <br>	    <span class="hljs-tag">&lt;<span class="hljs-name">PARAM</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;dataPortBase&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;26000&quot;</span>/&gt;</span> <br>	    <span class="hljs-tag">&lt;<span class="hljs-name">PARAM</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;dataNode1&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;/gaussdb/data/db1&quot;</span>/&gt;</span> <br>        <span class="hljs-tag">&lt;/<span class="hljs-name">DEVICE</span>&gt;</span> <br>    <span class="hljs-tag">&lt;/<span class="hljs-name">DEVICELIST</span>&gt;</span> <br><span class="hljs-tag">&lt;/<span class="hljs-name">ROOT</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+<p>复制完成后需要进行一些修改，如下图所示，其中服务器名称就是我们刚才查看的<code>hostname</code>。</p>
+<p><img src="https://baizexs-images-1257286808.cos.ap-nanjing.myqcloud.com/Gauss0021.jpg" srcset="/img/loading.gif" lazyload style="zoom:50%;" /></p>
+<p>修改完成后按<code>ESC</code>键，输入<code>:wq</code>保存并退出。</p>
+</li>
+</ul>
+<p>| 参数            | 说明                                                         |<br>| ———————- | —————————————————————————————— |<br>| clusterName     | openGauss名称。                                              |<br>| nodeNames       | openGauss中主机名称。                                        |<br>| backIp1s        | 主机在后端存储网络中的IP地址（内网IP）。所有openGauss主机使用后端存储网络通讯。 |<br>| gaussdbAppPath  | openGauss程序安装目录。此目录应满足如下要求：•磁盘空间&gt;1GB。•与数据库所需其它路径相互独立，没有包含关系。 |<br>| gaussdbLogPath  | openGauss运行日志和操作日志存储目录。此目录应满足如下要求：•磁盘空间建议根据主机上的数据库节点数规划。数据库节点预留1GB空间的基础上，再适当预留冗余空间。•与openGauss所需其它路径相互独立，没有包含关系。此路径可选。不指定的情况下，openGauss安装时会默认指定＂$GAUSSLOG/安装用户名＂作为日志目录。 |<br>| tmpdbPath       | 数据库临时文件存放目录。若不配置tmpdbPath，默认存放在/opt/huawei/wisequery/perfadm_db目录下。 |<br>| gaussdbToolPath | openGauss系统工具目录，主要用于存放互信工具等。此目录应满足如下要求：•磁盘空间&gt;100MB。•固定目录，与数据库所需其它目录相互独立，没有包含关系。此目录为可选配置项。不指定的情况下，openGauss安装时会默认指定＂/opt/huawei/wisequery＂作为数据库系统工具目录。 |<br>| corePath        | openGauss core文件的指定目录。                               |</p>
+</li>
+<li><p>预安装准备</p>
+<ul>
+<li><p>修改<code>performance.sh</code>文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">vim /etc/profile.d/performance.sh<br></code></pre></div></td></tr></table></figure>
+<p>注释如下内容，修改完成后按<code>ESC</code>键，输入<code>:wq</code>保存并退出。</p>
+<p><img src="https://baizexs-images-1257286808.cos.ap-nanjing.myqcloud.com/Gauss0022.jpg" srcset="/img/loading.gif" lazyload style="zoom:50%;" /></p>
+</li>
+<li><p>加载安装包中<code>lib</code>库</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">vim /etc/profile<br></code></pre></div></td></tr></table></figure>
+<p>在文件底部添加如下内容：</p>
+<figure class="highlight routeros"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs routeros"><span class="hljs-builtin-name">export</span> <span class="hljs-attribute">packagePath</span>=/opt/software/openGauss<br><span class="hljs-builtin-name">export</span> <span class="hljs-attribute">LD_LIBRARY_PATH</span>=<span class="hljs-variable">$packagePath</span>/script/gspylib/clib:$LD_LIBRARY_PATH<br></code></pre></div></td></tr></table></figure>
+<p>添加完成后按<code>ESC</code>键，输入<code>:wq</code>保存并退出。</p>
+<p>输入如下命令初始化文件，使之立即生效：</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">source /etc/profile<br></code></pre></div></td></tr></table></figure>
+</li>
+<li><p>解压安装包</p>
+<p>进入安装包目录</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">cd /opt/software/openGauss<br></code></pre></div></td></tr></table></figure>
+<p>解压<code>openGauss-x.x.x-openEuler-64bit-all.tar.gz</code>包</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">tar -zxvf  openGauss-x.x.x-openEuler-64bit-all.tar.gz<br></code></pre></div></td></tr></table></figure>
+<p>解压<code>openGauss-x.x.x-openEuler-64bit-om.tar.gz</code>包</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">tar -zxvf  openGauss-x.x.x-openEuler-64bit-om.tar.gz<br></code></pre></div></td></tr></table></figure>
+<p>解压后查看目录下文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">ls<br></code></pre></div></td></tr></table></figure>
+<p><img src="https://baizexs-images-1257286808.cos.ap-nanjing.myqcloud.com/Gauss0023.jpg" srcset="/img/loading.gif" lazyload style="zoom:50%;" /></p>
+</li>
+</ul>
+</li>
+<li><p>预安装</p>
+<ul>
+<li><p>进入<code>script</code>目录</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">cd script<br></code></pre></div></td></tr></table></figure>
+</li>
+<li><p>执行预安装脚本</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">python gs_preinstall -U omm -G dbgrp -X /opt/software/openGauss/clusterconfig.xml<br></code></pre></div></td></tr></table></figure>
+<ul>
+<li><code>-U</code> 后为用户名</li>
+<li><code>-G</code>后为用户组</li>
+<li><code>-X</code>后为XML配置文件</li>
+</ul>
+<p>运行过程中会询问我们是否执行，填写<code>yes</code>即可，随后会要求我们设置<code>omm</code>用户密码。</p>
+<p><img src="https://baizexs-images-1257286808.cos.ap-nanjing.myqcloud.com/Gauss0024.jpg" srcset="/img/loading.gif" lazyload style="zoom:50%;" /></p>
+</li>
+<li><p>安装完成后显示如下</p>
+<p><img src="https://baizexs-images-1257286808.cos.ap-nanjing.myqcloud.com/Gauss0025.jpg" srcset="/img/loading.gif" lazyload style="zoom:50%;" /></p>
+</li>
+</ul>
+</li>
+<li><p>安装openGauss</p>
+<ul>
+<li><p>修改文件权限</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">chmod -R 755 /opt/software/openGauss/script<br></code></pre></div></td></tr></table></figure>
+</li>
+<li><p>修改<code>omm</code>用户的<code>sudo</code>权限</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">vim /etc/sudoers<br></code></pre></div></td></tr></table></figure>
+<p>按<code>i</code>进入编辑模式，在<code>root</code>的下一行添加<code>omm</code>用户，添加完成后按<code>ESC</code>键，输入<code>:wq</code>保存并退出。</p>
+<p><img src="https://baizexs-images-1257286808.cos.ap-nanjing.myqcloud.com/Gauss0026.jpg" srcset="/img/loading.gif" lazyload style="zoom:50%;" /></p>
+</li>
+<li><p>切换至<code>omm</code>用户</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">su omm<br></code></pre></div></td></tr></table></figure>
+</li>
+<li><p>切换至openGauss的script目录</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">cd /opt/software/openGauss/script<br></code></pre></div></td></tr></table></figure>
+</li>
+<li><p>执行安装脚本</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">gs_install -X /opt/software/openGauss/clusterconfig.xml --gsinit-parameter=&quot;--encoding=UTF8&quot;  --dn-guc=&quot;max_process_memory=4GB&quot;  --dn-guc=&quot;shared_buffers=256MB&quot; --dn-guc=&quot;bulk_write_ring_size=256MB&quot; --dn-guc=&quot;cstore_buffers=16MB&quot;<br></code></pre></div></td></tr></table></figure>
+<p>参数说明如下：</p>
+<p>| 参数                 | 用途                                             |<br>| —————————— | ———————————————————————— |<br>| Encoding             | 设置字符集                                       |<br>| max_process_memory   | 设置一个数据库节点可用的最大物理内存             |<br>| shared_buffers       | 设置openGauss使用的共享内存大小                  |<br>| bulk_write_ring_size | 大批量数据写入触发时，该操作使用的环形缓冲区大小 |<br>| cstore_buffers       | 设置列存所使用的共享缓冲区的大小                 |</p>
+<p>在安装过程中需要需要设置数据库密码</p>
+<p><img src="https://baizexs-images-1257286808.cos.ap-nanjing.myqcloud.com/Gauss0027.jpg" srcset="/img/loading.gif" lazyload style="zoom: 50%;" /></p>
+</li>
+<li><p>安装成功则会有下图显示</p>
+<p><img src="https://baizexs-images-1257286808.cos.ap-nanjing.myqcloud.com/Gauss0028.jpg" srcset="/img/loading.gif" lazyload style="zoom:50%;" /></p>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="（六）、openGauss体验"><a href="#（六）、openGauss体验" class="headerlink" title="（六）、openGauss体验"></a>（六）、openGauss体验</h3><ol>
+<li><p>登陆服务器并切换至<code>omm</code>用户</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">su omm<br></code></pre></div></td></tr></table></figure>
+</li>
+<li><p>查看数据库是否启动</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">gs_om -t status<br></code></pre></div></td></tr></table></figure>
+</li>
+<li><p>启动数据库</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">gs_om -t start<br></code></pre></div></td></tr></table></figure>
+</li>
+<li><p>连接到默认数据库</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">gsql -d postgres -p 26000 -r<br></code></pre></div></td></tr></table></figure>
+<p><code>postgres</code>为openGauss安装完成后默认生成的数据库，初始可以连接到此数据库进行新数据库的创建，26000为数据库主节点的端口号，需根据openGauss的实际情况做替换。</p>
+<p><img src="https://baizexs-images-1257286808.cos.ap-nanjing.myqcloud.com/Gauss0029.jpg" srcset="/img/loading.gif" lazyload style="zoom:50%;" /></p>
+</li>
+<li><p>创建数据库用户<code>jay</code></p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">CREATE USER jay WITH PASSWORD &quot;Bigdata@123&quot;;<br></code></pre></div></td></tr></table></figure>
+<p>创建用户名为<code>jay</code>，密码为<code>Bigdata@123</code>的用户</p>
+</li>
+<li><p>创建数据库</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">CREATE DATABASE db_tpcc OWNER jay; <br></code></pre></div></td></tr></table></figure>
+<p>创建名为<code>db_tpcc</code>的数据库，其所有者为<code>jay</code></p>
+</li>
+<li><p>退出默认登陆</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">\q<br></code></pre></div></td></tr></table></figure>
+<p><img src="https://baizexs-images-1257286808.cos.ap-nanjing.myqcloud.com/Gauss0030.jpg" srcset="/img/loading.gif" lazyload style="zoom:50%;" /></p>
+</li>
+<li><p>使用新用户连接到此数据库</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">gsql -d db_tpcc -p 26000 -U jay -W Bigdata@123  -r<br></code></pre></div></td></tr></table></figure>
+</li>
+<li><p>创建名为<code>jay</code>的<code>SCHEMA</code>，并设置<code>jay</code>为当前的<code>schema</code></p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">CREATE SCHEMA joe AUTHORIZATION jay; <br>SET search_path TO jay;<br></code></pre></div></td></tr></table></figure>
+</li>
+<li><p>创建表</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">CREATE TABLE mytable (firstcol int);<br></code></pre></div></td></tr></table></figure>
+</li>
+<li><p>向表中插入数据</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">INSERT INTO mytable values (100); <br></code></pre></div></td></tr></table></figure>
+</li>
+<li><p>查看表中数据</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">SELECT * from mytable; <br></code></pre></div></td></tr></table></figure>
+<p><img src="https://baizexs-images-1257286808.cos.ap-nanjing.myqcloud.com/Gauss0031.jpg" srcset="/img/loading.gif" lazyload style="zoom:50%;" /></p>
+</li>
+</ol>
+<h2 id="二、了解IAM账号"><a href="#二、了解IAM账号" class="headerlink" title="二、了解IAM账号"></a>二、了解IAM账号</h2><blockquote>
+<p>如果您是<a target="_blank" rel="noopener" href="https://support.huaweicloud.com/usermanual-iam/iam_01_0001.html#iam_01_0001__section209491111991">管理员</a>，在华为云购买了多种资源，例如弹性云服务器、云硬盘、裸金属服务器等，您需要将资源分配给企业中不同的员工或者应用程序使用，为了避免分享自己的帐号密码，您可以使用IAM的用户管理功能，给员工或应用程序创建IAM用户。</p>
+<p>默认情况下，<strong>新创建的IAM用户没有任何权限</strong>，管理员需要为其授予权限，或将其加入用户组，并<a target="_blank" rel="noopener" href="https://support.huaweicloud.com/usermanual-iam/iam_03_0001.html#iam_03_0001__section29361034113212">给用户组授权</a>，用户组中的用户将获得用户组的权限。IAM用户拥有权限后，IAM用户就可以基于权限对云服务进行操作。</p>
+<p>“admin”为缺省用户组，具有所有云服务资源的操作权限。将用户加入该用户组后，用户可以操作并使用所有云服务资源，包括但不仅限于创建用户组及用户、修改用户组权限、管理资源等。</p>
+<p>以上参考资料来自华为云文档。</p>
+</blockquote>
+<p>我的理解：</p>
+<p>IAM账号可以理解为“部分管理员”。管理员账号拥有最高权限，掌握在华为云购买的所有资源。但是，当管理员需要将资源下放给其他用户，并且这些用户只能使用管理员分配给他们的资源时，就需要创建IAM用户给这些用户，并由管理员给他们分配相应的资源与对应的权限，这样既可以使得管理员之外的用户能够充分调用他们所需要的资源，又能阻止他们访问其他不属于他们管理范围内的资源，大大提高了资源的安全性。</p>
+<h2 id="三、安装openEuler虚拟机并连接"><a href="#三、安装openEuler虚拟机并连接" class="headerlink" title="三、安装openEuler虚拟机并连接"></a>三、安装openEuler虚拟机并连接</h2><p>在本地虚拟机部署openGauss一共有3种方式：</p>
+<ul>
+<li>在本地下载安装CentOS/openEuler虚拟机，随后手动安装openGauss</li>
+<li>在本地下载安装CentOS/openEuler虚拟机，借助脚本自动化安装openGauss</li>
+<li>下载华为官方提供的安装有openGauss的openEuler虚拟机文件，在本地直接导入虚拟机</li>
+</ul>
+<p>第三种方式较前两种省事不少，非常适合用于实验教学，并且前两种方法我在《在华为云ECS上部署openGauss》中也有过尝试，因此这里我使用第三种方式进行部署。</p>
+<h3 id="（一）、操作环境-1"><a href="#（一）、操作环境-1" class="headerlink" title="（一）、操作环境"></a>（一）、操作环境</h3><ul>
+<li>本地系统：macOS 12.2.1</li>
+<li>虚拟机软件：VirtualBox 6.1.34</li>
+</ul>
+<h3 id="（二）、下载虚拟机文件"><a href="#（二）、下载虚拟机文件" class="headerlink" title="（二）、下载虚拟机文件"></a>（二）、下载虚拟机文件</h3><p>从官网下载安装有openGauss数据库的openEuler虚拟机文件。</p>
+<p><img src="https://baizexs-images-1257286808.cos.ap-nanjing.myqcloud.com/Gauss032.jpg" srcset="/img/loading.gif" lazyload style="zoom: 50%;" /></p>
+<h3 id="（三）、导入虚拟机"><a href="#（三）、导入虚拟机" class="headerlink" title="（三）、导入虚拟机"></a>（三）、导入虚拟机</h3><ol>
+<li><p>打开 VirtualBox 虚拟机软件，单机 <code>导入</code> 选项</p>
+<p><img src="https://baizexs-images-1257286808.cos.ap-nanjing.myqcloud.com/Gauss0033.jpg" srcset="/img/loading.gif" lazyload style="zoom:50%;" /></p>
+</li>
+<li><p>选择虚拟机文件</p>
+<p><img src="https://baizexs-images-1257286808.cos.ap-nanjing.myqcloud.com/Gauss0034.jpg" srcset="/img/loading.gif" lazyload style="zoom:50%;" /></p>
+</li>
+<li><p>配置虚拟机资源并导入</p>
+<ul>
+<li>处理器数：4</li>
+<li>内存大小：4096MB</li>
+<li>MAC地址设定：为所有网卡重新生成MAC地址</li>
+</ul>
+<p><img src="https://baizexs-images-1257286808.cos.ap-nanjing.myqcloud.com/Gauss0035.jpg" srcset="/img/loading.gif" lazyload style="zoom:50%;" /></p>
+<p>配置好虚拟机资源后，单机 <code>导入</code> 即可。</p>
+</li>
+<li><p>虚拟机成功导入</p>
+<p><img src="https://baizexs-images-1257286808.cos.ap-nanjing.myqcloud.com/Gauss0036.jpg" srcset="/img/loading.gif" lazyload style="zoom:50%;" /></p>
+</li>
+<li><p>配置Host-Only网卡</p>
+<ul>
+<li><p>管理——&gt;主机网络管理器</p>
+<p><img src="https://baizexs-images-1257286808.cos.ap-nanjing.myqcloud.com/Gauss0037.jpg" srcset="/img/loading.gif" lazyload style="zoom:33%;" /></p>
+</li>
+<li><p>新建网卡配置</p>
+<p><img src="https://baizexs-images-1257286808.cos.ap-nanjing.myqcloud.com/Gauss0038.jpg" srcset="/img/loading.gif" lazyload style="zoom: 50%;" /></p>
+</li>
+<li><p>配置虚拟机网卡</p>
+<p>将连接方式为<code>Host-Only网络</code>的网卡的界面名称设置为我们刚创建的<code>vboxnet0</code>，单击确定使配置生效。</p>
+<p><img src="https://baizexs-images-1257286808.cos.ap-nanjing.myqcloud.com/Gauss0039.jpg" srcset="/img/loading.gif" lazyload style="zoom:50%;" /></p>
+</li>
+</ul>
+</li>
+<li><p>启动虚拟机</p>
+<ul>
+<li><p>单击启动虚拟机</p>
+<p><img src="https://baizexs-images-1257286808.cos.ap-nanjing.myqcloud.com/Gauss0040.jpg" srcset="/img/loading.gif" lazyload style="zoom:50%;" /></p>
+</li>
+<li><p>虚拟机成功启动</p>
+<p><img src="https://baizexs-images-1257286808.cos.ap-nanjing.myqcloud.com/Gauss0041.jpg" srcset="/img/loading.gif" lazyload style="zoom:50%;" /></p>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="（四）、通过-ssh-连接到虚拟机"><a href="#（四）、通过-ssh-连接到虚拟机" class="headerlink" title="（四）、通过 ssh 连接到虚拟机"></a>（四）、通过 ssh 连接到虚拟机</h3><ol>
+<li><p>使用默认用户名和密码登陆虚拟机</p>
+<ul>
+<li><p>默认用户名：<code>root</code></p>
+</li>
+<li><p>默认密码：<code>openGauss@123</code></p>
+</li>
+</ul>
+<p><img src="https://baizexs-images-1257286808.cos.ap-nanjing.myqcloud.com/Gauss0042.jpg" srcset="/img/loading.gif" lazyload style="zoom:50%;" /></p>
+</li>
+<li><p>检查网络配置</p>
+<ul>
+<li><p><code>ping</code> 一下百度试试</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">ping www.baidu.com<br></code></pre></div></td></tr></table></figure>
+<p><img src="https://baizexs-images-1257286808.cos.ap-nanjing.myqcloud.com/Gauss0043.jpg" srcset="/img/loading.gif" lazyload style="zoom:50%;" /></p>
+<p>可以看到，虚拟机网络已经正常连接互联网了。</p>
+</li>
+<li><p>查看网卡信息</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">ifconfig<br></code></pre></div></td></tr></table></figure>
+<p><img src="https://baizexs-images-1257286808.cos.ap-nanjing.myqcloud.com/Gauss0044.jpg" srcset="/img/loading.gif" lazyload style="zoom:50%;" /></p>
+<p>这里我们的内网IP为<code>192.168.56.101</code>，我们通过SSH服务连接时会使用这个IP。</p>
+</li>
+</ul>
+</li>
+<li><p>通过SSH连接至虚拟机</p>
+<ul>
+<li><p>打开终端</p>
+</li>
+<li><p>输入如下命令，使用<code>root</code>用户登陆虚拟机</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">ssh root@192.168.56.101<br></code></pre></div></td></tr></table></figure>
+<p>提示我们输入密码，这里的密码即为<code>root</code>用户的密码</p>
+<p><img src="https://baizexs-images-1257286808.cos.ap-nanjing.myqcloud.com/Gauss0045.jpg" srcset="/img/loading.gif" lazyload style="zoom:50%;" /></p>
+</li>
+<li><p>出现如下界面，则说明我们已经成功登陆至虚拟机了</p>
+<p><img src="https://baizexs-images-1257286808.cos.ap-nanjing.myqcloud.com/Gauss0046.jpg" srcset="/img/loading.gif" lazyload style="zoom:50%;" /></p>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="四、在ECS上创建数据库"><a href="#四、在ECS上创建数据库" class="headerlink" title="四、在ECS上创建数据库"></a>四、在ECS上创建数据库</h2><ol>
+<li><p>通过SSH连接至安装有openGauss的ECS服务器</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">ssh root@服务器IP<br></code></pre></div></td></tr></table></figure>
+<p><img src="https://baizexs-images-1257286808.cos.ap-nanjing.myqcloud.com/202205121221040.png" srcset="/img/loading.gif" lazyload style="zoom:50%;" /></p>
+</li>
+<li><p>切换用户</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">su omm<br></code></pre></div></td></tr></table></figure>
+</li>
+<li><p>启动数据库</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">gs_om -t start<br></code></pre></div></td></tr></table></figure>
+</li>
+<li><p>登陆数据库</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">gsql -d postgres -p 26000 -r<br></code></pre></div></td></tr></table></figure>
+<p><img src="https://baizexs-images-1257286808.cos.ap-nanjing.myqcloud.com/Gauss.png" srcset="/img/loading.gif" lazyload style="zoom:50%;" /></p>
+</li>
+<li><p>创建新的数据库用户</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">CREATE USER baizexs WITH PASSWORD &quot;baizexs@123&quot;;<br></code></pre></div></td></tr></table></figure>
+</li>
+<li><p>创建新的数据库</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">CREATE DATABASE db_baizexs OWNER baizexs;<br></code></pre></div></td></tr></table></figure>
+<p><img src="https://baizexs-images-1257286808.cos.ap-nanjing.myqcloud.com/Gauss0050.png" srcset="/img/loading.gif" lazyload style="zoom:50%;" /></p>
+</li>
+<li><p>退出当前用户</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">\q<br></code></pre></div></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="五、建立“学籍与成绩管理系统”表格"><a href="#五、建立“学籍与成绩管理系统”表格" class="headerlink" title="五、建立“学籍与成绩管理系统”表格"></a>五、建立“学籍与成绩管理系统”表格</h2><ol>
+<li><p>我们需要建立以下表格</p>
+<ul>
+<li><p>学生表</p>
+<p>| 字段名 | 字段含义     | 字段类型 | 字段长度 | NULL | 备注 |<br>| ——— | —————— | ———— | ———— | —— | —— |<br>| xm     | 姓名         | 字符     | 8        |      |      |<br>| xh     | 学号         | 字符     | 10       |      | PK   |<br>| ydh    | 所属学院代号 | 字符     | 2        | √    | FK   |<br>| bj     | 班级         | 字符     | 8        | √    |      |<br>| chrq   | 出生日期     | 日期     |          | √    |      |<br>| xb     | 性别         | 字符     | 2        | √    |      |</p>
+</li>
+<li><p>课程表</p>
+<p>| 字段名 | 字段含义 | 字段类型 | 字段长度 | NULL | 备注 |<br>| ——— | ———— | ———— | ———— | —— | —— |<br>| kcbh   | 课程编号 | 字符     | 3        |      | PK   |<br>| kc     | 课程名称 | 字符     | 20       |      |      |<br>| lx     | 课程类型 | 字符     | 10       | √    |      |<br>| xf     | 学分     | 数值     | 5.1      | √    |      |</p>
+</li>
+<li><p>教师表</p>
+<p>| 字段名 | 字段含义     | 字段类型 | 字段长度 | NULL | 备注 |<br>| ——— | —————— | ———— | ———— | —— | —— |<br>| xm     | 姓名         | 字符     | 8        |      |      |<br>| jsbh   | 教师编号     | 字符     | 10       |      | PK   |<br>| zc     | 职称         | 字符     | 6        | √    |      |<br>| ydh    | 所属学院代号 | 字符     | 2        | √    | FK   |</p>
+</li>
+<li><p>学院表</p>
+<p>| 字段名 | 字段含义 | 字段类型 | 字段长度 | NULL | 备注 |<br>| ——— | ———— | ———— | ———— | —— | —— |<br>| ydh    | 学院代号 | 字符     | 2        |      | PK   |<br>| ymc    | 学院名称 | 字符     | 30       |      |      |</p>
+</li>
+<li><p>授课表</p>
+<p>| 字段名 | 字段含义 | 字段类型 | 字段长度 | NULL | 备注   |<br>| ——— | ———— | ———— | ———— | —— | ——— |<br>| kcbh   | 课程编号 | 字符     | 3        |      | PK,FK1 |<br>| bh     | 教师编号 | 字符     | 10       |      | PK,FK2 |</p>
+</li>
+<li><p>选课表</p>
+<p>| 字段名 | 字段含义 | 字段类型 | 字段长度 | NULL | 备注   |<br>| ——— | ———— | ———— | ———— | —— | ——— |<br>| xh     | 学号     | 字符     | 10       |      | PK,FK  |<br>| kcbh   | 课程编号 | 字符     | 3        |      | PK,FK1 |<br>| jsbh   | 教师编号 | 字符     | 10       |      | PK,FK1 |<br>| cj     | 成绩     | 数值     | 5.1      | √    |        |</p>
+</li>
+</ul>
+</li>
+</ol>
+<ol>
+<li><p>使用新用户登陆</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">gsql -d db_baizexs -p 26000 -U baizexs -W baizexs@123 -r<br></code></pre></div></td></tr></table></figure>
+</li>
+<li><p>创建SCHEMA</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">CREATE SCHEMA baizexs AUTHORIZATION baizexs;<br></code></pre></div></td></tr></table></figure>
+<p><img src="https://baizexs-images-1257286808.cos.ap-nanjing.myqcloud.com/Gauss0051.png" srcset="/img/loading.gif" lazyload style="zoom:50%;" /></p>
+</li>
+<li><p>创建表</p>
+<ul>
+<li><p>创建学生表</p>
+<figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> xs (<br>    xm <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">16</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>,<br>    xh <span class="hljs-type">CHAR</span>(<span class="hljs-number">10</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">PRIMARY</span> KEY,<br>    xb <span class="hljs-type">CHAR</span>(<span class="hljs-number">2</span>),<br>    chrq <span class="hljs-type">DATE</span>,<br>    ydh <span class="hljs-type">CHAR</span>(<span class="hljs-number">2</span>),<br>    bj <span class="hljs-type">CHAR</span>(<span class="hljs-number">8</span>)<br>);<br></code></pre></div></td></tr></table></figure>
+</li>
+<li><p>创建课程表</p>
+<figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> kc (<br>    kcbh <span class="hljs-type">CHAR</span>(<span class="hljs-number">3</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">PRIMARY</span> KEY,<br>    kc <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">20</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>,<br>    lx <span class="hljs-type">CHAR</span>(<span class="hljs-number">10</span>),<br>    xf <span class="hljs-type">DECIMAL</span>(<span class="hljs-number">5</span>,<span class="hljs-number">1</span>)<br>);<br></code></pre></div></td></tr></table></figure>
+</li>
+<li><p>创建教师表</p>
+<figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> js (<br>    xm <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">16</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>,<br>    jsbh <span class="hljs-type">CHAR</span>(<span class="hljs-number">10</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">PRIMARY</span> KEY,<br>    zc <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">16</span>),<br>    ydh <span class="hljs-type">CHAR</span>(<span class="hljs-number">2</span>)<br>);<br></code></pre></div></td></tr></table></figure>
+</li>
+<li><p>创建学院表</p>
+<figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> xyb (<br>    ydh <span class="hljs-type">CHAR</span>(<span class="hljs-number">2</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">PRIMARY</span> KEY,<br>    ymc <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">30</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span><br>);<br></code></pre></div></td></tr></table></figure>
+</li>
+<li><p>创建授课表</p>
+<figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> sk (<br>    kcbh <span class="hljs-type">CHAR</span>(<span class="hljs-number">3</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>,<br>    bh <span class="hljs-type">CHAR</span>(<span class="hljs-number">10</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>,<br>    <span class="hljs-keyword">PRIMARY</span> KEY (kcbh,bh)<br>);<br></code></pre></div></td></tr></table></figure>
+</li>
+<li><p>创建学生选课表</p>
+<figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> xk (<br>    xh <span class="hljs-type">CHAR</span>(<span class="hljs-number">10</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>,<br>    kcbh <span class="hljs-type">CHAR</span>(<span class="hljs-number">3</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>,<br>    jsbh <span class="hljs-type">CHAR</span>(<span class="hljs-number">10</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>,<br>    cj <span class="hljs-type">DECIMAL</span>(<span class="hljs-number">5</span>,<span class="hljs-number">1</span>),<br>    <span class="hljs-keyword">PRIMARY</span> KEY (xh,kcbh,jsbh)<br>);<br></code></pre></div></td></tr></table></figure>
+</li>
+</ul>
+<p><img src="https://baizexs-images-1257286808.cos.ap-nanjing.myqcloud.com/Gauss0053.png" srcset="/img/loading.gif" lazyload style="zoom:67%;" /></p>
+</li>
+<li><p>定义主键</p>
+<p>由于我在创建表时，已经定义过主键，因此不能重复定义主键，这里的命令仅作为举例展示：</p>
+<ul>
+<li><p>创建学生表主键</p>
+<figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> xs <span class="hljs-keyword">ADD</span> <span class="hljs-keyword">CONSTRAINT</span> pk_xs <span class="hljs-keyword">PRIMARY</span> KEY(xh);<br></code></pre></div></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>定义外键</p>
+<ul>
+<li><p>创建学生表的外键</p>
+<figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> xs <span class="hljs-keyword">ADD</span> <span class="hljs-keyword">CONSTRAINT</span> fk_ydh <span class="hljs-keyword">FOREIGN</span> KEY(ydh) <span class="hljs-keyword">REFERENCES</span> xyb(ydh);<br></code></pre></div></td></tr></table></figure>
+</li>
+<li><p>创建教师表的外键</p>
+<figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> js <span class="hljs-keyword">ADD</span> <span class="hljs-keyword">CONSTRAINT</span> fk_ydh <span class="hljs-keyword">FOREIGN</span> KEY(ydh) <span class="hljs-keyword">REFERENCES</span> xyb(ydh);<br></code></pre></div></td></tr></table></figure>
+</li>
+<li><p>创建授课表的外键</p>
+<figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> sk <span class="hljs-keyword">ADD</span> <span class="hljs-keyword">CONSTRAINT</span> fk_kcbh <span class="hljs-keyword">FOREIGN</span> KEY(kcbh) <span class="hljs-keyword">REFERENCES</span> kc(kcbh);<br><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> sk <span class="hljs-keyword">ADD</span> <span class="hljs-keyword">CONSTRAINT</span> fk_jsbh <span class="hljs-keyword">FOREIGN</span> KEY(bh) <span class="hljs-keyword">REFERENCES</span> js(jsbh);<br></code></pre></div></td></tr></table></figure>
+</li>
+<li><p>创建选课表的外键</p>
+<figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> xk <span class="hljs-keyword">ADD</span> <span class="hljs-keyword">CONSTRAINT</span> fk_xh <span class="hljs-keyword">FOREIGN</span> KEY(xh) <span class="hljs-keyword">REFERENCES</span> xs(xh);<br><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> xk <span class="hljs-keyword">ADD</span> <span class="hljs-keyword">CONSTRAINT</span> fk_kcbh <span class="hljs-keyword">FOREIGN</span> KEY(kcbh) <span class="hljs-keyword">REFERENCES</span> kc(kcbh);<br><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> xk <span class="hljs-keyword">ADD</span> <span class="hljs-keyword">CONSTRAINT</span> fk_jsbh <span class="hljs-keyword">FOREIGN</span> KEY(jsbh) <span class="hljs-keyword">REFERENCES</span> js(jsbh);<br></code></pre></div></td></tr></table></figure>
+<p><img src="https://baizexs-images-1257286808.cos.ap-nanjing.myqcloud.com/Gauss0066.png" srcset="/img/loading.gif" lazyload style="zoom:50%;" /></p>
+</li>
+</ul>
+</li>
+<li><p>向表中添加数据</p>
+<ul>
+<li><p>由于需要较多数据，这里我写了一个功能正常但是代码质量糟糕的Java小程序用于语句的生成：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> Test;<br><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SQLxsTest</span> </span>&#123;<br>    <span class="hljs-keyword">static</span> String sXing =    <span class="hljs-string">&quot;赵钱孙李周吴郑王冯陈褚卫蒋沈韩杨朱秦尤许&quot;</span><br>            + <span class="hljs-string">&quot;何吕施张孔曹严华金魏陶姜戚谢邹喻柏水窦章&quot;</span><br>            + <span class="hljs-string">&quot;云苏潘葛奚范彭郎鲁韦昌马苗凤花方俞任袁柳&quot;</span><br>            + <span class="hljs-string">&quot;酆鲍史唐费廉岑薛雷贺倪汤滕殷罗毕郝邬安常&quot;</span><br>            + <span class="hljs-string">&quot;乐于时傅皮卞齐康伍余元卜顾孟平黄和穆萧尹&quot;</span><br>            + <span class="hljs-string">&quot;姚邵湛汪祁毛禹狄米贝明臧计伏成戴谈宋茅庞&quot;</span><br>            + <span class="hljs-string">&quot;熊纪舒屈项祝董粱杜阮蓝闵席季麻强贾路娄危&quot;</span><br>            + <span class="hljs-string">&quot;江童颜郭梅盛林刁钟徐邱骆高夏蔡田樊胡凌霍&quot;</span><br>            + <span class="hljs-string">&quot;虞万支柯昝管卢莫经房裘缪干解应宗丁宣贲邓&quot;</span><br>            + <span class="hljs-string">&quot;郁单杭洪包诸左石崔吉钮龚程嵇邢滑裴陆荣翁 &quot;</span>;<br><br>    <span class="hljs-keyword">static</span> String[] sMing = &#123;<span class="hljs-string">&quot;小&quot;</span>,<span class="hljs-string">&quot;明&quot;</span>,<span class="hljs-string">&quot;丽&quot;</span>,<span class="hljs-string">&quot;红&quot;</span>,<span class="hljs-string">&quot;强&quot;</span>,<span class="hljs-string">&quot;小丽&quot;</span>,<span class="hljs-string">&quot;炎&quot;</span>,<span class="hljs-string">&quot;燕&quot;</span>,<br>            <span class="hljs-string">&quot;晓燕&quot;</span>,<span class="hljs-string">&quot;洋&quot;</span>,<span class="hljs-string">&quot;阳&quot;</span>,<span class="hljs-string">&quot;庄&quot;</span>,<span class="hljs-string">&quot;小庄&quot;</span>,<span class="hljs-string">&quot;晓阳&quot;</span>,<span class="hljs-string">&quot;小洋&quot;</span>,<br>            <span class="hljs-string">&quot;山&quot;</span>,<span class="hljs-string">&quot;进&quot;</span>,<span class="hljs-string">&quot;明&quot;</span>,<span class="hljs-string">&quot;小文&quot;</span>,<span class="hljs-string">&quot;文&quot;</span>,<span class="hljs-string">&quot;文丽&quot;</span>,<span class="hljs-string">&quot;晓歌&quot;</span>,<br>            <span class="hljs-string">&quot;小歌&quot;</span>,<span class="hljs-string">&quot;歌&quot;</span>,<span class="hljs-string">&quot;晓波&quot;</span>,<span class="hljs-string">&quot;小波&quot;</span>,<span class="hljs-string">&quot;小亮&quot;</span>,<span class="hljs-string">&quot;晓亮&quot;</span>,<span class="hljs-string">&quot;亮&quot;</span>,<br>            <span class="hljs-string">&quot;品华&quot;</span>,<span class="hljs-string">&quot;霞&quot;</span>,<span class="hljs-string">&quot;红霞&quot;</span>,<span class="hljs-string">&quot;晓炎&quot;</span>,<span class="hljs-string">&quot;晓强&quot;</span>,<span class="hljs-string">&quot;德华&quot;</span>,<span class="hljs-string">&quot;华&quot;</span>,<br>            <span class="hljs-string">&quot;城&quot;</span>,<span class="hljs-string">&quot;诚&quot;</span>,<span class="hljs-string">&quot;小明&quot;</span>&#125;;<br>    <span class="hljs-keyword">static</span> <span class="hljs-keyword">char</span>[] lastName;<br>    <span class="hljs-keyword">static</span> &#123; lastName = sXing.toCharArray(); &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">xs</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-comment">// 学生表添加数据语句</span><br>        System.out.println(<span class="hljs-string">&quot;学生表添加数据语句&quot;</span>);<br>        <span class="hljs-keyword">int</span> xh = <span class="hljs-number">200000</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">50</span>; i++ ) &#123;<br>            xh++;<br>            <span class="hljs-keyword">int</span> index = (<span class="hljs-keyword">int</span>) (Math.random() * (sMing.length-<span class="hljs-number">1</span>)) + <span class="hljs-number">1</span>;<br>            String name = lastName[i] + sMing[index];<br>            String gender = Math.random() &gt; <span class="hljs-number">0.499</span> ? <span class="hljs-string">&quot;M&quot;</span> : <span class="hljs-string">&quot;F&quot;</span>;<br>            <span class="hljs-comment">// DATE</span><br>            <span class="hljs-keyword">int</span> year = <span class="hljs-number">1995</span> + (<span class="hljs-keyword">int</span>) (Math.random() * <span class="hljs-number">10</span>) + <span class="hljs-number">1</span>;<br>            <span class="hljs-keyword">int</span> month = (<span class="hljs-keyword">int</span>) (Math.random() * <span class="hljs-number">12</span>) + <span class="hljs-number">1</span>;<br>            <span class="hljs-keyword">int</span> day = (<span class="hljs-keyword">int</span>) (Math.random() * <span class="hljs-number">28</span>) + <span class="hljs-number">1</span>;<br>            <span class="hljs-keyword">int</span> ydh = (<span class="hljs-keyword">int</span>) (Math.random() * <span class="hljs-number">9</span>) + <span class="hljs-number">1</span>;<br>            <span class="hljs-keyword">int</span> bj = <span class="hljs-number">63012000</span> + (<span class="hljs-keyword">int</span>) (Math.random() * <span class="hljs-number">50</span>) + <span class="hljs-number">1</span>;<br>            System.out.println(<span class="hljs-string">&quot;INSERT INTO xs values(&#x27;&quot;</span> + name + <span class="hljs-string">&quot;&#x27;,&#x27;&quot;</span> + xh + <span class="hljs-string">&quot;&#x27;,&#x27;&quot;</span> + gender + <span class="hljs-string">&quot;&#x27;,&#x27;&quot;</span> + year + <span class="hljs-string">&quot;-&quot;</span> + month + <span class="hljs-string">&quot;-&quot;</span> + day + <span class="hljs-string">&quot;&#x27;,&#x27;&quot;</span> + ydh + <span class="hljs-string">&quot;&#x27;,&#x27;&quot;</span> + bj + <span class="hljs-string">&quot;&#x27;);&quot;</span>);<br>        &#125;<br>    &#125;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">js</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-comment">// 教师表添加数据</span><br>        System.out.println(<span class="hljs-string">&quot;教师表添加数据语句：&quot;</span>);<br>        String[] zcb = &#123;<span class="hljs-string">&quot;教授&quot;</span>,<span class="hljs-string">&quot;副教授&quot;</span>,<span class="hljs-string">&quot;讲师&quot;</span>,<span class="hljs-string">&quot;助教&quot;</span>&#125;;<br>        <span class="hljs-keyword">int</span> jsbh = <span class="hljs-number">100000</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">50</span>; i &lt; <span class="hljs-number">70</span>; i++ ) &#123;<br>            jsbh++;<br>            <span class="hljs-keyword">int</span> index = (<span class="hljs-keyword">int</span>) (Math.random() * (sMing.length-<span class="hljs-number">1</span>)) + <span class="hljs-number">1</span>;<br>            String name = lastName[i] + sMing[index];<br>            String zc = zcb[(<span class="hljs-keyword">int</span>) (Math.random() * <span class="hljs-number">3</span>)];<br>            <span class="hljs-keyword">int</span> ydh = (<span class="hljs-keyword">int</span>) (Math.random() * <span class="hljs-number">9</span>) + <span class="hljs-number">1</span>;<br>            System.out.println(<span class="hljs-string">&quot;INSERT INTO js VALUES(&#x27;&quot;</span> + name + <span class="hljs-string">&quot;&#x27;,&#x27;&quot;</span> + jsbh + <span class="hljs-string">&quot;&#x27;,&#x27;&quot;</span> + zc + <span class="hljs-string">&quot;&#x27;,&#x27;&quot;</span> + ydh + <span class="hljs-string">&quot;&#x27;);&quot;</span>);<br>        &#125;<br>    &#125;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">kc</span><span class="hljs-params">()</span> </span>&#123;<br>        String[] kcb = &#123;<span class="hljs-string">&quot;微积分&quot;</span>,<span class="hljs-string">&quot;线性代数&quot;</span>,<span class="hljs-string">&quot;C语言程序设计&quot;</span>,<span class="hljs-string">&quot;数据结构与算法&quot;</span>,<span class="hljs-string">&quot;数据库系统基础&quot;</span>,<span class="hljs-string">&quot;离散数学&quot;</span>,<span class="hljs-string">&quot;计算机网络&quot;</span>,<span class="hljs-string">&quot;编译原理&quot;</span>,<span class="hljs-string">&quot;计算机组成与原理&quot;</span>&#125;;<br>        String[] kcbh = &#123;<span class="hljs-string">&quot;A01&quot;</span>,<span class="hljs-string">&quot;A02&quot;</span>,<span class="hljs-string">&quot;A03&quot;</span>,<span class="hljs-string">&quot;B01&quot;</span>,<span class="hljs-string">&quot;B02&quot;</span>,<span class="hljs-string">&quot;B03&quot;</span>,<span class="hljs-string">&quot;C01&quot;</span>,<span class="hljs-string">&quot;D01&quot;</span>,<span class="hljs-string">&quot;D02&quot;</span>&#125;;<br>        String[] lx = &#123;<span class="hljs-string">&quot;基础课&quot;</span>,<span class="hljs-string">&quot;基础课&quot;</span>,<span class="hljs-string">&quot;基础课&quot;</span>,<span class="hljs-string">&quot;专业课&quot;</span>,<span class="hljs-string">&quot;专业课&quot;</span>,<span class="hljs-string">&quot;专业课&quot;</span>,<span class="hljs-string">&quot;专业课&quot;</span>,<span class="hljs-string">&quot;专业课&quot;</span>,<span class="hljs-string">&quot;专业课&quot;</span>&#125;;<br>        String[] xf = &#123;<span class="hljs-string">&quot;5.0&quot;</span>,<span class="hljs-string">&quot;2.0&quot;</span>,<span class="hljs-string">&quot;2.5&quot;</span>,<span class="hljs-string">&quot;5.0&quot;</span>,<span class="hljs-string">&quot;3.0&quot;</span>,<span class="hljs-string">&quot;4.0&quot;</span>,<span class="hljs-string">&quot;3.0&quot;</span>,<span class="hljs-string">&quot;3.0&quot;</span>,<span class="hljs-string">&quot;3.0&quot;</span>&#125;;<br>        <span class="hljs-comment">// 课程表添加数据</span><br>        System.out.println(<span class="hljs-string">&quot;课程表添加数据语句：&quot;</span>);<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">9</span>; i++ ) &#123;<br>            System.out.println(<span class="hljs-string">&quot;INSERT INTO kc VALUES(&#x27;&quot;</span> + kcbh[i] + <span class="hljs-string">&quot;&#x27;,&#x27;&quot;</span> + kcb[i] + <span class="hljs-string">&quot;&#x27;,&#x27;&quot;</span> + lx[i] + <span class="hljs-string">&quot;&#x27;,&#x27;&quot;</span> + xf[i] + <span class="hljs-string">&quot;&#x27;);&quot;</span>);<br>        &#125;<br>        <span class="hljs-comment">// 选课表添加数据</span><br>        System.out.println(<span class="hljs-string">&quot;授课表添加数据语句：&quot;</span>);<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">100001</span>; i &lt; <span class="hljs-number">100021</span>; i++)<br>            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; <span class="hljs-number">3</span>; j++ )<br>                System.out.println(<span class="hljs-string">&quot;INSERT INTO sk VALUES (&#x27;&quot;</span> + kcbh[(<span class="hljs-keyword">int</span>)(Math.random() * <span class="hljs-number">8</span>)] + <span class="hljs-string">&quot;&#x27;,&#x27;&quot;</span> + i + <span class="hljs-string">&quot;&#x27;);&quot;</span>);<br>        <span class="hljs-comment">// 选课表添加数据</span><br>        System.out.println(<span class="hljs-string">&quot;选课表添加数据语句：&quot;</span>);<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">200001</span>; i &lt; <span class="hljs-number">200051</span>; i++)<br>            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; <span class="hljs-number">3</span>; j++ ) &#123;<br>                System.out.println(<span class="hljs-string">&quot;INSERT INTO xk VALUES(&#x27;&quot;</span> + i + <span class="hljs-string">&quot;&#x27;,&#x27;&quot;</span> + kcbh[(<span class="hljs-keyword">int</span>) (Math.random() * <span class="hljs-number">8</span>)] + <span class="hljs-string">&quot;&#x27;,&#x27;&quot;</span> + (<span class="hljs-number">100000</span> + (<span class="hljs-keyword">int</span>) (Math.random() * <span class="hljs-number">20</span>) + <span class="hljs-number">1</span>) + <span class="hljs-string">&quot;&#x27;,&#x27;&quot;</span> + ((<span class="hljs-keyword">int</span>) (Math.random() * <span class="hljs-number">100</span>) + <span class="hljs-number">1</span>) + <span class="hljs-string">&quot;.0&#x27;);&quot;</span>);<br>                System.out.println(<span class="hljs-string">&quot;INSERT INTO xk VALUES(&#x27;&quot;</span> + i + <span class="hljs-string">&quot;&#x27;,&#x27;&quot;</span> + kcbh[(<span class="hljs-keyword">int</span>) (Math.random() * <span class="hljs-number">8</span>)] + <span class="hljs-string">&quot;&#x27;,&#x27;&quot;</span> + (<span class="hljs-number">100000</span> + (<span class="hljs-keyword">int</span>) (Math.random() * <span class="hljs-number">20</span>) + <span class="hljs-number">1</span>) + <span class="hljs-string">&quot;&#x27;,&#x27;&quot;</span> + ((<span class="hljs-keyword">int</span>) (Math.random() * <span class="hljs-number">100</span>) + <span class="hljs-number">1</span>) + <span class="hljs-string">&quot;.5&#x27;);&quot;</span>);<br>            &#125;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>        xs();<br>        js();<br>        kc();<br><br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+</li>
+<li><p>向学生表添加数据</p>
+<ul>
+<li><p>INSERT 语句（节选）</p>
+<figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> xs <span class="hljs-keyword">values</span>(<span class="hljs-string">&#x27;赵晓炎&#x27;</span>,<span class="hljs-string">&#x27;200001&#x27;</span>,<span class="hljs-string">&#x27;F&#x27;</span>,<span class="hljs-string">&#x27;2002-5-27&#x27;</span>,<span class="hljs-string">&#x27;6&#x27;</span>,<span class="hljs-string">&#x27;63012011&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> xs <span class="hljs-keyword">values</span>(<span class="hljs-string">&#x27;钱小亮&#x27;</span>,<span class="hljs-string">&#x27;200002&#x27;</span>,<span class="hljs-string">&#x27;F&#x27;</span>,<span class="hljs-string">&#x27;2004-7-1&#x27;</span>,<span class="hljs-string">&#x27;6&#x27;</span>,<span class="hljs-string">&#x27;63012027&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> xs <span class="hljs-keyword">values</span>(<span class="hljs-string">&#x27;孙庄&#x27;</span>,<span class="hljs-string">&#x27;200003&#x27;</span>,<span class="hljs-string">&#x27;M&#x27;</span>,<span class="hljs-string">&#x27;2000-5-7&#x27;</span>,<span class="hljs-string">&#x27;1&#x27;</span>,<span class="hljs-string">&#x27;63012050&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> xs <span class="hljs-keyword">values</span>(<span class="hljs-string">&#x27;李小文&#x27;</span>,<span class="hljs-string">&#x27;200004&#x27;</span>,<span class="hljs-string">&#x27;F&#x27;</span>,<span class="hljs-string">&#x27;2002-6-6&#x27;</span>,<span class="hljs-string">&#x27;8&#x27;</span>,<span class="hljs-string">&#x27;63012042&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> xs <span class="hljs-keyword">values</span>(<span class="hljs-string">&#x27;周诚&#x27;</span>,<span class="hljs-string">&#x27;200005&#x27;</span>,<span class="hljs-string">&#x27;F&#x27;</span>,<span class="hljs-string">&#x27;2000-12-6&#x27;</span>,<span class="hljs-string">&#x27;7&#x27;</span>,<span class="hljs-string">&#x27;63012023&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> xs <span class="hljs-keyword">values</span>(<span class="hljs-string">&#x27;吴霞&#x27;</span>,<span class="hljs-string">&#x27;200006&#x27;</span>,<span class="hljs-string">&#x27;F&#x27;</span>,<span class="hljs-string">&#x27;2004-3-18&#x27;</span>,<span class="hljs-string">&#x27;1&#x27;</span>,<span class="hljs-string">&#x27;63012035&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> xs <span class="hljs-keyword">values</span>(<span class="hljs-string">&#x27;郑文&#x27;</span>,<span class="hljs-string">&#x27;200007&#x27;</span>,<span class="hljs-string">&#x27;F&#x27;</span>,<span class="hljs-string">&#x27;1997-5-17&#x27;</span>,<span class="hljs-string">&#x27;2&#x27;</span>,<span class="hljs-string">&#x27;63012045&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> xs <span class="hljs-keyword">values</span>(<span class="hljs-string">&#x27;王小波&#x27;</span>,<span class="hljs-string">&#x27;200008&#x27;</span>,<span class="hljs-string">&#x27;M&#x27;</span>,<span class="hljs-string">&#x27;2005-2-27&#x27;</span>,<span class="hljs-string">&#x27;8&#x27;</span>,<span class="hljs-string">&#x27;63012043&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> xs <span class="hljs-keyword">values</span>(<span class="hljs-string">&#x27;冯文&#x27;</span>,<span class="hljs-string">&#x27;200009&#x27;</span>,<span class="hljs-string">&#x27;M&#x27;</span>,<span class="hljs-string">&#x27;2001-5-2&#x27;</span>,<span class="hljs-string">&#x27;1&#x27;</span>,<span class="hljs-string">&#x27;63012043&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> xs <span class="hljs-keyword">values</span>(<span class="hljs-string">&#x27;陈燕&#x27;</span>,<span class="hljs-string">&#x27;200010&#x27;</span>,<span class="hljs-string">&#x27;M&#x27;</span>,<span class="hljs-string">&#x27;1997-11-23&#x27;</span>,<span class="hljs-string">&#x27;1&#x27;</span>,<span class="hljs-string">&#x27;63012009&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> xs <span class="hljs-keyword">values</span>(<span class="hljs-string">&#x27;褚晓阳&#x27;</span>,<span class="hljs-string">&#x27;200011&#x27;</span>,<span class="hljs-string">&#x27;F&#x27;</span>,<span class="hljs-string">&#x27;1998-2-18&#x27;</span>,<span class="hljs-string">&#x27;6&#x27;</span>,<span class="hljs-string">&#x27;63012006&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> xs <span class="hljs-keyword">values</span>(<span class="hljs-string">&#x27;卫小庄&#x27;</span>,<span class="hljs-string">&#x27;200012&#x27;</span>,<span class="hljs-string">&#x27;F&#x27;</span>,<span class="hljs-string">&#x27;1997-8-4&#x27;</span>,<span class="hljs-string">&#x27;8&#x27;</span>,<span class="hljs-string">&#x27;63012035&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> xs <span class="hljs-keyword">values</span>(<span class="hljs-string">&#x27;蒋燕&#x27;</span>,<span class="hljs-string">&#x27;200013&#x27;</span>,<span class="hljs-string">&#x27;F&#x27;</span>,<span class="hljs-string">&#x27;2003-1-3&#x27;</span>,<span class="hljs-string">&#x27;1&#x27;</span>,<span class="hljs-string">&#x27;63012029&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> xs <span class="hljs-keyword">values</span>(<span class="hljs-string">&#x27;沈诚&#x27;</span>,<span class="hljs-string">&#x27;200014&#x27;</span>,<span class="hljs-string">&#x27;F&#x27;</span>,<span class="hljs-string">&#x27;2002-3-8&#x27;</span>,<span class="hljs-string">&#x27;5&#x27;</span>,<span class="hljs-string">&#x27;63012027&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> xs <span class="hljs-keyword">values</span>(<span class="hljs-string">&#x27;韩阳&#x27;</span>,<span class="hljs-string">&#x27;200015&#x27;</span>,<span class="hljs-string">&#x27;F&#x27;</span>,<span class="hljs-string">&#x27;1999-7-18&#x27;</span>,<span class="hljs-string">&#x27;2&#x27;</span>,<span class="hljs-string">&#x27;63012035&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> xs <span class="hljs-keyword">values</span>(<span class="hljs-string">&#x27;杨文丽&#x27;</span>,<span class="hljs-string">&#x27;200016&#x27;</span>,<span class="hljs-string">&#x27;M&#x27;</span>,<span class="hljs-string">&#x27;2000-3-8&#x27;</span>,<span class="hljs-string">&#x27;1&#x27;</span>,<span class="hljs-string">&#x27;63012045&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> xs <span class="hljs-keyword">values</span>(<span class="hljs-string">&#x27;朱文&#x27;</span>,<span class="hljs-string">&#x27;200017&#x27;</span>,<span class="hljs-string">&#x27;F&#x27;</span>,<span class="hljs-string">&#x27;1997-7-6&#x27;</span>,<span class="hljs-string">&#x27;9&#x27;</span>,<span class="hljs-string">&#x27;63012032&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> xs <span class="hljs-keyword">values</span>(<span class="hljs-string">&#x27;秦明&#x27;</span>,<span class="hljs-string">&#x27;200018&#x27;</span>,<span class="hljs-string">&#x27;M&#x27;</span>,<span class="hljs-string">&#x27;2003-6-27&#x27;</span>,<span class="hljs-string">&#x27;2&#x27;</span>,<span class="hljs-string">&#x27;63012014&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> xs <span class="hljs-keyword">values</span>(<span class="hljs-string">&#x27;尤炎&#x27;</span>,<span class="hljs-string">&#x27;200019&#x27;</span>,<span class="hljs-string">&#x27;M&#x27;</span>,<span class="hljs-string">&#x27;2004-10-14&#x27;</span>,<span class="hljs-string">&#x27;3&#x27;</span>,<span class="hljs-string">&#x27;63012023&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> xs <span class="hljs-keyword">values</span>(<span class="hljs-string">&#x27;许小波&#x27;</span>,<span class="hljs-string">&#x27;200020&#x27;</span>,<span class="hljs-string">&#x27;M&#x27;</span>,<span class="hljs-string">&#x27;2000-6-1&#x27;</span>,<span class="hljs-string">&#x27;1&#x27;</span>,<span class="hljs-string">&#x27;63012019&#x27;</span>);<br></code></pre></div></td></tr></table></figure>
+</li>
+<li><p>添加成功</p>
+<p><img src="https://baizexs-images-1257286808.cos.ap-nanjing.myqcloud.com/202204251549855.png" srcset="/img/loading.gif" lazyload style="zoom:50%;" /></p>
+</li>
+</ul>
+</li>
+<li><p>向课程表添加数据</p>
+<ul>
+<li><p>INSERT 语句</p>
+<figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> kc <span class="hljs-keyword">VALUES</span>(<span class="hljs-string">&#x27;A01&#x27;</span>,<span class="hljs-string">&#x27;微积分&#x27;</span>,<span class="hljs-string">&#x27;基础课&#x27;</span>,<span class="hljs-string">&#x27;5.0&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> kc <span class="hljs-keyword">VALUES</span>(<span class="hljs-string">&#x27;A02&#x27;</span>,<span class="hljs-string">&#x27;线性代数&#x27;</span>,<span class="hljs-string">&#x27;基础课&#x27;</span>,<span class="hljs-string">&#x27;2.0&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> kc <span class="hljs-keyword">VALUES</span>(<span class="hljs-string">&#x27;A03&#x27;</span>,<span class="hljs-string">&#x27;C语言程序设计&#x27;</span>,<span class="hljs-string">&#x27;基础课&#x27;</span>,<span class="hljs-string">&#x27;2.5&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> kc <span class="hljs-keyword">VALUES</span>(<span class="hljs-string">&#x27;B01&#x27;</span>,<span class="hljs-string">&#x27;数据结构与算法&#x27;</span>,<span class="hljs-string">&#x27;专业课&#x27;</span>,<span class="hljs-string">&#x27;5.0&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> kc <span class="hljs-keyword">VALUES</span>(<span class="hljs-string">&#x27;B02&#x27;</span>,<span class="hljs-string">&#x27;数据库系统基础&#x27;</span>,<span class="hljs-string">&#x27;专业课&#x27;</span>,<span class="hljs-string">&#x27;3.0&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> kc <span class="hljs-keyword">VALUES</span>(<span class="hljs-string">&#x27;B03&#x27;</span>,<span class="hljs-string">&#x27;离散数学&#x27;</span>,<span class="hljs-string">&#x27;专业课&#x27;</span>,<span class="hljs-string">&#x27;4.0&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> kc <span class="hljs-keyword">VALUES</span>(<span class="hljs-string">&#x27;C01&#x27;</span>,<span class="hljs-string">&#x27;计算机网络&#x27;</span>,<span class="hljs-string">&#x27;专业课&#x27;</span>,<span class="hljs-string">&#x27;3.0&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> kc <span class="hljs-keyword">VALUES</span>(<span class="hljs-string">&#x27;D01&#x27;</span>,<span class="hljs-string">&#x27;编译原理&#x27;</span>,<span class="hljs-string">&#x27;专业课&#x27;</span>,<span class="hljs-string">&#x27;3.0&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> kc <span class="hljs-keyword">VALUES</span>(<span class="hljs-string">&#x27;D02&#x27;</span>,<span class="hljs-string">&#x27;计算机组成与原理&#x27;</span>,<span class="hljs-string">&#x27;专业课&#x27;</span>,<span class="hljs-string">&#x27;3.0&#x27;</span>);<br></code></pre></div></td></tr></table></figure>
+<p><img src="https://baizexs-images-1257286808.cos.ap-nanjing.myqcloud.com/202204251620305.png" srcset="/img/loading.gif" lazyload style="zoom:50%;" /></p>
+</li>
+</ul>
+</li>
+<li><p>向教师表添加数据</p>
+<ul>
+<li><p>INSERT 语句（节选）</p>
+<figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> js <span class="hljs-keyword">VALUES</span>(<span class="hljs-string">&#x27;昌进&#x27;</span>,<span class="hljs-string">&#x27;100001&#x27;</span>,<span class="hljs-string">&#x27;教授&#x27;</span>,<span class="hljs-string">&#x27;9&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> js <span class="hljs-keyword">VALUES</span>(<span class="hljs-string">&#x27;马亮&#x27;</span>,<span class="hljs-string">&#x27;100002&#x27;</span>,<span class="hljs-string">&#x27;教授&#x27;</span>,<span class="hljs-string">&#x27;4&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> js <span class="hljs-keyword">VALUES</span>(<span class="hljs-string">&#x27;苗红&#x27;</span>,<span class="hljs-string">&#x27;100003&#x27;</span>,<span class="hljs-string">&#x27;副教授&#x27;</span>,<span class="hljs-string">&#x27;1&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> js <span class="hljs-keyword">VALUES</span>(<span class="hljs-string">&#x27;凤城&#x27;</span>,<span class="hljs-string">&#x27;100004&#x27;</span>,<span class="hljs-string">&#x27;教授&#x27;</span>,<span class="hljs-string">&#x27;1&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> js <span class="hljs-keyword">VALUES</span>(<span class="hljs-string">&#x27;花明&#x27;</span>,<span class="hljs-string">&#x27;100005&#x27;</span>,<span class="hljs-string">&#x27;教授&#x27;</span>,<span class="hljs-string">&#x27;1&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> js <span class="hljs-keyword">VALUES</span>(<span class="hljs-string">&#x27;方小亮&#x27;</span>,<span class="hljs-string">&#x27;100006&#x27;</span>,<span class="hljs-string">&#x27;副教授&#x27;</span>,<span class="hljs-string">&#x27;6&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> js <span class="hljs-keyword">VALUES</span>(<span class="hljs-string">&#x27;俞小歌&#x27;</span>,<span class="hljs-string">&#x27;100007&#x27;</span>,<span class="hljs-string">&#x27;教授&#x27;</span>,<span class="hljs-string">&#x27;2&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> js <span class="hljs-keyword">VALUES</span>(<span class="hljs-string">&#x27;任小文&#x27;</span>,<span class="hljs-string">&#x27;100008&#x27;</span>,<span class="hljs-string">&#x27;讲师&#x27;</span>,<span class="hljs-string">&#x27;4&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> js <span class="hljs-keyword">VALUES</span>(<span class="hljs-string">&#x27;袁小亮&#x27;</span>,<span class="hljs-string">&#x27;100009&#x27;</span>,<span class="hljs-string">&#x27;讲师&#x27;</span>,<span class="hljs-string">&#x27;9&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> js <span class="hljs-keyword">VALUES</span>(<span class="hljs-string">&#x27;柳晓阳&#x27;</span>,<span class="hljs-string">&#x27;100010&#x27;</span>,<span class="hljs-string">&#x27;副教授&#x27;</span>,<span class="hljs-string">&#x27;4&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> js <span class="hljs-keyword">VALUES</span>(<span class="hljs-string">&#x27;酆红&#x27;</span>,<span class="hljs-string">&#x27;100011&#x27;</span>,<span class="hljs-string">&#x27;副教授&#x27;</span>,<span class="hljs-string">&#x27;5&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> js <span class="hljs-keyword">VALUES</span>(<span class="hljs-string">&#x27;鲍红&#x27;</span>,<span class="hljs-string">&#x27;100012&#x27;</span>,<span class="hljs-string">&#x27;副教授&#x27;</span>,<span class="hljs-string">&#x27;7&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> js <span class="hljs-keyword">VALUES</span>(<span class="hljs-string">&#x27;史红霞&#x27;</span>,<span class="hljs-string">&#x27;100013&#x27;</span>,<span class="hljs-string">&#x27;教授&#x27;</span>,<span class="hljs-string">&#x27;7&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> js <span class="hljs-keyword">VALUES</span>(<span class="hljs-string">&#x27;唐晓强&#x27;</span>,<span class="hljs-string">&#x27;100014&#x27;</span>,<span class="hljs-string">&#x27;讲师&#x27;</span>,<span class="hljs-string">&#x27;4&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> js <span class="hljs-keyword">VALUES</span>(<span class="hljs-string">&#x27;费诚&#x27;</span>,<span class="hljs-string">&#x27;100015&#x27;</span>,<span class="hljs-string">&#x27;副教授&#x27;</span>,<span class="hljs-string">&#x27;6&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> js <span class="hljs-keyword">VALUES</span>(<span class="hljs-string">&#x27;廉歌&#x27;</span>,<span class="hljs-string">&#x27;100016&#x27;</span>,<span class="hljs-string">&#x27;副教授&#x27;</span>,<span class="hljs-string">&#x27;2&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> js <span class="hljs-keyword">VALUES</span>(<span class="hljs-string">&#x27;岑小亮&#x27;</span>,<span class="hljs-string">&#x27;100017&#x27;</span>,<span class="hljs-string">&#x27;副教授&#x27;</span>,<span class="hljs-string">&#x27;7&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> js <span class="hljs-keyword">VALUES</span>(<span class="hljs-string">&#x27;薛明&#x27;</span>,<span class="hljs-string">&#x27;100018&#x27;</span>,<span class="hljs-string">&#x27;讲师&#x27;</span>,<span class="hljs-string">&#x27;1&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> js <span class="hljs-keyword">VALUES</span>(<span class="hljs-string">&#x27;雷炎&#x27;</span>,<span class="hljs-string">&#x27;100019&#x27;</span>,<span class="hljs-string">&#x27;教授&#x27;</span>,<span class="hljs-string">&#x27;7&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> js <span class="hljs-keyword">VALUES</span>(<span class="hljs-string">&#x27;贺晓炎&#x27;</span>,<span class="hljs-string">&#x27;100020&#x27;</span>,<span class="hljs-string">&#x27;讲师&#x27;</span>,<span class="hljs-string">&#x27;6&#x27;</span>);<br></code></pre></div></td></tr></table></figure>
+</li>
+<li><p>添加成功</p>
+<p><img src="https://baizexs-images-1257286808.cos.ap-nanjing.myqcloud.com/202204251559182.png" srcset="/img/loading.gif" lazyload style="zoom:50%;" /></p>
+</li>
+</ul>
+</li>
+<li><p>向学院表添加数据</p>
+<ul>
+<li><p>INSERT 语句</p>
+<figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> xyb <span class="hljs-keyword">values</span>(<span class="hljs-string">&#x27;1&#x27;</span>,<span class="hljs-string">&#x27;睿信书院&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> xyb <span class="hljs-keyword">values</span>(<span class="hljs-string">&#x27;2&#x27;</span>,<span class="hljs-string">&#x27;精工书院&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> xyb <span class="hljs-keyword">values</span>(<span class="hljs-string">&#x27;3&#x27;</span>,<span class="hljs-string">&#x27;明德书院&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> xyb <span class="hljs-keyword">values</span>(<span class="hljs-string">&#x27;4&#x27;</span>,<span class="hljs-string">&#x27;知艺书院&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> xyb <span class="hljs-keyword">values</span>(<span class="hljs-string">&#x27;5&#x27;</span>,<span class="hljs-string">&#x27;令闻书院&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> xyb <span class="hljs-keyword">values</span>(<span class="hljs-string">&#x27;6&#x27;</span>,<span class="hljs-string">&#x27;求是书院&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> xyb <span class="hljs-keyword">values</span>(<span class="hljs-string">&#x27;7&#x27;</span>,<span class="hljs-string">&#x27;特立书院&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> xyb <span class="hljs-keyword">values</span>(<span class="hljs-string">&#x27;8&#x27;</span>,<span class="hljs-string">&#x27;经管书院&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> xyb <span class="hljs-keyword">values</span>(<span class="hljs-string">&#x27;9&#x27;</span>,<span class="hljs-string">&#x27;北京书院&#x27;</span>);<br></code></pre></div></td></tr></table></figure>
+</li>
+<li><p>添加成功</p>
+<p><img src="https://baizexs-images-1257286808.cos.ap-nanjing.myqcloud.com/202204251602042.jpg" srcset="/img/loading.gif" lazyload style="zoom:50%;" /></p>
+</li>
+</ul>
+</li>
+<li><p>向授课表添加数据</p>
+<ul>
+<li><p>INSERT 语句（节选）</p>
+<figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> sk <span class="hljs-keyword">VALUES</span> (<span class="hljs-string">&#x27;D01&#x27;</span>,<span class="hljs-string">&#x27;100001&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> sk <span class="hljs-keyword">VALUES</span> (<span class="hljs-string">&#x27;C01&#x27;</span>,<span class="hljs-string">&#x27;100001&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> sk <span class="hljs-keyword">VALUES</span> (<span class="hljs-string">&#x27;A02&#x27;</span>,<span class="hljs-string">&#x27;100001&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> sk <span class="hljs-keyword">VALUES</span> (<span class="hljs-string">&#x27;C01&#x27;</span>,<span class="hljs-string">&#x27;100002&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> sk <span class="hljs-keyword">VALUES</span> (<span class="hljs-string">&#x27;A02&#x27;</span>,<span class="hljs-string">&#x27;100002&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> sk <span class="hljs-keyword">VALUES</span> (<span class="hljs-string">&#x27;B02&#x27;</span>,<span class="hljs-string">&#x27;100002&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> sk <span class="hljs-keyword">VALUES</span> (<span class="hljs-string">&#x27;B02&#x27;</span>,<span class="hljs-string">&#x27;100003&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> sk <span class="hljs-keyword">VALUES</span> (<span class="hljs-string">&#x27;A01&#x27;</span>,<span class="hljs-string">&#x27;100003&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> sk <span class="hljs-keyword">VALUES</span> (<span class="hljs-string">&#x27;D01&#x27;</span>,<span class="hljs-string">&#x27;100003&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> sk <span class="hljs-keyword">VALUES</span> (<span class="hljs-string">&#x27;D01&#x27;</span>,<span class="hljs-string">&#x27;100004&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> sk <span class="hljs-keyword">VALUES</span> (<span class="hljs-string">&#x27;B01&#x27;</span>,<span class="hljs-string">&#x27;100004&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> sk <span class="hljs-keyword">VALUES</span> (<span class="hljs-string">&#x27;D01&#x27;</span>,<span class="hljs-string">&#x27;100004&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> sk <span class="hljs-keyword">VALUES</span> (<span class="hljs-string">&#x27;B03&#x27;</span>,<span class="hljs-string">&#x27;100005&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> sk <span class="hljs-keyword">VALUES</span> (<span class="hljs-string">&#x27;A01&#x27;</span>,<span class="hljs-string">&#x27;100005&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> sk <span class="hljs-keyword">VALUES</span> (<span class="hljs-string">&#x27;D01&#x27;</span>,<span class="hljs-string">&#x27;100005&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> sk <span class="hljs-keyword">VALUES</span> (<span class="hljs-string">&#x27;B02&#x27;</span>,<span class="hljs-string">&#x27;100006&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> sk <span class="hljs-keyword">VALUES</span> (<span class="hljs-string">&#x27;A01&#x27;</span>,<span class="hljs-string">&#x27;100006&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> sk <span class="hljs-keyword">VALUES</span> (<span class="hljs-string">&#x27;A03&#x27;</span>,<span class="hljs-string">&#x27;100006&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> sk <span class="hljs-keyword">VALUES</span> (<span class="hljs-string">&#x27;A01&#x27;</span>,<span class="hljs-string">&#x27;100007&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> sk <span class="hljs-keyword">VALUES</span> (<span class="hljs-string">&#x27;D01&#x27;</span>,<span class="hljs-string">&#x27;100007&#x27;</span>);<br></code></pre></div></td></tr></table></figure>
+</li>
+<li><p>添加成功</p>
+<p><img src="https://baizexs-images-1257286808.cos.ap-nanjing.myqcloud.com/202204251655061.jpg" srcset="/img/loading.gif" lazyload style="zoom: 33%;" /></p>
+</li>
+</ul>
+</li>
+<li><p>向学生选课表添加数据</p>
+<ul>
+<li><p>INSERT语句（节选）</p>
+<figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> xk <span class="hljs-keyword">VALUES</span>(<span class="hljs-string">&#x27;200001&#x27;</span>,<span class="hljs-string">&#x27;A02&#x27;</span>,<span class="hljs-string">&#x27;100018&#x27;</span>,<span class="hljs-string">&#x27;92.0&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> xk <span class="hljs-keyword">VALUES</span>(<span class="hljs-string">&#x27;200001&#x27;</span>,<span class="hljs-string">&#x27;B02&#x27;</span>,<span class="hljs-string">&#x27;100002&#x27;</span>,<span class="hljs-string">&#x27;90.5&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> xk <span class="hljs-keyword">VALUES</span>(<span class="hljs-string">&#x27;200001&#x27;</span>,<span class="hljs-string">&#x27;A01&#x27;</span>,<span class="hljs-string">&#x27;100007&#x27;</span>,<span class="hljs-string">&#x27;41.0&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> xk <span class="hljs-keyword">VALUES</span>(<span class="hljs-string">&#x27;200001&#x27;</span>,<span class="hljs-string">&#x27;B03&#x27;</span>,<span class="hljs-string">&#x27;100020&#x27;</span>,<span class="hljs-string">&#x27;27.5&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> xk <span class="hljs-keyword">VALUES</span>(<span class="hljs-string">&#x27;200001&#x27;</span>,<span class="hljs-string">&#x27;D01&#x27;</span>,<span class="hljs-string">&#x27;100001&#x27;</span>,<span class="hljs-string">&#x27;91.0&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> xk <span class="hljs-keyword">VALUES</span>(<span class="hljs-string">&#x27;200001&#x27;</span>,<span class="hljs-string">&#x27;B01&#x27;</span>,<span class="hljs-string">&#x27;100017&#x27;</span>,<span class="hljs-string">&#x27;82.5&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> xk <span class="hljs-keyword">VALUES</span>(<span class="hljs-string">&#x27;200002&#x27;</span>,<span class="hljs-string">&#x27;A01&#x27;</span>,<span class="hljs-string">&#x27;100016&#x27;</span>,<span class="hljs-string">&#x27;50.0&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> xk <span class="hljs-keyword">VALUES</span>(<span class="hljs-string">&#x27;200002&#x27;</span>,<span class="hljs-string">&#x27;B02&#x27;</span>,<span class="hljs-string">&#x27;100002&#x27;</span>,<span class="hljs-string">&#x27;31.5&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> xk <span class="hljs-keyword">VALUES</span>(<span class="hljs-string">&#x27;200002&#x27;</span>,<span class="hljs-string">&#x27;A03&#x27;</span>,<span class="hljs-string">&#x27;100015&#x27;</span>,<span class="hljs-string">&#x27;75.0&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> xk <span class="hljs-keyword">VALUES</span>(<span class="hljs-string">&#x27;200002&#x27;</span>,<span class="hljs-string">&#x27;C01&#x27;</span>,<span class="hljs-string">&#x27;100017&#x27;</span>,<span class="hljs-string">&#x27;30.5&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> xk <span class="hljs-keyword">VALUES</span>(<span class="hljs-string">&#x27;200002&#x27;</span>,<span class="hljs-string">&#x27;A02&#x27;</span>,<span class="hljs-string">&#x27;100002&#x27;</span>,<span class="hljs-string">&#x27;50.0&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> xk <span class="hljs-keyword">VALUES</span>(<span class="hljs-string">&#x27;200002&#x27;</span>,<span class="hljs-string">&#x27;A03&#x27;</span>,<span class="hljs-string">&#x27;100006&#x27;</span>,<span class="hljs-string">&#x27;78.5&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> xk <span class="hljs-keyword">VALUES</span>(<span class="hljs-string">&#x27;200003&#x27;</span>,<span class="hljs-string">&#x27;A01&#x27;</span>,<span class="hljs-string">&#x27;100007&#x27;</span>,<span class="hljs-string">&#x27;95.0&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> xk <span class="hljs-keyword">VALUES</span>(<span class="hljs-string">&#x27;200003&#x27;</span>,<span class="hljs-string">&#x27;A03&#x27;</span>,<span class="hljs-string">&#x27;100004&#x27;</span>,<span class="hljs-string">&#x27;45.5&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> xk <span class="hljs-keyword">VALUES</span>(<span class="hljs-string">&#x27;200003&#x27;</span>,<span class="hljs-string">&#x27;A01&#x27;</span>,<span class="hljs-string">&#x27;100010&#x27;</span>,<span class="hljs-string">&#x27;56.0&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> xk <span class="hljs-keyword">VALUES</span>(<span class="hljs-string">&#x27;200003&#x27;</span>,<span class="hljs-string">&#x27;D01&#x27;</span>,<span class="hljs-string">&#x27;100009&#x27;</span>,<span class="hljs-string">&#x27;22.5&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> xk <span class="hljs-keyword">VALUES</span>(<span class="hljs-string">&#x27;200003&#x27;</span>,<span class="hljs-string">&#x27;D01&#x27;</span>,<span class="hljs-string">&#x27;100002&#x27;</span>,<span class="hljs-string">&#x27;5.0&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> xk <span class="hljs-keyword">VALUES</span>(<span class="hljs-string">&#x27;200003&#x27;</span>,<span class="hljs-string">&#x27;B01&#x27;</span>,<span class="hljs-string">&#x27;100003&#x27;</span>,<span class="hljs-string">&#x27;77.5&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> xk <span class="hljs-keyword">VALUES</span>(<span class="hljs-string">&#x27;200004&#x27;</span>,<span class="hljs-string">&#x27;C01&#x27;</span>,<span class="hljs-string">&#x27;100015&#x27;</span>,<span class="hljs-string">&#x27;50.0&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> xk <span class="hljs-keyword">VALUES</span>(<span class="hljs-string">&#x27;200004&#x27;</span>,<span class="hljs-string">&#x27;B01&#x27;</span>,<span class="hljs-string">&#x27;100001&#x27;</span>,<span class="hljs-string">&#x27;88.5&#x27;</span>);<br></code></pre></div></td></tr></table></figure>
+</li>
+<li><p>添加成功</p>
+<p><img src="https://baizexs-images-1257286808.cos.ap-nanjing.myqcloud.com/202204251720009.jpg" srcset="/img/loading.gif" lazyload style="zoom:50%;" /></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>查看数据库和表</p>
+<ul>
+<li><p>查看数据库</p>
+<figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql">\l<br></code></pre></div></td></tr></table></figure>
+</li>
+<li><p>查看表</p>
+<figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql">\d<br></code></pre></div></td></tr></table></figure>
+</li>
+</ul>
+<p><img src="https://baizexs-images-1257286808.cos.ap-nanjing.myqcloud.com/202205011001300.jpg" srcset="/img/loading.gif" lazyload style="zoom:50%;" /></p>
+</li>
+<li><p>建立适当的索引</p>
+<p>（1）建立索引的规则</p>
+<ul>
+<li>索引不应该使用在较小的表上。</li>
+<li>索引不应该使用在有频繁的大批量的更新或插入操作的表上。</li>
+<li>索引不应该使用在含有大量的 NULL 值的列上。</li>
+<li>索引不应该使用在频繁操作的列上。</li>
+</ul>
+<p>（2）在数据库创建表时，数据库会根据主键建立聚集索引。</p>
+<p>（3）索引字段的选取</p>
+<ul>
+<li><p>学生表</p>
+<p>学生表中，我们比较常用的过滤规则为姓名、院代号、班级，并且这三个字段很少修改。因此，建立索引如下：</p>
+<figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> INDEX xs_xm <span class="hljs-keyword">ON</span> xs (xm);<br><span class="hljs-keyword">CREATE</span> INDEX xs_xybj <span class="hljs-keyword">ON</span> xs (ydh,bj);<br></code></pre></div></td></tr></table></figure>
+</li>
+<li><p>课程表中，我们比较常用的过滤规则为课程名称和课程类型，并且较少修改。因此，建立索引如下：</p>
+<figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> INDEX kc_kc <span class="hljs-keyword">ON</span> kc (kc);<br><span class="hljs-keyword">CREATE</span> INDEX kc_lx <span class="hljs-keyword">ON</span> kc (lx);<br></code></pre></div></td></tr></table></figure>
+</li>
+<li><p>教师表中，我们比较常用的过滤规则为姓名和院代号，并且较少修改。因此，建立索引如下：</p>
+<figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> INDEX js_xmxy <span class="hljs-keyword">ON</span> js (xm, ydh);<br></code></pre></div></td></tr></table></figure>
+</li>
+<li><p>学院表中，已有数据库依据主键形成的自建索引，且字段数较少，故而无需另建索引。</p>
+</li>
+<li><p>授课表中，已有数据库依据主键形成的自建索引，且字段数较少，故而无需另建索引。</p>
+</li>
+<li><p>学生选课表中，已有数据库依据主键形成的自建索引，故而无需另建索引。</p>
+</li>
+</ul>
+<p><img src="https://baizexs-images-1257286808.cos.ap-nanjing.myqcloud.com/202205121223094.png" srcset="/img/loading.gif" lazyload style="zoom:50%;" /></p>
+</li>
+</ol>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93-DB/">数据库/DB</a>
+                    
+                      <a class="hover-with-bg" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93-DB/openGauss/">openGauss</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/">入门笔记</a>
+                    
+                      <a class="hover-with-bg" href="/tags/openGauss/">openGauss</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/04/29/%E4%BA%91%E8%AE%A1%E7%AE%97%E2%80%94%E2%80%94%E5%9F%BA%E4%BA%8ESpark%E7%9A%84K%E8%BF%91%E9%82%BB%EF%BC%88KNN%EF%BC%89%E6%9F%A5%E8%AF%A2/">
+                        <span class="hidden-mobile">云计算——基于Spark的K近邻（KNN）查询</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"kPAygL5q2VkrVStJpaMqITqn-9Nh9j0Va","appKey":"m98SpwNzyNOjRi4xMzugiRJW","placeholder":"哒哒哒","path":"window.location.pathname","avatar":"retro","meta":["nick","mail"],"pageSize":10,"lang":"zh-CN","highlight":true,"recordIP":true,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false,"requiredFields":[]},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+        京ICP备2021027091号-1
+      </a>
+    </span>
+    
+  </div>
+
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":true,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?e0d9edce9af73da8896ba0d8880cc3aa";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
