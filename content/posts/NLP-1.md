@@ -1,0 +1,162 @@
+---
+title: "NLP-"
+date: 2020-09-15T11:30:03+00:00
+# weight: 1
+# aliases: ["/first"]
+tags: ["first"]
+author: "Tristan"
+showToc: true
+TocOpen: false
+draft: false
+hidemeta: false
+comments: false
+description: "Desc Text."
+canonicalURL: "https://canonical.url/to/page"
+disableHLJS: true # to disable highlightjs
+disableShare: false
+disableHLJS: false
+hideSummary: false
+searchHidden: true
+ShowReadingTime: true
+ShowBreadCrumbs: true
+ShowPostNavLinks: true
+ShowWordCount: true
+ShowRssButtonInSectionTermList: true
+UseHugoToc: true
+cover:
+    image: "<image path/url>" # image path/url
+    alt: "<alt text>" # alt text
+    caption: "<text>" # display caption under cover
+    relative: false # when using page bundles set this to true
+    hidden: true # only hide on current single page
+editPost:
+    URL: "https://github.com/<path_to_repo>/content"
+    Text: "Suggest Changes" # edit text
+    appendFilePath: true # to append file path to Edit link
+---
+
+## 一、数值特征与类别特征
+
+1. **数值特征 (Numeric Features)**  
+   - 具有可加减的意义，且存在大小顺序。  
+   - 例子：年龄、温度等。可以直接保留其整数或浮点数形式供模型使用。
+2. **类别特征 (Categorical Features)**  
+   - 数据值离散，不具备“数值大小”间的可比意义。  
+   - 例子：国籍（美国/中国/印度等）、性别（男/女）等。  
+   - **问题**：若仅用整数表示（美国=1, 中国=2），会引入错误的数值运算关系，如 “美国 + 中国 = 印度”。  
+
+## 二、One-Hot编码的动机与流程
+
+1. **为什么使用One-Hot**  
+   - 通过将类别映射为向量，避免整数编码引入的伪数值关系。  
+   - 同时保留各种可能类别的信息，且仅在对应位置为1，其他位置为0。  
+
+2. **建立映射：从类别到索引**  
+   - 为每个类别分配一个唯一索引，通常从1开始。  
+   - 预留索引0表示“未知”或“缺失”，对应全0向量。  
+
+3. **转换为One-Hot向量**  
+   - 若类别总数为197，则用197维向量表示。  
+   - 例子：美国 `[1, 0, 0, 0, …]`， 中国 `[0, 1, 0, 0, …]`。  
+
+4. **示例：表示一个人的特征**  
+   - 特征包含（年龄, 性别, 国籍，其中国籍197种）  
+   - 维度总和：1维_age + 1维_gender + 197维_nationality = 199维。  
+   - 例如 `(28, 女, 中国)` → `[28, 0, 0, 1, 0, …, 0]`。  
+
+## 三、文本数据处理流程
+
+文本在自然语言处理（NLP）中作为常见的原始输入，需要数值化才能送入模型。一般步骤如下：
+
+1. **分词 (Tokenization)**  
+   - 将文本拆分为一个个单词（Token）。  
+   - 例子：`"... to be or not to be..."` → `["...", "to", "be", "or", "not", "to", "be", "..."]`。  
+
+2. **统计词频 & 构建词典**  
+   1. **词频统计**  
+      - 用哈希表/字典记录每个单词出现次数。  
+      - 遍历文本时，若单词尚未入表，则新建记录；若已存在，则计数+1。  
+   2. **排序与索引**  
+      - 按词频降序排序，词频最高的单词排在前面。  
+      - 索引从1开始，0留给“未知”。  
+      - 词典规模（vocabulary）可视需求截断（例如只保留Top 10k）。  
+   3. **为什么移除低频词**  
+      - 低频词可能是拼写错误、罕见人名等，对模型帮助有限。  
+      - 减少词典规模可降低运算开销、加快模型训练与推理速度。  
+
+3. **独热编码 (One-Hot Encoding)**  
+   - 将每个单词映射为词典中的索引后（如 `[2, 4, 1, 8, …]`），可进一步转换成One-Hot向量。  
+   - One-Hot维度取决于保留下来的词典大小（例如1万）。  
+   - 未收录单词可能直接忽略，或统一用索引0代替。  
+
+## 四、核心收获与应用
+
+1. **类别特征必需数值化：**  
+   - 使用整数1,2,3…仅表示类别“标识”，并不代表它们可进行数值运算。  
+   - 因此需要One-Hot等编码方式，避免数值误解。  
+
+2. **文本数据预处理：**  
+   - 分词、词频统计、构建词典、索引化、One-Hot或其他方式（如词嵌入）是常见流程。  
+   - 正确的文本预处理可显著影响模型性能和效率。  
+
+3. **保留未知索引：**  
+   - 保证对缺失数据或字典外新词能有基本的表示，提升模型容错性。  
+
+4. **实际使用：**  
+   - 对于小规模类别可直接One-Hot编码；对于词典很大的场景，通常会进一步考虑词嵌入（Word Embedding）或预训练语言模型。
+
+
+
+
+
+
+
+```python
+
+print("hello")
+```
+
+- 🧪 (实验室/科学)
+
+- 💻 (编程/技术)
+
+- 🤖 (AI/机器学习)
+
+- 📚 (学习/教育)
+
+- ⚡ (效率/快速)
+
+
+
+
+
+```yaml
+analytics:
+    google:
+      SiteVerificationTag: "XYZabc"  # Google Search Console 验证码
+    bing:
+      SiteVerificationTag: "XYZabc"  # Bing Webmaster Tools 验证码
+    yandex:
+      SiteVerificationTag: "XYZabc"  # Yandex Webmaster 验证码
+```
+
+这些验证码的用途：
+
+1. Google Search Console：
+
+- 监控网站在 Google 搜索中的表现
+
+- 提交网站地图
+
+- 查看搜索分析数据
+
+1. Bing Webmaster Tools：
+
+- 监控网站在 Bing 搜索中的表现
+
+- 类似 Google Search Console 的功能
+
+1. Yandex Webmaster：
+
+- 俄罗斯搜索引擎 Yandex 的工具
+

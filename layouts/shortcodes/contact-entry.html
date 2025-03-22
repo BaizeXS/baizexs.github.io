@@ -1,0 +1,33 @@
+<div class="contact-entry">
+  <div class="contact-icon">{{ .Get "icon" }}</div>
+  <div class="contact-content">
+    {{ if .Get "link" }}
+    <a href="{{ .Get "link" }}" target="_blank" rel="noopener noreferrer">{{ .Get "content" }}</a>
+    {{ else }} {{ .Get "content" }} {{ end }}
+  </div>
+</div>
+
+<style>
+  .contact-entry {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5em;
+    font-size: 0.85em;
+    color: #333;
+  }
+
+  .contact-icon {
+    margin-right: 0.8em;
+    min-width: 1.2em;
+  }
+
+  .contact-content a {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .contact-content a:hover {
+    color: #007bff;
+  }
+</style>

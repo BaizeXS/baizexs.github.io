@@ -1,5 +1,9 @@
 ---
-date: '{{ .Date }}'
+title: "{{ replace .File.ContentBaseName "-" " " | title }}"
+date: "{{ .Date }}"
+tags: [""]
+author: "Tristan"
 draft: true
-title: '{{ replace .File.ContentBaseName "-" " " | title }}'
+description: ""
+# canonicalURL: "https://canonical.url/to/page"
 ---

@@ -1,0 +1,23 @@
+<div class="single-line-entry">
+  <div class="entry-title">{{ .Get "title" }}</div>
+  <div class="entry-time">{{ .Get "time" }}</div>
+</div>
+
+<style>
+  .single-line-entry {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 0.3em;
+  }
+
+  .entry-title {
+    font-size: 0.85em;
+    color: #333;
+  }
+
+  .entry-time {
+    white-space: nowrap;
+    font-size: 0.85em;
+  }
+</style>

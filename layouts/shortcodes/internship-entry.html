@@ -1,0 +1,58 @@
+<div class="internship-entry">
+  <div class="internship-header">
+    <div class="company-name">{{ .Get "company" }}</div>
+    <div class="internship-time">{{ .Get "time" }}</div>
+  </div>
+  <div class="position-description">{{ .Get "position" }}</div>
+  <div class="internship-content">{{ .Inner | markdownify }}</div>
+</div>
+
+<style>
+  .internship-entry {
+    margin-bottom: 1.2em;
+  }
+
+  .internship-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 0.3em;
+  }
+
+  .company-name {
+    font-weight: bold;
+    font-size: 1em;
+    color: #333;
+  }
+
+  .internship-time {
+    white-space: nowrap;
+    font-size: 0.85em;
+  }
+
+  .position-description {
+    color: #666;
+    font-style: italic;
+    font-size: 0.85em;
+    margin-bottom: 0.3em;
+  }
+
+  .internship-content {
+    text-align: justify;
+    font-size: 0.85em;
+  }
+
+  .internship-content ul {
+    padding-left: 1.2em;
+    margin-top: 0.3em;
+    margin-bottom: 0.3em;
+  }
+
+  .internship-content ul li {
+    margin-bottom: 0.3em;
+  }
+
+  .internship-content ul li:last-child {
+    margin-bottom: 0;
+  }
+</style>

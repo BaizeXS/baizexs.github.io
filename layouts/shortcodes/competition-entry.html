@@ -1,0 +1,58 @@
+<div class="competition-entry">
+  <div class="competition-header">
+    <div class="award-name">{{ .Get "award" }}</div>
+    <div class="competition-time">{{ .Get "time" }}</div>
+  </div>
+  <div class="project-title">{{ .Get "project" }}</div>
+  <div class="competition-content">{{ .Inner | markdownify }}</div>
+</div>
+
+<style>
+  .competition-entry {
+    margin-bottom: 1.2em;
+  }
+
+  .competition-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 0.3em;
+  }
+
+  .award-name {
+    font-weight: bold;
+    font-size: 1em;
+    color: #333;
+  }
+
+  .competition-time {
+    white-space: nowrap;
+    font-size: 0.85em;
+  }
+
+  .project-title {
+    color: #666;
+    font-style: italic;
+    font-size: 0.85em;
+    margin-bottom: 0.3em;
+  }
+
+  .competition-content {
+    text-align: justify;
+    font-size: 0.85em;
+  }
+
+  .competition-content ul {
+    padding-left: 1.2em;
+    margin-top: 0.3em;
+    margin-bottom: 0.3em;
+  }
+
+  .competition-content ul li {
+    margin-bottom: 0.3em;
+  }
+
+  .competition-content ul li:last-child {
+    margin-bottom: 0;
+  }
+</style>

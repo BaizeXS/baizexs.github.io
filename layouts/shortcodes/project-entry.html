@@ -1,0 +1,58 @@
+<div class="project-entry">
+  <div class="project-header">
+    <div class="project-name">{{ .Get "name" }}</div>
+    <div class="project-time">{{ .Get "time" }}</div>
+  </div>
+  <div class="project-description">{{ .Get "description" }}</div>
+  <div class="project-content">{{ .Inner | markdownify }}</div>
+</div>
+
+<style>
+  .project-entry {
+    margin-bottom: 1.2em;
+  }
+
+  .project-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 0.3em;
+  }
+
+  .project-name {
+    font-weight: bold;
+    font-size: 1em;
+    color: #333;
+  }
+
+  .project-time {
+    white-space: nowrap;
+    font-size: 0.85em;
+  }
+
+  .project-description {
+    color: #666;
+    font-style: italic;
+    font-size: 0.85em;
+    margin-bottom: 0.3em;
+  }
+
+  .project-content {
+    text-align: justify;
+    font-size: 0.85em;
+  }
+
+  .project-content ul {
+    padding-left: 1.2em;
+    margin-top: 0.3em;
+    margin-bottom: 0.3em;
+  }
+
+  .project-content ul li {
+    margin-bottom: 0.3em;
+  }
+
+  .project-content ul li:last-child {
+    margin-bottom: 0;
+  }
+</style>

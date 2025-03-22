@@ -1,0 +1,58 @@
+<div class="education-entry">
+  <div class="education-header">
+    <div class="school-name">{{ .Get "school" }}</div>
+    <div class="school-time">{{ .Get "time" }}</div>
+  </div>
+  <div class="school-department">{{ .Get "department" }}</div>
+  <div class="education-content">{{ .Inner | markdownify }}</div>
+</div>
+
+<style>
+  .education-entry {
+    margin-bottom: 1.2em;
+  }
+
+  .education-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 0.3em;
+  }
+
+  .school-name {
+    font-weight: bold;
+    font-size: 1em;
+    color: #333;
+  }
+
+  .school-time {
+    white-space: nowrap;
+    font-size: 0.85em;
+  }
+
+  .school-department {
+    color: #666;
+    font-style: italic;
+    font-size: 0.85em;
+    margin-bottom: 0.3em;
+  }
+
+  .education-content {
+    text-align: justify;
+    font-size: 0.85em;
+  }
+
+  .education-content ul {
+    padding-left: 1.2em;
+    margin-top: 0.3em;
+    margin-bottom: 0.3em;
+  }
+
+  .education-content ul li {
+    margin-bottom: 0.3em;
+  }
+
+  .education-content ul li:last-child {
+    margin-bottom: 0;
+  }
+</style>
