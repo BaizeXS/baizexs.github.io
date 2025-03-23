@@ -24,7 +24,7 @@ minify:
 params:
   env: production # To enable google analytics, opengraph, twitter-cards and schema.
   title: "Tristan's Blog"
-  description: > # TODO: Need to be updated
+  description: >
     A personal blog focused on software development, AI technology, 
     and programming tutorials. Here I share my learning journey 
     and technical insights in computer science and machine learning.
@@ -81,10 +81,10 @@ params:
   # Home Info Mode
   homeInfoParams:
     Title: "👋 Welcome to Tristan's Blog"
-    Content: > # TODO: Need to be updated
+    Content: >
       Hi, I'm Tristan. I'm documenting my learning journey 
       and technical insights in computer science, 
-      machine learning, and software development.
+      artificial intelligence, and software development.
 
   # Social Icons
   socialIcons:
