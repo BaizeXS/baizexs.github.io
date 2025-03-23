@@ -3,11 +3,16 @@ title: "Zongsi (Tristan) Xu"
 layout: "resume"
 url: "/resume/"
 summary: "Personal resume of Zongsi (Tristan) Xu"
+disableShare: true
 ---
 
 ### 👋 About me
 
-I'm ...
+{{< justify >}}
+Hello! I'm Xu Zongsi, a passionate technology enthusiast currently pursuing my Master of Science in ECIC at The University of Hong Kong. With a solid background in Software Engineering from the Beijing Institute of Technology, I specialize in artificial intelligence areas like machine learning, deep learning, natural language processing, computer vision, and reinforcement learning.
+
+Inspired by OpenAI's five-step plan towards superintelligence, I am excited about AGI and have developed a keen interest in **LLM agents**, **MLLM**, and **knowledge graphs**. I see great potential in these fields and aspire to contribute to innovative solutions.
+{{< /justify >}}
 
 ### 📚 Education
 
@@ -34,7 +39,7 @@ I'm ...
 
 ### 💼 Project Experience
 
-{{< project-entry name="Online Transaction Fraud Detection" time="09/2024 – 01/2025" description="Independent project, supervised by Dr. Vivien Chan" >}}
+{{< project-entry name="🔍 Online Transaction Fraud Detection" time="09/2024 – 01/2025" description="Independent project, supervised by Dr. Vivien Chan" >}}
 
 - Focused on addressing financial fraud in e-commerce to enhance the accuracy of transaction anomaly detection, while independently managing the entire case study that included data preprocessing, feature engineering, model building, evaluation, and results analysis.
 - Effectively resolved class imbalance issues using SMOTE and ROSE techniques.
@@ -43,7 +48,7 @@ I'm ...
 
 {{< /project-entry >}}
 
-{{< project-entry name="Multi-Model Intelligent Text Keyword Extraction System" time="08/2023 – 09/2023" description="Group project, supervised by Associate Prof. Xiaolin Zhao" >}}
+{{< project-entry name="🤖 Multi-Model Intelligent Text Keyword Extraction System" time="08/2023 – 09/2023" description="Group project, supervised by Associate Prof. Xiaolin Zhao" >}}
 
 - Designed and implemented an intelligent text summary system that automatically extracts keywords from article titles and abstracts, enhancing the understanding and summarization of text information.
 - Participated in the planning of the technical route and built a hybrid model combining extractive and generative approaches, utilizing advanced natural language processing techniques including KeyBERT, Sentence Transformer, BERT, and T5 models.
@@ -52,7 +57,7 @@ I'm ...
 
 {{< /project-entry >}}
 
-{{< project-entry name="Cambridge University Machine Learning Summer Project" time="07/2023 – 08/2023" description="Group project, supervised by Prof. Pietro Liò" >}}
+{{< project-entry name="🎓 Cambridge University Machine Learning Summer Project" time="07/2023 – 08/2023" description="Group project, supervised by Prof. Pietro Liò" >}}
 
 - Participated in the Cambridge University deep learning summer project, focusing on deep reinforcement learning; explored multi-agent learning algorithms across different environments.
 - Reproduced the Multi-Agent Deep Deterministic Policy Gradient (MADDPG) algorithm in the Simple Adversary environment and studied the effect of agent numbers on convergence speed and stability, finding optimal stability at 21 agents.
@@ -61,7 +66,7 @@ I'm ...
 
 {{< /project-entry >}}
 
-{{< project-entry name="Deep Learning and Computer Vision Semester Project" time="09/2022 – 12/2022" description="Independent project, supervised by Associate Prof. Guangyu Gao" >}}
+{{< project-entry name="👁️ Deep Learning and Computer Vision Semester Project" time="09/2022 – 12/2022" description="Independent project, supervised by Associate Prof. Guangyu Gao" >}}
 
 - Designed and implemented a waste classifier using the ResNet model to improve classification accuracy and reduce resource waste. The project also enhanced understanding of transfer learning techniques with ResNet.
 - Collected a dataset of 16 waste categories and preprocessed the images for uniformity and standardization, incorporating data augmentation techniques to enhance the dataset.
@@ -72,7 +77,7 @@ I'm ...
 
 ### 🎓 Internship
 
-{{< internship-entry company="Beijing Academy of Quantum Information Science" time="08/2023 – 01/2024" position="Research Intern at Quantum Computation Department" >}}
+{{< internship-entry company="⚛️ Beijing Academy of Quantum Information Science" time="08/2023 – 01/2024" position="Research Intern at Quantum Computation Department" >}}
 
 - Proposed a quantum convolution kernel design based on variational quantum circuits and developed a universal quantum convolution layer, successfully integrating it into classical CNN architectures such as VGG, GoogLeNet, and ResNet.
 - Developed and evaluated various hybrid models, including a simple model named HQCCNN-2, which achieved 84.45% accuracy on the FashionMNIST dataset, surpassing the traditional CNN's 80.72%. This demonstrates the effectiveness of the quantum convolution layer in improving model performance.
@@ -82,13 +87,13 @@ I'm ...
 
 ### 🏅 Competition Experience
 
-{{< competition-entry award="China International \"Internet +\" College Students' Innovation Competition" time="08/2022" project="Zhongke Ushield: Deep Learning-based Face Privacy Protection Authentication System" >}}
+{{< competition-entry award="🥉 China International \"Internet +\" College Students' Innovation Competition" time="08/2022" project="🛡️ Zhongke Ushield: Deep Learning-based Face Privacy Protection Authentication System" >}}
 
 - Responsible for constructing a localized facial feature extraction engine based on MobileFaceNet, ensuring feature extraction is completed on end devices (such as mobile phones and cameras), guaranteeing that raw data does not leave the domain and is not stored, thus enhancing user privacy protection while improving recognition efficiency.
 
 {{< /competition-entry >}}
 
-{{< competition-entry award="\"Challenge Cup\" Capital University Entrepreneurship Competition" time="05/2022" project="Smart Orchard" >}}
+{{< competition-entry award="🥉 \"Challenge Cup\" Capital University Entrepreneurship Competition" time="05/2022" project="🌳 Smart Orchard" >}}
 
 - Responsible for the development of the fruit detection, ripeness prediction, and pest identification system, using deep convolutional neural network (CNN) technology for intelligent monitoring of crop growth conditions.
 - Applied advanced object detection algorithms such as Faster R-CNN and YOLO to achieve high precision in apple detection and ripeness assessment, with an accuracy rate exceeding 90%, significantly enhancing the intelligence level of orchard management.
@@ -103,7 +108,7 @@ I'm ...
 
 ### 📫 Contact
 
-{{< contact-entry icon="📧" content="zongsi.xu@outlook.com" link="mailto:zongsi.xu@outlook.com" >}}
-{{< contact-entry icon="👔" content="Zongsi (Tristan) Xu" link="https://linkedin.com/in/zongsi-xu-aa8648337" >}}
-{{< contact-entry icon="💻" content="github.com/BaizeXS" link="https://github.com/BaizeXS" >}}
-{{< contact-entry icon="📍" content="Hong Kong SAR, China" >}}
+{{< contact-entry icon="📧" content="Email: zongsi.xu@outlook.com" link="mailto:zongsi.xu@outlook.com" >}}
+{{< contact-entry icon="👔" content="LinkedIn: Zongsi (Tristan) Xu" link="https://linkedin.com/in/zongsi-xu-aa8648337" >}}
+{{< contact-entry icon="💻" content="GitHub: BaizeXS" link="https://github.com/BaizeXS" >}}
+{{< contact-entry icon="📍" content="Location: Hong Kong SAR, China" >}}

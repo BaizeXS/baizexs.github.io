@@ -2,31 +2,122 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Tristan&#39;s Blog</title>
-    <link>https://baizexs.github.io/</link>
+    <link>http://localhost:1313/</link>
     <description>Recent content on Tristan&#39;s Blog</description>
     <generator>Hugo -- 0.145.0</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 15 Sep 2020 11:30:03 +0000</lastBuildDate>
-    <atom:link href="https://baizexs.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>My 1st post</title>
-      <link>https://baizexs.github.io/posts/nlp-2/</link>
-      <pubDate>Tue, 15 Sep 2020 11:30:03 +0000</pubDate>
-      <guid>https://baizexs.github.io/posts/nlp-2/</guid>
-      <description>Desc Text.</description>
+      <title></title>
+      <link>http://localhost:1313/posts/nlp-1/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/nlp-1/</guid>
+      <description>&lt;h2 id=&#34;一数值特征与类别特征&#34;&gt;一、数值特征与类别特征&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;数值特征 (Numeric Features)&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;具有可加减的意义，且存在大小顺序。&lt;/li&gt;
+&lt;li&gt;例子：年龄、温度等。可以直接保留其整数或浮点数形式供模型使用。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;类别特征 (Categorical Features)&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;数据值离散，不具备“数值大小”间的可比意义。&lt;/li&gt;
+&lt;li&gt;例子：国籍（美国/中国/印度等）、性别（男/女）等。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;问题&lt;/strong&gt;：若仅用整数表示（美国=1, 中国=2），会引入错误的数值运算关系，如 “美国 + 中国 = 印度”。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;二one-hot编码的动机与流程&#34;&gt;二、One-Hot编码的动机与流程&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;为什么使用One-Hot&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;通过将类别映射为向量，避免整数编码引入的伪数值关系。&lt;/li&gt;
+&lt;li&gt;同时保留各种可能类别的信息，且仅在对应位置为1，其他位置为0。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;建立映射：从类别到索引&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;为每个类别分配一个唯一索引，通常从1开始。&lt;/li&gt;
+&lt;li&gt;预留索引0表示“未知”或“缺失”，对应全0向量。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;转换为One-Hot向量&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;若类别总数为197，则用197维向量表示。&lt;/li&gt;
+&lt;li&gt;例子：美国 &lt;code&gt;[1, 0, 0, 0, …]&lt;/code&gt;， 中国 &lt;code&gt;[0, 1, 0, 0, …]&lt;/code&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;示例：表示一个人的特征&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;特征包含（年龄, 性别, 国籍，其中国籍197种）&lt;/li&gt;
+&lt;li&gt;维度总和：1维_age + 1维_gender + 197维_nationality = 199维。&lt;/li&gt;
+&lt;li&gt;例如 &lt;code&gt;(28, 女, 中国)&lt;/code&gt; → &lt;code&gt;[28, 0, 0, 1, 0, …, 0]&lt;/code&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;三文本数据处理流程&#34;&gt;三、文本数据处理流程&lt;/h2&gt;
+&lt;p&gt;文本在自然语言处理（NLP）中作为常见的原始输入，需要数值化才能送入模型。一般步骤如下：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;分词 (Tokenization)&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;将文本拆分为一个个单词（Token）。&lt;/li&gt;
+&lt;li&gt;例子：&lt;code&gt;&amp;quot;... to be or not to be...&amp;quot;&lt;/code&gt; → &lt;code&gt;[&amp;quot;...&amp;quot;, &amp;quot;to&amp;quot;, &amp;quot;be&amp;quot;, &amp;quot;or&amp;quot;, &amp;quot;not&amp;quot;, &amp;quot;to&amp;quot;, &amp;quot;be&amp;quot;, &amp;quot;...&amp;quot;]&lt;/code&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;统计词频 &amp;amp; 构建词典&lt;/strong&gt;&lt;/p&gt;</description>
     </item>
     <item>
-      <title>NLP-</title>
-      <link>https://baizexs.github.io/posts/nlp-1/</link>
-      <pubDate>Tue, 15 Sep 2020 11:30:03 +0000</pubDate>
-      <guid>https://baizexs.github.io/posts/nlp-1/</guid>
-      <description>Desc Text.</description>
+      <title></title>
+      <link>http://localhost:1313/posts/nlp-2/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/nlp-2/</guid>
+      <description>&lt;h3 id=&#34;text-to-sequence&#34;&gt;Text to Sequence&lt;/h3&gt;
+&lt;p&gt;文本处理&lt;/p&gt;
+&lt;p&gt;Step1: Tokenization&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Tokenization breaks a piece of text down into a list of tokens.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Here, a token is a word. (A token can be a character in some applications.)&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Tokenization讲究很多，例如是否应该把大写改成小写呢？进行typo correction等等&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;image-20250322150322238&#34; loading=&#34;lazy&#34; src=&#34;./NLP-2.assets/image-20250322150322238.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Step2: Build Dictionary&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Use a dictionary (hash table) to count word frequencies.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The dictionary maps word to index.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;可以首先统计词频去掉低频词，然后让每个词对应一个正整数；这样的话，一句话就可以用一个正整数列表表示，这个列表就叫sequence；如果必要就还得做one-hot encoding。&lt;img alt=&#34;image-20250322150620890&#34; loading=&#34;lazy&#34; src=&#34;./NLP-2.assets/image-20250322150620890.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;结果&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;image-20250322150754528&#34; loading=&#34;lazy&#34; src=&#34;./NLP-2.assets/image-20250322150754528.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;但是长度不统一&lt;/p&gt;
+&lt;p&gt;Step4: 对齐sequence&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;image-20250322150854986&#34; loading=&#34;lazy&#34; src=&#34;./NLP-2.assets/image-20250322150854986.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;解决方案是这样的：可以固定长度为w，加入一个序列长度太长，就砍掉前面的词，只保留最后w个词；如果一个序列太短，就做zero padding，用0填充&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;image-20250322151030119&#34; loading=&#34;lazy&#34; src=&#34;./NLP-2.assets/image-20250322151030119.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;这样一来，所有的序列长度就统一了&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;image-20250322151117125&#34; loading=&#34;lazy&#34; src=&#34;./NLP-2.assets/image-20250322151117125.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;文本处理完成了，接下来是word embedding，把单词表示为一个低维向量；&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;image-20250322151252837&#34; loading=&#34;lazy&#34; src=&#34;./NLP-2.assets/image-20250322151252837.png&#34;&gt;&lt;/p&gt;</description>
     </item>
     <item>
       <title>Zongsi (Tristan) Xu</title>
-      <link>https://baizexs.github.io/resume/</link>
+      <link>http://localhost:1313/resume/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://baizexs.github.io/resume/</guid>
+      <guid>http://localhost:1313/resume/</guid>
       <description>Personal resume of Zongsi (Tristan) Xu</description>
     </item>
   </channel>

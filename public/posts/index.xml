@@ -2,24 +2,24 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Posts on Tristan&#39;s Blog</title>
-    <link>https://baizexs.github.io/posts/</link>
+    <link>http://localhost:1313/posts/</link>
     <description>Recent content in Posts on Tristan&#39;s Blog</description>
     <generator>Hugo -- 0.145.0</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 15 Sep 2020 11:30:03 +0000</lastBuildDate>
-    <atom:link href="https://baizexs.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>My 1st post</title>
-      <link>https://baizexs.github.io/posts/nlp-2/</link>
+      <link>http://localhost:1313/posts/nlp-2/</link>
       <pubDate>Tue, 15 Sep 2020 11:30:03 +0000</pubDate>
-      <guid>https://baizexs.github.io/posts/nlp-2/</guid>
+      <guid>http://localhost:1313/posts/nlp-2/</guid>
       <description>Desc Text.</description>
     </item>
     <item>
       <title>NLP-</title>
-      <link>https://baizexs.github.io/posts/nlp-1/</link>
+      <link>http://localhost:1313/posts/nlp-1/</link>
       <pubDate>Tue, 15 Sep 2020 11:30:03 +0000</pubDate>
-      <guid>https://baizexs.github.io/posts/nlp-1/</guid>
+      <guid>http://localhost:1313/posts/nlp-1/</guid>
       <description>Desc Text.</description>
     </item>
   </channel>
