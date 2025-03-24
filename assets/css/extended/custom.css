@@ -1,3 +1,10 @@
 .first-entry {
   margin-bottom: 0px;
 }
+
+/* 文章正文两端对齐样式 */
+.post-content p,
+.post-content li {
+  text-align: justify;
+  text-justify: inter-word;
+}

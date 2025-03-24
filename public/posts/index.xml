@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>Tristan&#39;s Blog</title>
-    <link>http://localhost:1313/</link>
-    <description>Recent content on Tristan&#39;s Blog</description>
+    <title>Posts on Tristan&#39;s Blog</title>
+    <link>http://localhost:1313/posts/</link>
+    <description>Recent content in Posts on Tristan&#39;s Blog</description>
     <generator>Hugo -- 0.145.0</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 24 Mar 2025 11:41:56 +0800</lastBuildDate>
-    <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>NLP09</title>
       <link>http://localhost:1313/posts/nlp09/</link>
@@ -89,7 +89,9 @@
 &lt;p&gt;解决方案是这样的：可以固定长度为w，加入一个序列长度太长，就砍掉前面的词，只保留最后w个词；如果一个序列太短，就做zero padding，用0填充&lt;/p&gt;
 &lt;p&gt;这样一来，所有的序列长度就统一了&lt;/p&gt;
 &lt;p&gt;文本处理完成了，接下来是word embedding，把单词表示为一个低维向量；&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;image-20250322151252837&#34; loading=&#34;lazy&#34; src=&#34;../../../../Downloads/NLP-2.assets/image-20250322151252837.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;然而这样做的话，如果是10000个单词，维度就是10000维，维度太高了；因此要做word embedding；&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;image-20250322151511757&#34; loading=&#34;lazy&#34; src=&#34;../../../../Downloads/NLP-2.assets/image-20250322151511757.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;具体做法就是把one-hot向量e_i和参数矩阵p相乘；矩阵P转置的大小是d x v；d是词向量的维度；v是字典里词汇的数量；结果为x_i；x_i就是一个词向量；如果one-hot向量的第三行为1；那么x_i就是P转置矩阵的第三列（其余列都为0）；所以P转置每一列都是一个词向量；所以矩阵P本身的每一行就是一个词向量；其行数为v；即vocabulary，词汇量；每一行对应一个单词；矩阵的列数为d；d是用户决定的；d的大小会决定机器学习模型的表现；应该用xxx来选择一个比较好的d；&lt;/p&gt;</description>
     </item>
     <item>
@@ -132,13 +134,6 @@
 &lt;/table&gt;
 &lt;h3 id=&#34;numeric-features&#34;&gt;Numeric Features&lt;/h3&gt;
 &lt;p&gt;Numeric features refer to data that possess &lt;strong&gt;additive properties&lt;/strong&gt; and &lt;strong&gt;can be compared in magnitude&lt;/strong&gt;. For example, a person&amp;rsquo;s age serves as a numeric feature, where 35 is greater than 31.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Zongsi (Tristan) Xu</title>
-      <link>http://localhost:1313/resume/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/resume/</guid>
-      <description>Personal resume of Zongsi (Tristan) Xu</description>
     </item>
   </channel>
 </rss>

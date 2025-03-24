@@ -2,16 +2,47 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://baizexs.github.io/archives/</loc>
+    <loc>http://localhost:1313/posts/nlp09/</loc>
+    <lastmod>2025-03-24T11:41:56+08:00</lastmod>
   </url><url>
-    <loc>https://baizexs.github.io/categories/</loc>
+    <loc>http://localhost:1313/posts/</loc>
+    <lastmod>2025-03-24T11:41:56+08:00</lastmod>
   </url><url>
-    <loc>https://baizexs.github.io/search/</loc>
+    <loc>http://localhost:1313/</loc>
+    <lastmod>2025-03-24T11:41:56+08:00</lastmod>
   </url><url>
-    <loc>https://baizexs.github.io/tags/</loc>
+    <loc>http://localhost:1313/posts/nlp08/</loc>
+    <lastmod>2025-03-24T11:41:52+08:00</lastmod>
   </url><url>
-    <loc>https://baizexs.github.io/</loc>
+    <loc>http://localhost:1313/posts/nlp07/</loc>
+    <lastmod>2025-03-24T11:41:49+08:00</lastmod>
   </url><url>
-    <loc>https://baizexs.github.io/resume/</loc>
+    <loc>http://localhost:1313/posts/nlp06/</loc>
+    <lastmod>2025-03-24T11:41:43+08:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/posts/nlp05/</loc>
+    <lastmod>2025-03-24T11:41:39+08:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/posts/nlp04/</loc>
+    <lastmod>2025-03-24T11:41:35+08:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/posts/nlp03/</loc>
+    <lastmod>2025-03-24T11:41:32+08:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/posts/nlp02/</loc>
+    <lastmod>2025-03-24T11:41:20+08:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/posts/nlp01/</loc>
+    <lastmod>2025-03-23T21:43:18+08:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/archives/</loc>
+  </url><url>
+    <loc>http://localhost:1313/categories/</loc>
+  </url><url>
+    <loc>http://localhost:1313/search/</loc>
+  </url><url>
+    <loc>http://localhost:1313/tags/</loc>
+  </url><url>
+    <loc>http://localhost:1313/resume/</loc>
   </url>
 </urlset>

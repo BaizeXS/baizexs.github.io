@@ -44,6 +44,11 @@ params:
   DateFormat: "January 2, 2006"
   defaultTheme: auto
   disableThemeToggle: false
+  # Math Config
+  math: true
+  katex:
+    enable: true
+    html_dom_element: document.body
 
   # Functionality Config
   # Article Info Display
@@ -58,7 +63,7 @@ params:
   # Article Content Display
   ShowCodeCopyButtons: true
   UseHugoToc: true
-  showtoc: false
+  showtoc: true
   tocopen: false
   # Social Sharing
   ShowShareButtons: true
@@ -112,7 +117,7 @@ params:
 
   # Edit Post Config
   editPost:
-    URL: "https://github.com/BaizeXS/baizexs.github.io/content"
+    URL: "https://github.com/BaizeXS/baizexs.github.io/tree/main/content"
     Text: "Suggest Changes"
     appendFilePath: true
 
