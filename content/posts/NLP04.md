@@ -3,7 +3,7 @@ title: "RNN and NLP Study Notes 04"
 date: "2025-03-24T11:41:35+08:00"
 tags: [""]
 author: "Tristan"
-draft: true
+draft: false
 description: ""
 # canonicalURL: "https://canonical.url/to/page"
 ---
@@ -174,3 +174,4 @@ This means that as the input scale increases, the number of parameters in LSTM w
 
 ### Reference
 
+For a deeper understanding of these concepts, you can refer to the following course video:[RNN模型与NLP应用(4/9)：LSTM模型](https://youtu.be/vTouAvxlphc?si=qu9kilJ2P_gcZXsL).

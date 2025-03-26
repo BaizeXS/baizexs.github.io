@@ -97,3 +97,9 @@ These designs and limitations point to the use cases of Simple RNNs as well as t
   $$
 
 - Only one such parameter matrix, no matter how long the sequence is.
+
+
+
+### Reference
+
+For a deeper understanding of these concepts, you can refer to the following course video:[RNN模型与NLP应用(3/9)：Simple RNN模型](https://youtu.be/Cc4ENs6BHQw?si=CGRqvmrSrBACrlO9).
