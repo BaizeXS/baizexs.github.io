@@ -32,7 +32,19 @@
     <loc>http://localhost:1313/posts/nlp02/</loc>
     <lastmod>2025-03-24T11:41:20+08:00</lastmod>
   </url><url>
+    <loc>http://localhost:1313/tags/machine-learning/</loc>
+    <lastmod>2025-03-23T21:43:18+08:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/tags/ml-basics/</loc>
+    <lastmod>2025-03-23T21:43:18+08:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/tags/nlp/</loc>
+    <lastmod>2025-03-23T21:43:18+08:00</lastmod>
+  </url><url>
     <loc>http://localhost:1313/posts/nlp01/</loc>
+    <lastmod>2025-03-23T21:43:18+08:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/tags/</loc>
     <lastmod>2025-03-23T21:43:18+08:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/archives/</loc>
@@ -40,8 +52,6 @@
     <loc>http://localhost:1313/categories/</loc>
   </url><url>
     <loc>http://localhost:1313/search/</loc>
-  </url><url>
-    <loc>http://localhost:1313/tags/</loc>
   </url><url>
     <loc>http://localhost:1313/resume/</loc>
   </url>

@@ -180,3 +180,7 @@ outputs:
     - HTML
     - RSS
     - JSON
+
+# Security Config
+security:
+  enableInlineShortcodes: true

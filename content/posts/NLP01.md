@@ -171,6 +171,6 @@ Each word can then be represented as a one-hot vector. If a word cannot be found
 
 In this section, we explored essential concepts of data processing, which are foundational for effectively applying Recurrent Neural Networks (RNNs) in Natural Language Processing (NLP). We examined different data types, emphasizing numerical, binary, and categorical features. Additionally, we highlighted preprocessing techniques like One-Hot encoding and tokenization, which are crucial for transforming textual data into a format suitable for RNNs and other machine learning models.
 
-## Additional Resources
+## References
 
 For a deeper understanding of these concepts, you can refer to the following course video:[RNN模型与NLP应用(1/9)：数据处理基础](https://youtu.be/NWcShtqr8kc?si=OobtdifZSl41e_Mn).

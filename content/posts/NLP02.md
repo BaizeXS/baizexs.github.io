@@ -3,72 +3,208 @@ title: "RNN and NLP Study Notes 02"
 date: "2025-03-24T11:41:20+08:00"
 tags: [""]
 author: "Tristan"
-draft: true
+draft: false
 description: ""
 # canonicalURL: "https://canonical.url/to/page"
 ---
 
 ## Text Processing and Word Embedding
 
-文本处理
+### Text to Sequence
 
-Step1: Tokenization
+Processing text data is crucial for natural language processing (NLP) and machine learning applications. This section outlines the key steps in processing text data.
 
-- Tokenization breaks a piece of text down into a list of tokens.
+#### Step 1: Tokenization
 
-- Here, a token is a word. (A token can be a character in some applications.)
+The first step in text processing is **tokenization**, which involves **breaking down a text string into a list of individual words**. For example, given the text:
 
-Tokenization讲究很多，例如是否应该把大写改成小写呢？进行typo correction等等
+```
+S = "Machine learning is an important branch of artificial intelligence"  
+```
 
+Breaking this string into a word list:
 
+```
+L = ["machine", "learning", "is", "an", "important", "branch", "of", "artificial", "intelligence"]
+```
 
-Step2: Build Dictionary
+This shows the simplest form of tokenization, but in reality, many factors need to be considered, such as:
 
-- Use a dictionary (hash table) to count word frequencies.
+- Converting upper case to lower case (e.g., changing "Apple" to "apple").
+- Removing stop words, such as "the," "a," "of," etc.
+- Correcting typos (e.g., changing "goood" to "good").
 
-- The dictionary maps word to index.
+Nowadays, commonly used tokenization methods include **BPE (Byte Pair Encoding)**, **WordPiece**, and **SentencePiece**.
 
-可以首先统计词频去掉低频词，然后让每个词对应一个正整数；这样的话，一句话就可以用一个正整数列表表示，这个列表就叫sequence；如果必要就还得做one-hot encoding。结果
+#### Step 2: Build Dictionary
 
+After obtaining the word list, the next step is to **build a dictionary that maps each word to a unique index** and **counts the frequency of each word**. This can be accomplished **using a dictionary (hash table)** that records each word along with its corresponding frequency.
 
+- Initially, the dictionary is empty.
+- For each word ($w$):
+  - If $w$ is not in the dictionary, add $w$ and set its frequency to 1.
+  - If $w$ is already in the dictionary, increment its frequency counter.
 
-但是长度不统一
+After processing some text, the dictionary might look like this:
 
-Step4: 对齐sequence
+| Word                    | Frequency |
+| ----------------------- | --------- |
+| machine learning        | 219       |
+| artificial intelligence | 200       |
+| deep learning           | 180       |
+| model                   | 131       |
+| algorithm               | 120       |
+| training                | 52        |
+| prediction              | 31        |
 
+#### Step 3: One-Hot Encoding
 
+**Using a dictionary to map words to indices**
 
-解决方案是这样的：可以固定长度为w，加入一个序列长度太长，就砍掉前面的词，只保留最后w个词；如果一个序列太短，就做zero padding，用0填充
+Utilizing the previously constructed dictionary, map each word in the text to its corresponding index (integer). Then, these indices form a sequence. For example, suppose the dictionary contains the following entries derived from the frequency table:
 
+| Word                    | Index |
+| ----------------------- | ----- |
+| machine learning        | 1     |
+| artificial intelligence | 2     |
+| deep learning           | 3     |
+| model                   | 4     |
+| algorithm               | 5     |
+| training                | 6     |
+| prediction              | 7     |
+| an                      | 8     |
+| important               | 9     |
+| branch                  | 10    |
+| of                      | 11    |
+| intelligence            | 12    |
+| is                      | 13    |
 
+The corresponding sequence for the sentence would be:
 
-这样一来，所有的序列长度就统一了
+```
+sequences = [1, 13, 8, 9, 10, 11, 2]
+```
 
+**Generating one-hot vectors**
 
+For each word in the sequence, a one-hot vector is generated based on its index. A one-hot vector is a $v$-dimensional vector, where $v$ is the size of the vocabulary.
 
+Given the vocabulary size of 13 (assuming distinct words from the example), each word's one-hot vector will be structured as follows:
 
+```(空)
+"machine learning" = [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+"artificial intelligence" = [0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+"is" = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]
+"an" = [0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0]
+"important" = [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0]
+"branch" = [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0]
+"of" = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0]
+```
 
+For the example sentence "Machine learning is an important branch of artificial intelligence", the corresponding one-hot encoding results would be:
 
+```
+[  
+  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  // "machine learning"  
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],  // "is"  
+  [0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0],  // "an"  
+  [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0],  // "important"  
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0],  // "branch"  
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0],  // "of"  
+  [0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  // "artificial intelligence"
+]  
+```
 
+In this way, all words in the example sentence are transformed into corresponding one-hot encodings, which can be used for subsequent machine learning tasks.
 
+#### Step 4: Align Sequences
 
+In the process of text processing, Aligning Sequences is a crucial step to ensure that **all input samples have the same length**. After the previous processing steps, we found that there are differences in the lengths of the sequences, which poses a challenge for building machine learning models. Most machine learning models require uniform input shapes, so we must perform sequence alignment.
 
+To address this issue, the following measures can be implemented:
 
-文本处理完成了，接下来是word embedding，把单词表示为一个低维向量；
+- **Fixed Length**: Choose a fixed length $w$.
+- **Truncation**: If a sequence exceeds the length $w$, retain only the last $w$ words.
+- **Padding**: If a sequence is shorter than $w$, pad it with zeros until it reaches the specified length $w$.
 
-然而这样做的话，如果是10000个单词，维度就是10000维，维度太高了；因此要做word embedding；
+![image-20250325141534011](/images/image-20250325141534011.png)
 
+By doing this, all sequences will be adjusted to the same length, allowing them to be effectively stored in a matrix and facilitating subsequent training of machine learning models. This process will help improve the model's performance and accuracy.
 
+![image-20250325141950386](/images/image-20250325141950386.png)
 
-具体做法就是把one-hot向量e_i和参数矩阵p相乘；矩阵P转置的大小是d x v；d是词向量的维度；v是字典里词汇的数量；结果为x_i；x_i就是一个词向量；如果one-hot向量的第三行为1；那么x_i就是P转置矩阵的第三列（其余列都为0）；所以P转置每一列都是一个词向量；所以矩阵P本身的每一行就是一个词向量；其行数为v；即vocabulary，词汇量；每一行对应一个单词；矩阵的列数为d；d是用户决定的；d的大小会决定机器学习模型的表现；应该用xxx来选择一个比较好的d；
+### Word Embedding: Word to Vector
 
-我们的任务是看评论是正面的还是负面的；参数矩阵是从训练数据中学习出来的，所以学出来的词向量是带有感情色彩的；假设这些词向量都是二维的，则可以在平面坐标系中标出下面词向量
+#### Why map words to vectors?
 
+The main reasons for mapping words to vectors in natural language processing (NLP) include:
 
+1. **Capturing semantic relationships**
 
-keras提供embedding层；用户可以指定vocabulary大小和d的大小；以及每一个sequence的长度；d是根据算法选出来的
+   Traditional word representations (like one-hot vectors) only indicate the presence or absence of words, lacking the ability to express similarities between words. By mapping to a low-dimensional vector space, word embeddings can capture semantic similarities between words. For example, "king" and "queen" would be closer in vector space, while "king" and "apple" would be farther apart.
 
+2. **Dimensionality reduction**
 
-到这一步，我们已经完成了文本处理和word embedding。接下来就是用Logistic Regression for Binary Classification做二分类；
+   One-hot encoding generates a sparse vector with a dimension equal to the size of the vocabulary, leading to significant storage and computational costs. Word embeddings represent words as low-dimensional dense vectors, significantly reducing the required storage space and computation.
 
+3. **Improving model performance**
 
+   Using low-dimensional embedding vectors allows machine learning models to learn and predict more efficiently. Embedding vectors enable models to better understand and process complex patterns in language, thus enhancing performance in tasks like sentiment analysis and text classification.
+
+4. **Facilitating transfer learning**
+
+   Pre-trained word embedding vectors can be transferred between different tasks and datasets, accelerating model training and improving prediction accuracy. This makes word embeddings widely used in various NLP tasks.
+
+#### How to map word to vector?
+
+1. **Represent words using one-hot vectors**
+
+   First, represent words using one-hot vectors.
+
+   - Assume the dictionary contains $v$ unique words (vocabulary = $v$).
+   - Then the one-hot vectors $e_1$, $e_2$, $e_3$, …, $e_v$ are $v$-dimensional.
+
+2. **Map one-hot vectors to low-dimensional vectors**
+
+   Next, map the one-hot vectors to low-dimensional vectors. The mapping formula is:
+   $$
+   x_i = P^T \cdot e_i
+   $$
+
+   - $x_i$ is the low-dimensional vector, with dimensions $d \times 1$.
+   - $P$ is parameter matrix which can be learned from training data, with dimensions $d \times v$.
+   - $e_i$ is the one-hot vector of the 𝑖-th word in dictionary, with dimensions $v \times 1$
+
+   {{< figure src="/images/image-20250325143845492.png" alt="image-20250325143845492" >}}
+
+#### Interpretation of the parameter matrix
+
+- The parameter matrix $P$ contains the embedding representations of each word in the low-dimensional space. **Each row corresponds to a word**.
+
+- By visualizing, you can see the relative positions of different words in low-dimensional space. **Similar words are close to each other in vector space**, reflecting their semantic similarity.
+
+  For example, the position of the word "fantastic" is close to "good," "fun," etc., while "boring" and "poor" are relatively far apart.
+
+  {{< figure src="/images/image-20250325143922568.png" alt="image-20250325143922568" >}}
+
+## Conclusion
+
+Text processing converts raw text into structured formats suitable for analysis and consists of several key steps:
+
+1. **Tokenization**: Breaking down text into individual words.
+2. **Building a Dictionary**: Mapping each word to a unique index and counting frequencies.
+3. **One-Hot Encoding**: Converting words to one-hot vectors.
+4. **Aligning Sequences**: Ensuring uniform input lengths for machine learning models.
+
+Mastering these steps is essential for efficient feature extraction and improved model performance in natural language processing tasks.
+
+Word embeddings transform words into low-dimensional vectors, capturing semantic relationships and enhancing expressiveness for various natural language processing tasks. The process involves:
+
+1. **One-Hot Encoding**: Representing words as sparse vectors.
+2. **Mapping to Low-Dimensional Vectors**: Using a parameter matrix to project one-hot vectors into a reduced space.
+
+Understanding how to map words to vectors and interpret the parameter matrix is crucial for developing effective NLP applications.
+
+## References
+
+For a deeper understanding of these concepts, you can refer to the following course video:[RNN模型与NLP应用(2/9)：文本处理与词嵌入](https://youtu.be/6_2_2CPB97s?si=dUyiiUyIeKITKTxN).
